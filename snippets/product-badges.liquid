@@ -1,0 +1,37 @@
+{%- comment -%}
+  Provenance badges (organic / biodynamic / vegan / award-winning).
+
+  Driven by product tags so a merchant can flag a bottle straight from the
+  Shopify admin. Both the English and the Catalan tag slug are accepted.
+
+  Accepts:
+  - product: {Object} product Liquid object
+  - style: {String} 'card' (default) or 'pdp'
+{%- endcomment -%}
+
+{%- liquid
+  assign style = style | default: 'card'
+  assign badge_keys = 'organic,biodynamic,vegan,award' | split: ','
+  assign badge_tag_aliases = 'ecologic,biodinamic,vega,premiat' | split: ','
+-%}
+
+{%- for badge_key in badge_keys -%}
+  {%- assign alias = badge_tag_aliases[forloop.index0] -%}
+  {%- if product.tags contains badge_key or product.tags contains alias -%}
+    <span class="{% if style == 'pdp' %}pdp__provenance-badge pdp__provenance-badge--{{ badge_key }}{% else %}badge badge--{{ badge_key }}{% endif %}">
+      {%- assign icon_size = 12 -%}
+      {%- if style == 'pdp' -%}{%- assign icon_size = 16 -%}{%- endif -%}
+      {%- case badge_key -%}
+        {%- when 'organic' -%}
+          <svg xmlns="http://www.w3.org/2000/svg" width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+        {%- when 'biodynamic' -%}
+          <svg xmlns="http://www.w3.org/2000/svg" width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18 4.5 4.5 0 0 1 0-9 4.5 4.5 0 0 0 0-9z"/></svg>
+        {%- when 'vegan' -%}
+          <svg xmlns="http://www.w3.org/2000/svg" width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M12 20c0-6 2-10 8-11-1 7-4 11-8 11z"/><path d="M12 20c0-4-1.5-7-6-8 .5 5 2.5 8 6 8z"/></svg>
+        {%- when 'award' -%}
+          <svg xmlns="http://www.w3.org/2000/svg" width="{{ icon_size }}" height="{{ icon_size }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.2 14.3 7 22l5-3 5 3-1.2-7.7"/></svg>
+      {%- endcase -%}
+      {{ 'products.badges.' | append: badge_key | t }}
+    </span>
+  {%- endif -%}
+{%- endfor -%}

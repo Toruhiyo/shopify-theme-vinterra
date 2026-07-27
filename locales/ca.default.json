@@ -1,0 +1,242 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "accessibility": {
+    "skip_to_content": "Ves al contingut"
+  },
+  "general": {
+    "language": "Idioma",
+    "previous": "Anterior",
+    "next": "Següent",
+    "404": {
+      "subheading": "Pàgina no trobada",
+      "title": "Aquesta ampolla no existeix",
+      "description": "La pàgina que busques no existeix o s'ha mogut. Tornem al celler.",
+      "button": "Torna a l'inici"
+    }
+  },
+  "header": {
+    "menu": "Menú",
+    "search": "Cerca",
+    "account": "El meu compte",
+    "cart": "Cistella",
+    "navigation": "Navegació principal",
+    "mobile_menu": "Menú mòbil",
+    "close_menu": "Tanca el menú",
+    "search_placeholder": "Cerca vins, caves, cellers...",
+    "view_all": "Veure-ho tot",
+    "more": "Més",
+    "support": "Atenció al client",
+    "help": "Ajuda",
+    "policies": "Polítiques",
+    "home": "Inici",
+    "shop_all": "Tot {{ title }}",
+    "shipping_policy": "Política d'enviaments",
+    "returns_refunds": "Devolucions i reemborsaments",
+    "terms_of_service": "Condicions de contractació",
+    "privacy_policy": "Política de privacitat"
+  },
+  "sections": {
+    "announcement_bar": {
+      "label": "Avís"
+    },
+    "featured_collection": {
+      "view_all": "Veure-ho tot"
+    },
+    "accessories": {
+      "view_all": "Veure-ho tot"
+    }
+  },
+  "products": {
+    "add_to_cart": "Afegeix a la cistella",
+    "buy_now": "Compra ara",
+    "sold_out": "Exhaurit",
+    "quick_view": "Vista ràpida",
+    "quantity": "Ampolles",
+    "decrease_quantity": "Treu una ampolla",
+    "increase_quantity": "Afegeix una ampolla",
+    "thumbnail": "Miniatura",
+    "reviews_count": "{{ count }} valoracions",
+    "yes": "Sí",
+    "no": "No",
+    "units": {
+      "months": " mesos",
+      "years": " anys",
+      "bottles": " ampolles"
+    },
+    "badges": {
+      "new": "Novetat",
+      "featured": "Destacat",
+      "sale": "Oferta",
+      "organic": "Ecològic",
+      "biodynamic": "Biodinàmic",
+      "vegan": "Vegà",
+      "award": "Premiat",
+      "last_bottles": "Últimes ampolles"
+    },
+    "links": {
+      "format": "Format",
+      "vintage": "Anyada",
+      "pack": "Presentació",
+      "range": "Gamma",
+      "pairs_with": "Marida amb"
+    },
+    "tabs": {
+      "tasting": "Tast",
+      "technical": "Fitxa tècnica",
+      "pairing": "Maridatge",
+      "winery": "El celler",
+      "serving": "Servei i conservació"
+    },
+    "specs": {
+      "winery": "Celler",
+      "wine_type": "Tipus",
+      "do": "Denominació d'Origen",
+      "region": "Regió",
+      "country": "País",
+      "vintage": "Anyada",
+      "grape_varieties": "Varietats",
+      "alcohol_abv": "Graduació",
+      "ageing": "Criança",
+      "barrel_months": "Criança en bóta",
+      "lees_months": "Criança en rima",
+      "dosage": "Dosatge",
+      "soil": "Sòl",
+      "vine_age_years": "Edat de les vinyes",
+      "altitude_m": "Altitud",
+      "yield_hl_ha": "Rendiment",
+      "harvest": "Verema",
+      "fermentation": "Fermentació",
+      "malolactic": "Fermentació malolàctica",
+      "filtration": "Filtratge",
+      "natural_wine": "Vi natural",
+      "organic_certified": "Certificat ecològic",
+      "biodynamic_certified": "Certificat biodinàmic",
+      "vegan": "Apte per a vegans",
+      "sulfites_mg_l": "Sulfits totals",
+      "residual_sugar_gl": "Sucre residual",
+      "total_acidity_gl": "Acidesa total",
+      "ph": "pH",
+      "production_bottles": "Producció",
+      "winemaker": "Enologia",
+      "bottle_format_cl": "Format",
+      "closure": "Tapament",
+      "serving_temperature_c": "Temperatura de servei",
+      "decanting": "Decantació",
+      "cellaring_years": "Potencial de guarda",
+      "glass_type": "Copa recomanada",
+      "awards": "Premis i puntuacions"
+    }
+  },
+  "collections": {
+    "title": "Col·leccions",
+    "products": "referències",
+    "sort_by": "Ordena per",
+    "filters": "Filtres",
+    "pagination": "Paginació",
+    "previous": "Pàgina anterior",
+    "next": "Pàgina següent",
+    "clear_all": "Neteja-ho tot",
+    "empty": "No hi ha cap vi que coincideixi",
+    "continue_shopping": "Continua comprant"
+  },
+  "cart": {
+    "title": "La teva cistella",
+    "close": "Tanca la cistella",
+    "product": "Producte",
+    "quantity": "Unitats",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "checkout": "Finalitza la comanda",
+    "empty": "La teva cistella és buida",
+    "continue_shopping": "Continua comprant",
+    "complete_setup": "Completa la teva caixa",
+    "decrease": "Treu una unitat",
+    "increase": "Afegeix una unitat",
+    "shipping_note": "Enviament i impostos calculats en finalitzar la comanda.",
+    "you_save": "Estalvies",
+    "remove": "Treu",
+    "cancel": "Cancel·la",
+    "confirm_remove": "Vols treure aquest article de la cistella?"
+  },
+  "search": {
+    "title": "Cerca",
+    "placeholder": "Cerca vins i caves...",
+    "submit": "Cerca",
+    "results_count": "{{ count }} resultats",
+    "no_results": "Cap resultat per a \"{{ terms }}\"",
+    "no_results_hint": "Prova amb un altre terme o descobreix les nostres col·leccions."
+  },
+  "newsletter": {
+    "placeholder": "El teu correu electrònic",
+    "email_label": "Adreça electrònica",
+    "subscribe": "Subscriu-m'hi",
+    "success": "Ja hi ets. Revisa la safata d'entrada per confirmar-ho."
+  },
+  "footer": {
+    "email_placeholder": "El teu correu",
+    "subscribe": "Subscriu-m'hi",
+    "support": "Atenció al client",
+    "legal": "Legal",
+    "secure_checkout": "Pagament segur",
+    "free_shipping": "Enviament gratuït a partir de 60 €",
+    "easy_returns": "Devolucions sense complicacions",
+    "protected_packaging": "Embalatge protegit per a ampolles",
+    "rights": "Tots els drets reservats."
+  },
+  "contact": {
+    "form": {
+      "name": "Nom",
+      "email": "Correu electrònic",
+      "subject": "Assumpte",
+      "message": "Missatge",
+      "send": "Envia el missatge",
+      "success": "Gràcies per escriure'ns. Et responem al més aviat possible."
+    }
+  },
+  "support": {
+    "contact_us": "Contacta'ns",
+    "faq": "Preguntes freqüents"
+  },
+  "blog": {
+    "comments": "Comentaris",
+    "no_articles": "Encara no hi ha articles."
+  },
+  "age_gate": {
+    "title": "Tens 18 anys o més?",
+    "text": "La venda de begudes alcohòliques està reservada a majors d'edat. Confirma la teva edat per entrar.",
+    "confirm": "Sí, soc major d'edat",
+    "deny": "No",
+    "denied": "Ho sentim, has de ser major d'edat per accedir a aquesta botiga.",
+    "disclaimer": "Beu amb moderació."
+  },
+  "bizmis": {
+    "panel": {
+      "title": "Coneix el teu sommelier de veu",
+      "examples": "Busco un negre del Penedès per acompanyar un rostit de xai.\nAquests dos caves s'assemblen. Quin és més sec?\nAquest blanc és ecològic i apte per a vegans?\nOn és la meva comanda? Fa dies que el seguiment no es mou.\nM'ha arribat una ampolla trencada. Com ho soluciono?\nFeu enviaments a França i el vi viatja protegit?",
+      "example_tags": "Més vendes · Descoberta de producte\nMés vendes · Comparació d'ampolles\nMés vendes · Assessorament expert\nMenys hores de suport · Estat de la comanda\nMenys hores de suport · Incidències i devolucions\nMenys hores de suport · Dubtes abans de comprar",
+      "install": "Instal·la Bizmis",
+      "just_say": "Només cal dir",
+      "coach_hide": "Amaga els suggeriments",
+      "coach_show": "Mostra els suggeriments",
+      "coach_examples": "Exemples",
+      "install_with_code": "Instal·la-ho amb el teu codi d'accés anticipat"
+    },
+    "promo": {
+      "label": "Botiga de demostració Bizmis",
+      "demo_badge": "BOTIGA DEMO",
+      "message": "Estàs navegant per una botiga de demostració de Bizmis. Tot això també funciona a la teva botiga.",
+      "landing": "Visita Bizmis",
+      "other_demos": "Altres demos",
+      "demos_hint": "Aquestes demos estan protegides amb contrasenya.",
+      "password_label": "Contrasenya"
+    }
+  }
+}

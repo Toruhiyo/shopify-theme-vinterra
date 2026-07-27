@@ -1,5 +1,5 @@
 {%- liquid
-  assign _fallback_handles = 'featured,hot-deals,hottest-deals,deals,highlighted' | split: ','
+  assign _fallback_handles = 'featured,destacats,novetats,vins,caves,all' | split: ','
   assign collection = section.settings.collection
   if collection == blank
     for _handle in _fallback_handles
@@ -70,13 +70,13 @@
       "type": "text",
       "id": "subtitle",
       "label": "Subtitle",
-      "default": "Curated"
+      "default": "Selecció del celler"
     },
     {
       "type": "text",
       "id": "title",
       "label": "Heading",
-      "default": "Hottest deals"
+      "default": "Els nostres destacats"
     },
     {
       "type": "collection",
@@ -118,11 +118,11 @@
       "id": "aspect_ratio",
       "label": "Image ratio",
       "options": [
+        { "value": "3 / 4", "label": "Portrait (3:4) — bottles" },
         { "value": "1 / 1", "label": "Square (1:1)" },
-        { "value": "4 / 3", "label": "Landscape (4:3)" },
-        { "value": "3 / 4", "label": "Portrait (3:4)" }
+        { "value": "4 / 3", "label": "Landscape (4:3)" }
       ],
-      "default": "1 / 1"
+      "default": "3 / 4"
     },
     {
       "type": "checkbox",

@@ -10,7 +10,7 @@
       },
       {
         scrollbars: {
-          theme: 'os-theme-crimson',
+          theme: 'os-theme-vinterra',
           autoHide: 'leave',
           autoHideDelay: 600,
         },

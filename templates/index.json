@@ -12,7 +12,11 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "autoplay_interval": 3
+        "height": "large",
+        "autoplay_interval": 5,
+        "subtitle": "Vins i caves del Penedès des de 1912",
+        "title": "El sommelier t'espera.",
+        "cta_text": "Digues què vols beure."
       }
     },
     "feature-strip": {
@@ -21,53 +25,45 @@
         "f1": {
           "type": "feature",
           "settings": {
-            "icon": "shipping",
-            "text": "Free shipping"
+            "icon": "leaf",
+            "text": "Vins ecològics certificats"
           }
         },
         "f2": {
           "type": "feature",
           "settings": {
-            "icon": "shield",
-            "text": "2-year warranty"
+            "icon": "grape",
+            "text": "Cellers familiars del Penedès"
           }
         },
         "f3": {
           "type": "feature",
           "settings": {
-            "icon": "star",
-            "text": "Top rated"
+            "icon": "shipping",
+            "text": "Enviament gratuït a partir de 60 €"
           }
         },
         "f4": {
           "type": "feature",
           "settings": {
-            "icon": "headphones",
-            "text": "24/7 support"
+            "icon": "package",
+            "text": "Embalatge protegit per a ampolles"
           }
         }
       },
       "block_order": ["f1", "f2", "f3", "f4"],
       "settings": {}
     },
-    "category-grid": {
-      "type": "category-grid",
-      "settings": {
-        "use_store_collections": true,
-        "subtitle": "Browse",
-        "title": "Shop by category",
-        "columns": "3"
-      }
-    },
-    "new-arrivals": {
+    "featured-collection-2": {
       "type": "featured-collection",
       "settings": {
-        "subtitle": "Just landed",
-        "title": "New arrivals",
-        "collection": "new-arrivals",
+        "subtitle": "Selecció del celler",
+        "title": "Els nostres destacats",
+        "collection": "featured",
         "products_count": 8,
         "columns": "4",
         "layout": "carousel",
+        "aspect_ratio": "3 / 4",
         "show_vendor": true,
         "show_view_all": true
       }
@@ -76,25 +72,85 @@
       "type": "bizmis-voice-demo",
       "settings": {}
     },
-    "featured-collection-2": {
+    "category-grid": {
+      "type": "category-grid",
+      "settings": {
+        "use_store_collections": true,
+        "subtitle": "Descobreix",
+        "title": "Compra per categoria",
+        "columns": "3"
+      }
+    },
+    "new-arrivals": {
       "type": "featured-collection",
       "settings": {
-        "subtitle": "This week",
-        "title": "Hot deals",
+        "subtitle": "Acaben d'arribar",
+        "title": "Noves anyades",
+        "collection": "novetats",
         "products_count": 8,
         "columns": "4",
         "layout": "carousel",
+        "aspect_ratio": "3 / 4",
         "show_vendor": true,
         "show_view_all": true
+      }
+    },
+    "editorial": {
+      "type": "editorial-block",
+      "blocks": {
+        "s1": {
+          "type": "spec",
+          "settings": {
+            "value": "1912",
+            "label": "Primera verema"
+          }
+        },
+        "s2": {
+          "type": "spec",
+          "settings": {
+            "value": "42 ha",
+            "label": "Vinya pròpia"
+          }
+        },
+        "s3": {
+          "type": "spec",
+          "settings": {
+            "value": "100%",
+            "label": "Ecològic certificat"
+          }
+        },
+        "s4": {
+          "type": "spec",
+          "settings": {
+            "value": "48 h",
+            "label": "Lliurament a península"
+          }
+        }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"],
+      "settings": {
+        "reversed": false,
+        "subtitle": "Des de 1912",
+        "title": "Viticultura ecològica de muntanya",
+        "text": "<p>Conreem les nostres vinyes a les Muntanyes d'Ordal, al Penedès, sense herbicides ni fertilitzants de síntesi. Verema manual, fermentacions amb llevats autòctons i la mínima intervenció possible al celler: així el vi explica d'on ve.</p>",
+        "cta_text": "Coneix el celler"
       }
     },
     "accessories": {
       "type": "accessories-upsell",
       "settings": {
-        "subtitle": "You may also need",
-        "title": "Complete your setup",
+        "subtitle": "Per gaudir-ho millor",
+        "title": "Copes, accessoris i lots",
         "products_count": 8,
         "show_vendor": false
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "subtitle": "Carta del celler",
+        "title": "Rep les novetats de cada verema",
+        "text": "Noves anyades, edicions limitades i invitacions a les nostres cates, directament al teu correu."
       }
     }
   },
@@ -105,6 +161,8 @@
     "bizmis-voice-demo",
     "category-grid",
     "new-arrivals",
-    "accessories"
+    "editorial",
+    "accessories",
+    "newsletter"
   ]
 }

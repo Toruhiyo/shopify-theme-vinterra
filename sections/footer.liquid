@@ -4,7 +4,7 @@
   <div class="footer__newsletter-banner">
     <div class="page-width footer__newsletter-inner">
       <div class="footer__newsletter-copy">
-        <h4 class="footer__newsletter-heading">{{ section.settings.newsletter_heading | default: 'Stay in the Loop' }}</h4>
+        <h4 class="footer__newsletter-heading">{{ section.settings.newsletter_heading | default: 'Carta del celler' }}</h4>
         {%- if section.settings.newsletter_text != blank -%}
           <p class="footer__newsletter-text">{{ section.settings.newsletter_text }}</p>
         {%- endif -%}
@@ -18,13 +18,13 @@
               type="email"
               name="contact[email]"
               class="input footer__newsletter-input"
-              placeholder="{{ section.settings.newsletter_placeholder | default: 'Enter your email' }}"
+              placeholder="{{ section.settings.newsletter_placeholder | default: 'El teu correu electrònic' }}"
               required
               autocomplete="email"
-              aria-label="{{ section.settings.newsletter_placeholder | default: 'Enter your email' }}"
+              aria-label="{{ section.settings.newsletter_placeholder | default: 'El teu correu electrònic' }}"
             >
             <input type="hidden" name="contact[tags]" value="newsletter">
-            <button type="submit" class="btn btn--primary">{{ section.settings.newsletter_button | default: 'Subscribe' }}</button>
+            <button type="submit" class="btn btn--primary">{{ section.settings.newsletter_button | default: "Subscriu-m'hi" }}</button>
           </div>
         {%- endif -%}
       {% endform %}
@@ -81,8 +81,8 @@
           {{ 'footer.easy_returns' | t }}
         </div>
         <div class="trust-row__item">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          {{ 'footer.warranty_included' | t }}
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          {{ 'footer.protected_packaging' | t }}
         </div>
       </div>
     {%- endif -%}
@@ -169,25 +169,25 @@
       "type": "text",
       "id": "newsletter_heading",
       "label": "Newsletter heading",
-      "default": "Stay up to date"
+      "default": "Carta del celler"
     },
     {
       "type": "text",
       "id": "newsletter_text",
       "label": "Newsletter description",
-      "default": "New arrivals, exclusive offers, and more."
+      "default": "Noves anyades, edicions limitades i invitacions a cates."
     },
     {
       "type": "text",
       "id": "newsletter_placeholder",
       "label": "Newsletter placeholder",
-      "default": "Enter your email"
+      "default": "El teu correu electrònic"
     },
     {
       "type": "text",
       "id": "newsletter_button",
       "label": "Newsletter button",
-      "default": "Subscribe"
+      "default": "Subscriu-m'hi"
     },
     {
       "type": "checkbox",

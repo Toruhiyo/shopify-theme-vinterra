@@ -1,40 +1,51 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "accessibility": {
-    "skip_to_content": "Saltar para o conteúdo"
+    "skip_to_content": "Ir para o conteúdo"
   },
   "general": {
     "language": "Idioma",
+    "previous": "Anterior",
+    "next": "Seguinte",
     "404": {
       "subheading": "Página não encontrada",
-      "title": "Perdido no vazio",
-      "description": "A página que procura não existe ou foi movida. Vamos colocá-lo de volta no caminho certo.",
+      "title": "Esta garrafa não existe",
+      "description": "A página que procura não existe ou foi movida. Voltemos à adega.",
       "button": "Voltar ao início"
     }
   },
   "header": {
     "menu": "Menu",
     "search": "Pesquisar",
-    "account": "Conta",
-    "cart": "Carrinho",
+    "account": "A minha conta",
+    "cart": "Cesto",
     "navigation": "Navegação principal",
     "mobile_menu": "Menu móvel",
     "close_menu": "Fechar menu",
-    "search_placeholder": "Pesquisar produtos, coleções...",
+    "search_placeholder": "Pesquisar vinhos, cavas, produtores...",
     "view_all": "Ver tudo",
     "more": "Mais",
-    "support": "Suporte",
+    "support": "Apoio ao cliente",
     "help": "Ajuda",
     "policies": "Políticas",
     "home": "Início",
-    "shop_all": "Ver tudo {{ title }}",
-    "shipping_policy": "Política de envio",
+    "shop_all": "Todos os {{ title }}",
+    "shipping_policy": "Política de envios",
     "returns_refunds": "Devoluções e reembolsos",
-    "terms_of_service": "Termos de serviço",
+    "terms_of_service": "Condições de venda",
     "privacy_policy": "Política de privacidade"
   },
   "sections": {
     "announcement_bar": {
-      "label": "Anúncio"
+      "label": "Aviso"
     },
     "featured_collection": {
       "view_all": "Ver tudo"
@@ -44,99 +55,185 @@
     }
   },
   "products": {
-    "add_to_cart": "Adicionar ao carrinho",
-    "buy_now": "Comprar agora",
+    "add_to_cart": "Adicionar ao cesto",
+    "buy_now": "Comprar já",
     "sold_out": "Esgotado",
-    "quick_view": "Visualização rápida",
-    "quantity": "Quantidade",
-    "decrease_quantity": "Diminuir quantidade",
-    "increase_quantity": "Aumentar quantidade",
+    "quick_view": "Vista rápida",
+    "quantity": "Garrafas",
+    "decrease_quantity": "Retirar uma garrafa",
+    "increase_quantity": "Adicionar uma garrafa",
     "thumbnail": "Miniatura",
     "reviews_count": "{{ count }} avaliações",
-    "color": "Cor",
+    "yes": "Sim",
+    "no": "Não",
+    "units": {
+      "months": " meses",
+      "years": " anos",
+      "bottles": " garrafas"
+    },
     "badges": {
-      "new": "Novo",
-      "hot": "Popular",
-      "sale": "Promoção"
+      "new": "Novidade",
+      "featured": "Destaque",
+      "sale": "Promoção",
+      "organic": "Biológico",
+      "biodynamic": "Biodinâmico",
+      "vegan": "Vegan",
+      "award": "Premiado",
+      "last_bottles": "Últimas garrafas"
+    },
+    "links": {
+      "format": "Formato",
+      "vintage": "Colheita",
+      "pack": "Apresentação",
+      "range": "Gama",
+      "pairs_with": "Harmoniza com"
+    },
+    "tabs": {
+      "tasting": "Prova",
+      "technical": "Ficha técnica",
+      "pairing": "Harmonização",
+      "winery": "O produtor",
+      "serving": "Serviço e conservação"
+    },
+    "specs": {
+      "winery": "Produtor",
+      "wine_type": "Tipo",
+      "do": "Denominação de Origem",
+      "region": "Região",
+      "country": "País",
+      "vintage": "Colheita",
+      "grape_varieties": "Castas",
+      "alcohol_abv": "Teor alcoólico",
+      "ageing": "Estágio",
+      "barrel_months": "Estágio em barrica",
+      "lees_months": "Estágio sobre borras",
+      "dosage": "Dosagem",
+      "soil": "Solo",
+      "vine_age_years": "Idade das vinhas",
+      "altitude_m": "Altitude",
+      "yield_hl_ha": "Rendimento",
+      "harvest": "Vindima",
+      "fermentation": "Fermentação",
+      "malolactic": "Fermentação malolática",
+      "filtration": "Filtração",
+      "natural_wine": "Vinho natural",
+      "organic_certified": "Certificado biológico",
+      "biodynamic_certified": "Certificado biodinâmico",
+      "vegan": "Adequado a vegans",
+      "sulfites_mg_l": "Sulfitos totais",
+      "residual_sugar_gl": "Açúcar residual",
+      "total_acidity_gl": "Acidez total",
+      "ph": "pH",
+      "production_bottles": "Produção",
+      "winemaker": "Enologia",
+      "bottle_format_cl": "Formato",
+      "closure": "Vedante",
+      "serving_temperature_c": "Temperatura de serviço",
+      "decanting": "Decantação",
+      "cellaring_years": "Potencial de guarda",
+      "glass_type": "Copo recomendado",
+      "awards": "Prémios e pontuações"
     }
   },
   "collections": {
     "title": "Coleções",
-    "products": "produtos",
+    "products": "referências",
     "sort_by": "Ordenar por",
     "filters": "Filtros",
     "pagination": "Paginação",
     "previous": "Página anterior",
     "next": "Página seguinte",
     "clear_all": "Limpar tudo",
-    "empty": "Nenhum produto encontrado",
+    "empty": "Não há vinhos que correspondam",
     "continue_shopping": "Continuar a comprar"
   },
   "cart": {
-    "title": "O seu carrinho",
-    "close": "Fechar carrinho",
+    "title": "O seu cesto",
+    "close": "Fechar cesto",
     "product": "Produto",
-    "quantity": "Qtd",
+    "quantity": "Qtd.",
     "total": "Total",
     "subtotal": "Subtotal",
     "checkout": "Finalizar compra",
-    "empty": "O seu carrinho está vazio",
+    "empty": "O seu cesto está vazio",
     "continue_shopping": "Continuar a comprar",
-    "complete_setup": "Concluir configuração",
+    "complete_setup": "Complete a sua caixa",
     "decrease": "Diminuir quantidade",
     "increase": "Aumentar quantidade",
-    "shipping_note": "Portes e impostos calculados no checkout."
+    "shipping_note": "Portes e impostos calculados na finalização.",
+    "you_save": "Poupa",
+    "remove": "Remover",
+    "cancel": "Cancelar",
+    "confirm_remove": "Remover este artigo do cesto?"
   },
   "search": {
-    "title": "Pesquisar",
-    "placeholder": "Pesquisar produtos...",
+    "title": "Pesquisa",
+    "placeholder": "Pesquisar vinhos e cavas...",
     "submit": "Pesquisar",
     "results_count": "{{ count }} resultados",
-    "no_results": "Nenhum resultado para \"{{ terms }}\"",
-    "no_results_hint": "Tente outro termo de pesquisa ou navegue pelas nossas coleções."
+    "no_results": "Sem resultados para \"{{ terms }}\"",
+    "no_results_hint": "Experimente outro termo ou explore as nossas coleções."
   },
   "newsletter": {
-    "placeholder": "Introduza o seu email",
-    "email_label": "Endereço de email",
+    "placeholder": "O seu e-mail",
+    "email_label": "Endereço de e-mail",
     "subscribe": "Subscrever",
-    "success": "Tudo certo! Confirma no teu email."
+    "success": "Está feito. Verifique a caixa de entrada para confirmar."
   },
   "footer": {
-    "email_placeholder": "O seu email",
+    "email_placeholder": "O seu e-mail",
     "subscribe": "Subscrever",
-    "support": "Suporte",
+    "support": "Apoio ao cliente",
     "legal": "Legal",
-    "secure_checkout": "Checkout seguro",
-    "free_shipping": "Portes grátis acima de 99€",
-    "easy_returns": "Devoluções fáceis",
-    "warranty_included": "Garantia incluída",
+    "secure_checkout": "Pagamento seguro",
+    "free_shipping": "Envio grátis a partir de 60 €",
+    "easy_returns": "Devoluções sem complicações",
+    "protected_packaging": "Embalagem protegida para garrafas",
     "rights": "Todos os direitos reservados."
+  },
+  "contact": {
+    "form": {
+      "name": "Nome",
+      "email": "E-mail",
+      "subject": "Assunto",
+      "message": "Mensagem",
+      "send": "Enviar mensagem",
+      "success": "Obrigado por escrever. Respondemos assim que possível."
+    }
   },
   "support": {
     "contact_us": "Contacte-nos",
-    "faq": "FAQ"
+    "faq": "Perguntas frequentes"
   },
   "blog": {
     "comments": "Comentários",
     "no_articles": "Ainda não há artigos."
   },
+  "age_gate": {
+    "title": "Tem 18 anos ou mais?",
+    "text": "A venda de bebidas alcoólicas é reservada a maiores de idade. Confirme a sua idade para entrar.",
+    "confirm": "Sim, sou maior de idade",
+    "deny": "Não",
+    "denied": "Lamentamos, tem de ser maior de idade para aceder a esta loja.",
+    "disclaimer": "Beba com moderação."
+  },
   "bizmis": {
     "panel": {
-      "title": "Conheça o seu assistente de loja por voz",
-      "examples": "Procuro um portátil que aguente o dia todo.\nEstes auriculares parecem iguais. Quais são melhores para correr?\nTem carregamento rápido para iPhone 15?\nOnde está a minha encomenda? O rastreio não atualiza há dias.\nO carregador veio com a ficha errada. Posso trocá-lo?\nEnviam para Espanha? A garantia é válida lá?",
-      "example_tags": "Aumente vendas · Descoberta de produto\nAumente vendas · Comparação de produtos\nAumente vendas · Orientação técnica\nPoupe horas de suporte · Estado da encomenda\nPoupe horas de suporte · Ajuda com trocas\nPoupe horas de suporte · Dúvidas pré-compra",
-      "install": "Instalar o Bizmis",
+      "title": "Conheça o seu escanção por voz",
+      "examples": "Procuro um tinto do Penedès para acompanhar borrego assado.\nEstas duas cavas parecem iguais. Qual é a mais seca?\nEste branco é biológico e adequado a vegans?\nOnde está a minha encomenda? O rastreio não mexe há dias.\nChegou uma garrafa partida. Como resolvo isto?\nEnviam para França e o vinho viaja protegido?",
+      "example_tags": "Mais vendas · Descoberta de produto\nMais vendas · Comparação de garrafas\nMais vendas · Aconselhamento especializado\nMenos horas de apoio · Estado da encomenda\nMenos horas de apoio · Quebras e devoluções\nMenos horas de apoio · Dúvidas antes da compra",
+      "install": "Instalar Bizmis",
       "just_say": "Basta dizer",
       "coach_hide": "Ocultar sugestões",
       "coach_show": "Mostrar sugestões",
       "coach_examples": "Exemplos",
-      "install_with_code": "Instale com o seu código de acesso antecipado"
+      "install_with_code": "Instalar com o seu código de acesso antecipado"
     },
     "promo": {
-      "label": "Loja demo da Bizmis",
+      "label": "Loja de demonstração Bizmis",
       "demo_badge": "LOJA DEMO",
-      "message": "Está numa loja demo da Bizmis. Tudo isto funciona também na sua loja.",
-      "landing": "Ir para a Bizmis",
+      "message": "Está a navegar numa loja de demonstração Bizmis. Tudo isto funciona também na sua loja.",
+      "landing": "Visitar Bizmis",
       "other_demos": "Outras demos",
       "demos_hint": "Estas demos estão protegidas por palavra-passe.",
       "password_label": "Palavra-passe"

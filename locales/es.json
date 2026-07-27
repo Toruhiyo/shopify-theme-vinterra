@@ -9,41 +9,43 @@
  */
 {
   "accessibility": {
-    "skip_to_content": "Saltar al contenido"
+    "skip_to_content": "Ir al contenido"
   },
   "general": {
     "language": "Idioma",
+    "previous": "Anterior",
+    "next": "Siguiente",
     "404": {
       "subheading": "Página no encontrada",
-      "title": "Te has perdido",
-      "description": "La página que buscas no existe o se ha movido. Vamos a llevarte de vuelta.",
+      "title": "Esta botella no existe",
+      "description": "La página que buscas no existe o se ha movido. Volvamos a la bodega.",
       "button": "Volver al inicio"
     }
   },
   "header": {
     "menu": "Menú",
     "search": "Buscar",
-    "account": "Cuenta",
-    "cart": "Carrito",
+    "account": "Mi cuenta",
+    "cart": "Cesta",
     "navigation": "Navegación principal",
     "mobile_menu": "Menú móvil",
     "close_menu": "Cerrar menú",
-    "search_placeholder": "Busca productos, colecciones...",
+    "search_placeholder": "Busca vinos, cavas, bodegas...",
     "view_all": "Ver todo",
     "more": "Más",
-    "support": "Soporte",
+    "support": "Atención al cliente",
     "help": "Ayuda",
-    "policies": "Legal",
+    "policies": "Políticas",
     "home": "Inicio",
-    "shop_all": "Comprar {{ title }}",
-    "shipping_policy": "Envíos",
+    "shop_all": "Todo {{ title }}",
+    "shipping_policy": "Política de envíos",
     "returns_refunds": "Devoluciones y reembolsos",
-    "terms_of_service": "Términos y condiciones",
+    "terms_of_service": "Condiciones de contratación",
     "privacy_policy": "Política de privacidad"
   },
   "sections": {
     "announcement_bar": {
-      "label": "Anuncio"
+      "label": "Aviso"
     },
     "featured_collection": {
       "view_all": "Ver todo"
@@ -53,118 +55,185 @@
     }
   },
   "products": {
-    "add_to_cart": "Añadir al carrito",
-    "buy_now": "Comprar ya",
+    "add_to_cart": "Añadir a la cesta",
+    "buy_now": "Comprar ahora",
     "sold_out": "Agotado",
     "quick_view": "Vista rápida",
-    "quantity": "Cantidad",
-    "decrease_quantity": "Reducir cantidad",
-    "increase_quantity": "Aumentar cantidad",
+    "quantity": "Botellas",
+    "decrease_quantity": "Quitar una botella",
+    "increase_quantity": "Añadir una botella",
     "thumbnail": "Miniatura",
-    "reviews_count": "{{ count }} reseñas",
-    "color": "Color",
-    "badges": {
-      "new": "Nuevo",
-      "hot": "Popular",
-      "sale": "Oferta",
-      "refurbished": "Reacondicionado certificado",
-      "open_box": "Caja abierta"
+    "reviews_count": "{{ count }} valoraciones",
+    "yes": "Sí",
+    "no": "No",
+    "units": {
+      "months": " meses",
+      "years": " años",
+      "bottles": " botellas"
     },
-    "link_options": "Opciones",
-    "link_model": "Modelo",
-    "link_compatible": "Compatible con"
+    "badges": {
+      "new": "Novedad",
+      "featured": "Destacado",
+      "sale": "Oferta",
+      "organic": "Ecológico",
+      "biodynamic": "Biodinámico",
+      "vegan": "Vegano",
+      "award": "Premiado",
+      "last_bottles": "Últimas botellas"
+    },
+    "links": {
+      "format": "Formato",
+      "vintage": "Añada",
+      "pack": "Presentación",
+      "range": "Gama",
+      "pairs_with": "Marida con"
+    },
+    "tabs": {
+      "tasting": "Cata",
+      "technical": "Ficha técnica",
+      "pairing": "Maridaje",
+      "winery": "La bodega",
+      "serving": "Servicio y conservación"
+    },
+    "specs": {
+      "winery": "Bodega",
+      "wine_type": "Tipo",
+      "do": "Denominación de Origen",
+      "region": "Región",
+      "country": "País",
+      "vintage": "Añada",
+      "grape_varieties": "Variedades",
+      "alcohol_abv": "Graduación",
+      "ageing": "Crianza",
+      "barrel_months": "Crianza en barrica",
+      "lees_months": "Crianza en rima",
+      "dosage": "Dosaje",
+      "soil": "Suelo",
+      "vine_age_years": "Edad de los viñedos",
+      "altitude_m": "Altitud",
+      "yield_hl_ha": "Rendimiento",
+      "harvest": "Vendimia",
+      "fermentation": "Fermentación",
+      "malolactic": "Fermentación maloláctica",
+      "filtration": "Filtrado",
+      "natural_wine": "Vino natural",
+      "organic_certified": "Certificado ecológico",
+      "biodynamic_certified": "Certificado biodinámico",
+      "vegan": "Apto para veganos",
+      "sulfites_mg_l": "Sulfitos totales",
+      "residual_sugar_gl": "Azúcar residual",
+      "total_acidity_gl": "Acidez total",
+      "ph": "pH",
+      "production_bottles": "Producción",
+      "winemaker": "Enología",
+      "bottle_format_cl": "Formato",
+      "closure": "Tapón",
+      "serving_temperature_c": "Temperatura de servicio",
+      "decanting": "Decantación",
+      "cellaring_years": "Potencial de guarda",
+      "glass_type": "Copa recomendada",
+      "awards": "Premios y puntuaciones"
+    }
   },
   "collections": {
     "title": "Colecciones",
-    "products": "productos",
-    "sort_by": "Ordenar",
+    "products": "referencias",
+    "sort_by": "Ordenar por",
     "filters": "Filtros",
     "pagination": "Paginación",
     "previous": "Página anterior",
     "next": "Página siguiente",
     "clear_all": "Borrar todo",
-    "empty": "No hemos encontrado ningún producto",
+    "empty": "No hay ningún vino que coincida",
     "continue_shopping": "Seguir comprando"
   },
   "cart": {
-    "title": "Tu carrito",
-    "close": "Cerrar el carrito",
+    "title": "Tu cesta",
+    "close": "Cerrar cesta",
     "product": "Producto",
-    "quantity": "Cant.",
+    "quantity": "Uds.",
     "total": "Total",
     "subtotal": "Subtotal",
-    "checkout": "Finalizar compra",
-    "empty": "Tu carrito está vacío",
+    "checkout": "Finalizar pedido",
+    "empty": "Tu cesta está vacía",
     "continue_shopping": "Seguir comprando",
-    "complete_setup": "Completa tu configuración",
-    "decrease": "Reducir cantidad",
-    "increase": "Aumentar cantidad",
-    "shipping_note": "Los gastos de envío y los impuestos se calculan al finalizar la compra.",
+    "complete_setup": "Completa tu caja",
+    "decrease": "Quitar una unidad",
+    "increase": "Añadir una unidad",
+    "shipping_note": "Envío e impuestos calculados al finalizar el pedido.",
     "you_save": "Ahorras",
-    "remove": "Eliminar",
+    "remove": "Quitar",
     "cancel": "Cancelar",
-    "confirm_remove": "¿Quieres quitar este artículo del carrito?"
+    "confirm_remove": "¿Quieres quitar este artículo de la cesta?"
   },
   "search": {
     "title": "Buscar",
-    "placeholder": "Busca productos...",
+    "placeholder": "Busca vinos y cavas...",
     "submit": "Buscar",
     "results_count": "{{ count }} resultados",
-    "no_results": "No hay resultados para \"{{ terms }}\"",
-    "no_results_hint": "Prueba con otra búsqueda o explora nuestras colecciones."
+    "no_results": "Ningún resultado para \"{{ terms }}\"",
+    "no_results_hint": "Prueba con otro término o descubre nuestras colecciones."
   },
   "newsletter": {
-    "placeholder": "Introduce tu email",
-    "email_label": "Email",
-    "subscribe": "Suscríbete",
-    "success": "¡Ya estás dentro! Revisa tu email para confirmar."
+    "placeholder": "Tu correo electrónico",
+    "email_label": "Dirección de correo",
+    "subscribe": "Suscribirme",
+    "success": "Ya estás dentro. Revisa tu bandeja de entrada para confirmarlo."
   },
   "footer": {
-    "email_placeholder": "Tu email",
-    "subscribe": "Suscríbete",
-    "support": "Ayuda",
+    "email_placeholder": "Tu correo",
+    "subscribe": "Suscribirme",
+    "support": "Atención al cliente",
     "legal": "Legal",
-    "secure_checkout": "Compra segura",
-    "free_shipping": "Envío gratis desde $99",
-    "easy_returns": "Devoluciones sencillas",
-    "warranty_included": "Garantía incluida",
+    "secure_checkout": "Pago seguro",
+    "free_shipping": "Envío gratuito a partir de 60 €",
+    "easy_returns": "Devoluciones sin complicaciones",
+    "protected_packaging": "Embalaje protegido para botellas",
     "rights": "Todos los derechos reservados."
-  },
-  "support": {
-    "contact_us": "Contacta con nosotros",
-    "faq": "Preguntas frecuentes"
-  },
-  "blog": {
-    "comments": "Comentarios",
-    "no_articles": "Aún no hay artículos."
   },
   "contact": {
     "form": {
       "name": "Nombre",
-      "email": "Email",
+      "email": "Correo electrónico",
       "subject": "Asunto",
       "message": "Mensaje",
       "send": "Enviar mensaje",
-      "success": "Gracias por escribirnos. Te responderemos lo antes posible."
+      "success": "Gracias por escribirnos. Te respondemos lo antes posible."
     }
+  },
+  "support": {
+    "contact_us": "Contacto",
+    "faq": "Preguntas frecuentes"
+  },
+  "blog": {
+    "comments": "Comentarios",
+    "no_articles": "Todavía no hay artículos."
+  },
+  "age_gate": {
+    "title": "¿Tienes 18 años o más?",
+    "text": "La venta de bebidas alcohólicas está reservada a mayores de edad. Confirma tu edad para entrar.",
+    "confirm": "Sí, soy mayor de edad",
+    "deny": "No",
+    "denied": "Lo sentimos, debes ser mayor de edad para acceder a esta tienda.",
+    "disclaimer": "Bebe con moderación."
   },
   "bizmis": {
     "panel": {
-      "title": "Conoce a tu dependiente virtual por voz",
-      "examples": "Busco un portátil que aguante todo el día.\nEstos auriculares parecen iguales. ¿Cuál es mejor para correr?\n¿Tiene carga rápida para iPhone 15?\n¿Dónde está mi pedido? El seguimiento lleva días sin actualizarse.\nEl cargador ha llegado con el enchufe equivocado. ¿Puedo cambiarlo?\n¿Enviáis a España? ¿La garantía vale allí?",
-      "example_tags": "Aumenta ventas · Descubrir producto\nAumenta ventas · Comparar productos\nAumenta ventas · Guía técnica\nAhorra horas de soporte · Estado del pedido\nAhorra horas de soporte · Guía de devoluciones\nAhorra horas de soporte · Preguntas previas",
+      "title": "Conoce a tu sumiller de voz",
+      "examples": "Busco un tinto del Penedès para acompañar un asado de cordero.\nEstos dos cavas se parecen. ¿Cuál es más seco?\n¿Este blanco es ecológico y apto para veganos?\n¿Dónde está mi pedido? Hace días que el seguimiento no se mueve.\nMe ha llegado una botella rota. ¿Cómo lo soluciono?\n¿Hacéis envíos a Francia y el vino viaja protegido?",
+      "example_tags": "Más ventas · Descubrimiento de producto\nMás ventas · Comparación de botellas\nMás ventas · Asesoramiento experto\nMenos horas de soporte · Estado del pedido\nMenos horas de soporte · Incidencias y devoluciones\nMenos horas de soporte · Dudas antes de comprar",
       "install": "Instalar Bizmis",
-      "just_say": "Solo di",
+      "just_say": "Solo tienes que decir",
       "coach_hide": "Ocultar sugerencias",
       "coach_show": "Mostrar sugerencias",
       "coach_examples": "Ejemplos",
-      "install_with_code": "Instala con tu código de acceso anticipado"
+      "install_with_code": "Instalar con tu código de acceso anticipado"
     },
     "promo": {
-      "label": "Tienda demo de Bizmis",
+      "label": "Tienda de demostración Bizmis",
       "demo_badge": "TIENDA DEMO",
-      "message": "Estás en una tienda demo de Bizmis. Todo esto funciona también en tu tienda.",
-      "landing": "Ir a Bizmis",
+      "message": "Estás navegando por una tienda de demostración de Bizmis. Todo esto también funciona en tu tienda.",
+      "landing": "Visitar Bizmis",
       "other_demos": "Otras demos",
       "demos_hint": "Estas demos están protegidas con contraseña.",
       "password_label": "Contraseña"

@@ -1,0 +1,47 @@
+{%- comment -%}
+  Age verification overlay. Selling alcohol requires the visitor to confirm
+  they are of legal drinking age before browsing. The choice is remembered in
+  localStorage, so the gate only interrupts the first visit.
+
+  Hidden in the theme editor so merchants can keep working on the storefront.
+{%- endcomment -%}
+
+{%- if settings.age_gate_enabled and request.design_mode == false -%}
+  {%- assign minimum_age = settings.age_gate_minimum | default: 18 -%}
+
+  <div
+    class="age-gate"
+    data-age-gate
+    data-minimum-age="{{ minimum_age }}"
+    data-exit-url="{{ settings.age_gate_exit_url | escape }}"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="age-gate-title"
+    hidden
+  >
+    <div class="age-gate__panel">
+      <img
+        class="age-gate__logo"
+        src="{{ 'logo-transparent.png' | asset_url }}"
+        alt="{{ shop.name }}"
+        width="160"
+        height="40"
+      >
+
+      <h2 class="age-gate__title h3" id="age-gate-title">{{ 'age_gate.title' | t }}</h2>
+      <p class="age-gate__text">{{ 'age_gate.text' | t }}</p>
+
+      <div class="age-gate__actions">
+        <button type="button" class="btn btn--primary btn--lg" data-age-gate-confirm>
+          {{ 'age_gate.confirm' | t }}
+        </button>
+        <button type="button" class="btn btn--outline btn--lg" data-age-gate-deny>
+          {{ 'age_gate.deny' | t }}
+        </button>
+      </div>
+
+      <p class="age-gate__denied" data-age-gate-denied hidden>{{ 'age_gate.denied' | t }}</p>
+      <p class="age-gate__disclaimer">{{ 'age_gate.disclaimer' | t }}</p>
+    </div>
+  </div>
+{%- endif -%}

@@ -15,12 +15,11 @@
       "type": "footer",
       "settings": {
         "show_trust_row": true,
-        "brand_text": "Premium gaming gear and peripherals built for competitive players. Level up your setup with cutting-edge tech.",
-        "support_heading": "Support",
-        "newsletter_heading": "Stay in the Loop",
-        "newsletter_text": "Get drops, deals, and new gear first.",
-        "newsletter_placeholder": "Enter your email",
-        "newsletter_button": "Subscribe"
+        "brand_text": "Vins i caves ecològics del Penedès. Verema manual, criança pacient i ampolles amb caràcter de la terra.",
+        "newsletter_heading": "Carta del celler",
+        "newsletter_text": "Noves anyades, edicions limitades i invitacions a cates.",
+        "newsletter_placeholder": "El teu correu electrònic",
+        "newsletter_button": "Subscriu-m'hi"
       }
     }
   },

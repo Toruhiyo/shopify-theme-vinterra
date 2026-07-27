@@ -1,5 +1,5 @@
 {%- liquid
-  assign _upsell_fallbacks = 'addons,add-ons,upsell,complete-order,before-you-go,all' | split: ','
+  assign _upsell_fallbacks = 'accessoris,copes,lots-i-regals,accessories,upsell,all' | split: ','
   assign collection = section.settings.collection
   if collection == blank
     for _handle in _upsell_fallbacks
@@ -33,7 +33,7 @@
       <div class="carousel__track">
         {%- for product in collection.products limit: limit -%}
           <div class="carousel__slide">
-            {% render 'product-card', product: product, show_vendor: show_vendor, aspect_ratio: '1 / 1' %}
+            {% render 'product-card', product: product, show_vendor: show_vendor, aspect_ratio: '3 / 4' %}
           </div>
         {%- endfor -%}
       </div>
@@ -49,7 +49,7 @@
 
 {% schema %}
 {
-  "name": "Accessories upsell",
+  "name": "Copes i accessoris",
   "tag": "section",
   "class": "accessories-upsell-section",
   "settings": [
@@ -57,13 +57,13 @@
       "type": "text",
       "id": "subtitle",
       "label": "Subtitle",
-      "default": "Complete your order"
+      "default": "Per gaudir-ho millor"
     },
     {
       "type": "text",
       "id": "title",
       "label": "Heading",
-      "default": "Complete your order"
+      "default": "Copes, accessoris i lots"
     },
     {
       "type": "collection",

@@ -8,14 +8,18 @@
               {%- case block.settings.icon -%}
                 {%- when 'shipping' -%}
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-                {%- when 'shield' -%}
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                {%- when 'star' -%}
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                {%- when 'grape' -%}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V3"/><path d="M12 3c1.5 0 3-.8 4-2"/><circle cx="8" cy="11" r="2.6"/><circle cx="16" cy="11" r="2.6"/><circle cx="12" cy="15" r="2.6"/><circle cx="12" cy="20" r="2.6"/></svg>
+                {%- when 'leaf' -%}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                {%- when 'award' -%}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="M8.2 14.3 7 22l5-3 5 3-1.2-7.7"/></svg>
+                {%- when 'glass' -%}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8"/><path d="M12 15v7"/><path d="M6 3h12l-1 6a5 5 0 0 1-10 0z"/></svg>
+                {%- when 'package' -%}
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
                 {%- when 'check' -%}
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                {%- when 'headphones' -%}
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
               {%- endcase -%}
             </div>
           {%- endif -%}
@@ -43,19 +47,21 @@
           "label": "Icon",
           "options": [
             { "value": "none", "label": "None" },
+            { "value": "grape", "label": "Grapes" },
+            { "value": "leaf", "label": "Leaf (organic)" },
+            { "value": "glass", "label": "Wine glass" },
+            { "value": "award", "label": "Award" },
             { "value": "shipping", "label": "Shipping" },
-            { "value": "shield", "label": "Shield" },
-            { "value": "star", "label": "Star" },
-            { "value": "check", "label": "Check" },
-            { "value": "headphones", "label": "Headphones" }
+            { "value": "package", "label": "Protected packaging" },
+            { "value": "check", "label": "Check" }
           ],
-          "default": "shipping"
+          "default": "grape"
         },
         {
           "type": "text",
           "id": "text",
           "label": "Text",
-          "default": "Free Shipping"
+          "default": "Viticultura ecològica"
         }
       ]
     }
@@ -65,10 +71,10 @@
     {
       "name": "Feature strip",
       "blocks": [
-        { "type": "feature", "settings": { "icon": "shipping", "text": "Free Shipping" } },
-        { "type": "feature", "settings": { "icon": "shield", "text": "2-Year Warranty" } },
-        { "type": "feature", "settings": { "icon": "star", "text": "Top Rated" } },
-        { "type": "feature", "settings": { "icon": "headphones", "text": "24/7 Support" } }
+        { "type": "feature", "settings": { "icon": "leaf", "text": "Vins ecològics certificats" } },
+        { "type": "feature", "settings": { "icon": "grape", "text": "Cellers familiars" } },
+        { "type": "feature", "settings": { "icon": "shipping", "text": "Enviament gratuït a partir de 60 €" } },
+        { "type": "feature", "settings": { "icon": "package", "text": "Embalatge protegit per a ampolles" } }
       ]
     }
   ]

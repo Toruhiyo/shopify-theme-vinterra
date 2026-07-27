@@ -15,77 +15,38 @@
         "b1": {
           "type": "benefit",
           "settings": {
-            "text": "Free shipping over $99"
+            "text": "Enviament gratuït a partir de 60 €"
           }
         },
         "b2": {
           "type": "benefit",
           "settings": {
-            "text": "2-year warranty included"
+            "text": "Embalatge protegit per a ampolles"
           }
         },
         "b3": {
           "type": "benefit",
           "settings": {
-            "text": "30-day easy returns"
-          }
-        },
-        "tab-overview": {
-          "type": "tab",
-          "settings": {
-            "title": "Overview",
-            "content": "<p>Product details and information.</p>"
-          }
-        },
-        "tab-specs": {
-          "type": "tab",
-          "settings": {
-            "title": "Specs",
-            "content": "<p>Technical specifications.</p>"
-          }
-        },
-        "tab-compat": {
-          "type": "tab",
-          "settings": {
-            "title": "Compatibility",
-            "content": "<p>Compatible devices and systems.</p>"
-          }
-        },
-        "tab-box": {
-          "type": "tab",
-          "settings": {
-            "title": "In the box",
-            "content": "<p>What's included with your purchase.</p>"
-          }
-        },
-        "tab-warranty": {
-          "type": "tab",
-          "settings": {
-            "title": "Warranty",
-            "content": "<p>Warranty information and terms.</p>"
+            "text": "Vi ecològic certificat"
           }
         }
       },
       "block_order": [
         "b1",
         "b2",
-        "b3",
-        "tab-overview",
-        "tab-specs",
-        "tab-compat",
-        "tab-box",
-        "tab-warranty"
+        "b3"
       ],
       "settings": {}
     },
     "related-products": {
       "type": "featured-collection",
       "settings": {
-        "subtitle": "You may also like",
-        "title": "Related Products",
+        "subtitle": "També et pot agradar",
+        "title": "Altres ampolles",
         "products_count": 4,
         "columns": "4",
         "layout": "grid",
+        "aspect_ratio": "3 / 4",
         "show_vendor": true,
         "show_view_all": false
       }

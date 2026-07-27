@@ -1,5 +1,5 @@
 /* ============================================================
-   CRIMSON INDEX — Theme JavaScript
+   VINTERRA — Theme JavaScript
    ============================================================ */
 
 (function () {
@@ -1707,7 +1707,7 @@
     resize();
     window.addEventListener('resize', resize);
 
-    const primary = getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim() || '#D1001A';
+    const primary = getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim() || '#701C33';
     const gravity = 0.32;
     const drag = 0.006;
     const duration = 2600;
@@ -1867,6 +1867,55 @@
     window.addEventListener('load', apply);
   }
 
+  /* Age verification. Blocks the storefront until the visitor confirms they are
+     of legal drinking age; the answer is remembered so it only ever asks once. */
+  const AGE_GATE_STORAGE_KEY = 'vinterra:age-confirmed';
+
+  class AgeGate {
+    constructor(root) {
+      this.root = root;
+      this.deniedMessage = root.querySelector('[data-age-gate-denied]');
+      this.exitUrl = root.dataset.exitUrl;
+
+      if (this.isAlreadyConfirmed()) return;
+
+      this.open();
+      root.querySelector('[data-age-gate-confirm]').addEventListener('click', () => this.confirm());
+      root.querySelector('[data-age-gate-deny]').addEventListener('click', () => this.deny());
+    }
+
+    isAlreadyConfirmed() {
+      try {
+        return localStorage.getItem(AGE_GATE_STORAGE_KEY) === this.root.dataset.minimumAge;
+      } catch (err) {
+        return false;
+      }
+    }
+
+    open() {
+      this.root.hidden = false;
+      document.body.classList.add('age-gate-open');
+    }
+
+    confirm() {
+      try {
+        localStorage.setItem(AGE_GATE_STORAGE_KEY, this.root.dataset.minimumAge);
+      } catch (err) {
+        /* Private browsing: the gate simply asks again next visit. */
+      }
+      this.root.hidden = true;
+      document.body.classList.remove('age-gate-open');
+    }
+
+    deny() {
+      if (this.exitUrl) {
+        window.location.href = this.exitUrl;
+        return;
+      }
+      this.deniedMessage.hidden = false;
+    }
+  }
+
   /* --- Initialize --- */
   function init() {
     new CartDrawer();
@@ -1888,6 +1937,7 @@
     document.querySelectorAll('.carousel').forEach(el => new Carousel(el));
     document.querySelectorAll('[data-hero-slideshow]').forEach(el => new HeroSlideshow(el));
     document.querySelectorAll('[data-voice-demo]').forEach(el => new VoiceDemo(el));
+    document.querySelectorAll('[data-age-gate]').forEach(el => new AgeGate(el));
     initVoiceClerkTriggers();
     initPromoBar();
     document.querySelectorAll('[data-variant-selector]').forEach(el => {

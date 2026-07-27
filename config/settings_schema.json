@@ -1,11 +1,11 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Crimson Index",
+    "theme_name": "Vinterra",
     "theme_version": "1.0.0",
     "theme_author": "Bizmis",
-    "theme_documentation_url": "https://github.com/Toruhiyo/shopify-theme-crimson-index",
-    "theme_support_url": "https://github.com/Toruhiyo/shopify-theme-crimson-index/issues"
+    "theme_documentation_url": "https://github.com/Toruhiyo/shopify-theme-vinterra",
+    "theme_support_url": "https://github.com/Toruhiyo/shopify-theme-vinterra/issues"
   },
   {
     "name": "Colors",
@@ -18,61 +18,68 @@
         "type": "color",
         "id": "color_background",
         "label": "Background",
-        "default": "#FFFFFF"
+        "default": "#FBF8F3"
       },
       {
         "type": "color",
         "id": "color_foreground",
         "label": "Foreground",
-        "default": "#111111"
+        "default": "#1F1A16"
       },
       {
         "type": "color",
         "id": "color_card",
         "label": "Card / Surface",
-        "default": "#F5F5F7"
+        "default": "#F2ECE1"
       },
       {
         "type": "color",
         "id": "color_muted",
         "label": "Muted background",
-        "default": "#F5F5F7"
+        "default": "#F2ECE1"
       },
       {
         "type": "color",
         "id": "color_muted_foreground",
         "label": "Secondary text",
-        "default": "#6E6E73"
+        "default": "#756A5E"
       },
       {
         "type": "color",
         "id": "color_border",
         "label": "Borders / Dividers",
-        "default": "#E5E5EA"
+        "default": "#E2D8C7"
       },
       {
         "type": "color",
         "id": "color_primary",
-        "label": "Primary accent (red)",
-        "default": "#D1001A"
+        "label": "Primary accent (wine)",
+        "default": "#701C33"
       },
       {
         "type": "color",
         "id": "color_primary_foreground",
         "label": "Primary foreground",
-        "default": "#FFFFFF"
+        "default": "#FDF9F2"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Secondary accent (gold)",
+        "default": "#A9863F",
+        "info": "Used for eyebrows, awards and editorial rules."
       },
       {
         "type": "color",
         "id": "color_success",
-        "label": "Success",
-        "default": "#34C759"
+        "label": "Success (vineyard green)",
+        "default": "#4C7A46"
       },
       {
         "type": "color",
         "id": "color_warning",
         "label": "Warning",
-        "default": "#FF9500"
+        "default": "#C08A2E"
       }
     ]
   },
@@ -83,13 +90,13 @@
         "type": "font_picker",
         "id": "font_heading",
         "label": "Heading font",
-        "default": "inter_n6"
+        "default": "playfair_display_n4"
       },
       {
         "type": "font_picker",
         "id": "font_body",
         "label": "Body font",
-        "default": "inter_n4"
+        "default": "source_sans_3_n4"
       },
       {
         "type": "range",
@@ -136,7 +143,7 @@
         "max": 1600,
         "step": 20,
         "unit": "px",
-        "default": 1280
+        "default": 1320
       },
       {
         "type": "range",
@@ -146,7 +153,7 @@
         "max": 80,
         "step": 8,
         "unit": "px",
-        "default": 64
+        "default": 72
       },
       {
         "type": "range",
@@ -156,7 +163,7 @@
         "max": 24,
         "step": 2,
         "unit": "px",
-        "default": 10
+        "default": 2
       },
       {
         "type": "range",
@@ -166,7 +173,7 @@
         "max": 24,
         "step": 2,
         "unit": "px",
-        "default": 16
+        "default": 4
       },
       {
         "type": "checkbox",
@@ -180,6 +187,37 @@
         "label": "Minimal shadows",
         "default": true,
         "info": "Adds very subtle shadows to cards and elevated elements"
+      }
+    ]
+  },
+  {
+    "name": "Age verification",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Selling alcohol online requires visitors to confirm they are of legal drinking age. All copy lives in the theme locale files under age_gate.*"
+      },
+      {
+        "type": "checkbox",
+        "id": "age_gate_enabled",
+        "label": "Ask visitors to confirm their age",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "age_gate_minimum",
+        "label": "Minimum age",
+        "min": 16,
+        "max": 21,
+        "step": 1,
+        "default": 18,
+        "info": "Shown in the locale copy. Update the locale files if you change it."
+      },
+      {
+        "type": "url",
+        "id": "age_gate_exit_url",
+        "label": "Redirect when the visitor is underage",
+        "info": "Defaults to a message on the overlay when left blank."
       }
     ]
   },
@@ -214,13 +252,13 @@
     "settings": [
       {
         "type": "text",
-        "id": "social_twitter",
-        "label": "X (Twitter)"
+        "id": "social_instagram",
+        "label": "Instagram"
       },
       {
         "type": "text",
-        "id": "social_instagram",
-        "label": "Instagram"
+        "id": "social_facebook",
+        "label": "Facebook"
       },
       {
         "type": "text",
@@ -229,18 +267,23 @@
       },
       {
         "type": "text",
-        "id": "social_twitch",
-        "label": "Twitch"
+        "id": "social_linkedin",
+        "label": "LinkedIn"
       },
       {
         "type": "text",
-        "id": "social_discord",
-        "label": "Discord"
+        "id": "social_pinterest",
+        "label": "Pinterest"
       },
       {
         "type": "text",
         "id": "social_tiktok",
         "label": "TikTok"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter",
+        "label": "X (Twitter)"
       }
     ]
   },
@@ -251,7 +294,7 @@
         "type": "link_list",
         "id": "support_menu",
         "label": "Support menu",
-        "info": "Used in header Support dropdown and footer. Add Contact Us, FAQ, etc."
+        "info": "Used in header Support dropdown and footer. Add Contact, FAQ, Shipping, etc."
       }
     ]
   },

@@ -1,0 +1,242 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "accessibility": {
+    "skip_to_content": "Skip to content"
+  },
+  "general": {
+    "language": "Language",
+    "previous": "Previous",
+    "next": "Next",
+    "404": {
+      "subheading": "Page not found",
+      "title": "This bottle doesn't exist",
+      "description": "The page you're looking for doesn't exist or has been moved. Let's head back to the cellar.",
+      "button": "Back to home"
+    }
+  },
+  "header": {
+    "menu": "Menu",
+    "search": "Search",
+    "account": "Account",
+    "cart": "Cart",
+    "navigation": "Main navigation",
+    "mobile_menu": "Mobile menu",
+    "close_menu": "Close menu",
+    "search_placeholder": "Search wines, cavas, wineries...",
+    "view_all": "View all",
+    "more": "More",
+    "support": "Customer care",
+    "help": "Help",
+    "policies": "Policies",
+    "home": "Home",
+    "shop_all": "All {{ title }}",
+    "shipping_policy": "Shipping policy",
+    "returns_refunds": "Returns & refunds",
+    "terms_of_service": "Terms of service",
+    "privacy_policy": "Privacy policy"
+  },
+  "sections": {
+    "announcement_bar": {
+      "label": "Announcement"
+    },
+    "featured_collection": {
+      "view_all": "View all"
+    },
+    "accessories": {
+      "view_all": "View all"
+    }
+  },
+  "products": {
+    "add_to_cart": "Add to cart",
+    "buy_now": "Buy now",
+    "sold_out": "Sold out",
+    "quick_view": "Quick view",
+    "quantity": "Bottles",
+    "decrease_quantity": "Remove a bottle",
+    "increase_quantity": "Add a bottle",
+    "thumbnail": "Thumbnail",
+    "reviews_count": "{{ count }} reviews",
+    "yes": "Yes",
+    "no": "No",
+    "units": {
+      "months": " months",
+      "years": " years",
+      "bottles": " bottles"
+    },
+    "badges": {
+      "new": "New",
+      "featured": "Featured",
+      "sale": "Sale",
+      "organic": "Organic",
+      "biodynamic": "Biodynamic",
+      "vegan": "Vegan",
+      "award": "Award-winning",
+      "last_bottles": "Last bottles"
+    },
+    "links": {
+      "format": "Format",
+      "vintage": "Vintage",
+      "pack": "Pack",
+      "range": "Range",
+      "pairs_with": "Pairs with"
+    },
+    "tabs": {
+      "tasting": "Tasting notes",
+      "technical": "Technical sheet",
+      "pairing": "Food pairing",
+      "winery": "The winery",
+      "serving": "Serving & cellaring"
+    },
+    "specs": {
+      "winery": "Winery",
+      "wine_type": "Type",
+      "do": "Appellation",
+      "region": "Region",
+      "country": "Country",
+      "vintage": "Vintage",
+      "grape_varieties": "Grape varieties",
+      "alcohol_abv": "Alcohol",
+      "ageing": "Ageing",
+      "barrel_months": "Barrel ageing",
+      "lees_months": "Ageing on lees",
+      "dosage": "Dosage",
+      "soil": "Soil",
+      "vine_age_years": "Vine age",
+      "altitude_m": "Altitude",
+      "yield_hl_ha": "Yield",
+      "harvest": "Harvest",
+      "fermentation": "Fermentation",
+      "malolactic": "Malolactic fermentation",
+      "filtration": "Filtration",
+      "natural_wine": "Natural wine",
+      "organic_certified": "Certified organic",
+      "biodynamic_certified": "Certified biodynamic",
+      "vegan": "Vegan friendly",
+      "sulfites_mg_l": "Total sulfites",
+      "residual_sugar_gl": "Residual sugar",
+      "total_acidity_gl": "Total acidity",
+      "ph": "pH",
+      "production_bottles": "Production",
+      "winemaker": "Winemaker",
+      "bottle_format_cl": "Format",
+      "closure": "Closure",
+      "serving_temperature_c": "Serving temperature",
+      "decanting": "Decanting",
+      "cellaring_years": "Cellaring potential",
+      "glass_type": "Recommended glass",
+      "awards": "Awards & scores"
+    }
+  },
+  "collections": {
+    "title": "Collections",
+    "products": "references",
+    "sort_by": "Sort by",
+    "filters": "Filters",
+    "pagination": "Pagination",
+    "previous": "Previous page",
+    "next": "Next page",
+    "clear_all": "Clear all",
+    "empty": "No wines match your selection",
+    "continue_shopping": "Continue shopping"
+  },
+  "cart": {
+    "title": "Your cart",
+    "close": "Close cart",
+    "product": "Product",
+    "quantity": "Qty",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "checkout": "Checkout",
+    "empty": "Your cart is empty",
+    "continue_shopping": "Continue shopping",
+    "complete_setup": "Complete your case",
+    "decrease": "Decrease quantity",
+    "increase": "Increase quantity",
+    "shipping_note": "Shipping and taxes calculated at checkout.",
+    "you_save": "You save",
+    "remove": "Remove",
+    "cancel": "Cancel",
+    "confirm_remove": "Remove this item from your cart?"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search wines and cavas...",
+    "submit": "Search",
+    "results_count": "{{ count }} results",
+    "no_results": "No results for \"{{ terms }}\"",
+    "no_results_hint": "Try another term or explore our collections."
+  },
+  "newsletter": {
+    "placeholder": "Your email",
+    "email_label": "Email address",
+    "subscribe": "Subscribe",
+    "success": "You're in. Check your inbox to confirm."
+  },
+  "footer": {
+    "email_placeholder": "Your email",
+    "subscribe": "Subscribe",
+    "support": "Customer care",
+    "legal": "Legal",
+    "secure_checkout": "Secure checkout",
+    "free_shipping": "Free shipping over €60",
+    "easy_returns": "Hassle-free returns",
+    "protected_packaging": "Bottle-safe packaging",
+    "rights": "All rights reserved."
+  },
+  "contact": {
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "send": "Send message",
+      "success": "Thanks for writing. We'll get back to you as soon as we can."
+    }
+  },
+  "support": {
+    "contact_us": "Contact us",
+    "faq": "FAQ"
+  },
+  "blog": {
+    "comments": "Comments",
+    "no_articles": "No articles yet."
+  },
+  "age_gate": {
+    "title": "Are you 18 or over?",
+    "text": "Alcohol can only be sold to adults. Confirm your age to enter.",
+    "confirm": "Yes, I'm of legal age",
+    "deny": "No",
+    "denied": "Sorry, you must be of legal drinking age to access this store.",
+    "disclaimer": "Please drink responsibly."
+  },
+  "bizmis": {
+    "panel": {
+      "title": "Meet your voice sommelier",
+      "examples": "I'm after a Penedès red to go with roast lamb.\nThese two cavas look the same. Which one is drier?\nIs this white organic and vegan friendly?\nWhere's my order? Tracking hasn't updated in days.\nA bottle arrived broken. How do I sort it out?\nDo you ship to France, and does the wine travel protected?",
+      "example_tags": "Boost sales · Product discovery\nBoost sales · Bottle comparison\nBoost sales · Expert guidance\nSave support hours · Order status\nSave support hours · Breakages and returns\nSave support hours · Pre-purchase FAQs",
+      "install": "Install Bizmis",
+      "just_say": "Just say",
+      "coach_hide": "Hide suggestions",
+      "coach_show": "Show suggestions",
+      "coach_examples": "Examples",
+      "install_with_code": "Install with your early-access code"
+    },
+    "promo": {
+      "label": "Bizmis demo store",
+      "demo_badge": "DEMO STORE",
+      "message": "You're browsing a Bizmis demo store. Everything here works on your store too.",
+      "landing": "Visit Bizmis",
+      "other_demos": "Other demos",
+      "demos_hint": "These demos are password-protected.",
+      "password_label": "Password"
+    }
+  }
+}

@@ -48,12 +48,12 @@
               {%- for block in benefits -%}
                 <span class="pdp__trust-badge" {{ block.shopify_attributes }}>
                   {%- assign _text = block.settings.text | downcase -%}
-                  {%- if _text contains 'shipping' -%}
+                  {%- if _text contains 'enviament' or _text contains 'envío' or _text contains 'shipping' -%}
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-                  {%- elsif _text contains 'warranty' -%}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                  {%- elsif _text contains 'return' -%}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                  {%- elsif _text contains 'embalatge' or _text contains 'embalaje' or _text contains 'packaging' -%}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                  {%- elsif _text contains 'ecolog' or _text contains 'ecològ' or _text contains 'organic' -%}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
                   {%- else -%}
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                   {%- endif -%}
@@ -73,17 +73,10 @@
 
         <h1 class="pdp__title">{{ product.title }}</h1>
 
-        {%- if product.tags contains 'subcategory-certified-refurbished' -%}
-          <div class="pdp__condition-badge pdp__condition-badge--refurbished">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"/><path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg>
-            {{ 'products.badges.refurbished' | t }}
-          </div>
-        {%- endif -%}
-        {%- if product.tags contains 'subcategory-open-box' -%}
-          <div class="pdp__condition-badge pdp__condition-badge--open-box">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-            {{ 'products.badges.open_box' | t }}
-          </div>
+        {%- capture _provenance -%}{% render 'product-badges', product: product, style: 'pdp' %}{%- endcapture -%}
+        {%- assign _provenance = _provenance | strip -%}
+        {%- if _provenance != blank -%}
+          <div class="pdp__provenance">{{ _provenance }}</div>
         {%- endif -%}
 
         {%- comment -%} Rating {%- endcomment -%}
@@ -143,7 +136,8 @@
 
           {%- unless product.has_only_default_variant -%}
             {%- for option in product.options_with_values -%}
-              {%- if option.name == 'Color' -%}{%- continue -%}{%- endif -%}
+              {%- comment -%} Format is already offered through the linked-bottle selector above {%- endcomment -%}
+              {%- if option.name == 'Format' or option.name == 'Formato' -%}{%- continue -%}{%- endif -%}
               <div class="pdp__variants mb-md">
                 <p class="pdp__variant-label">{{ option.name }}</p>
                 <div class="variant-pills">
@@ -186,7 +180,7 @@
           <div class="pdp__ctas">
             {%- if current_variant.available -%}
               <button type="submit" class="btn btn--primary btn--lg btn--full" data-add-btn>
-                {{ 'products.add_to_cart' | t }} &mdash; {{ current_variant.price | money }}
+                {{ 'products.add_to_cart' | t }} · {{ current_variant.price | money }}
               </button>
             {%- else -%}
               <button type="button" class="btn btn--primary btn--lg btn--full" disabled>
@@ -200,85 +194,65 @@
       </div>
     </div>
 
-    {%- comment -%} Tabs Section — driven by product metafields {%- endcomment -%}
-    {%- assign tab_overview = product.metafields.custom.overview.value -%}
-    {%- assign tab_specs = product.metafields.custom.specs.value -%}
-    {%- assign tab_compatibility = product.metafields.custom.compatibility.value -%}
-    {%- assign tab_in_the_box = product.metafields.custom.in_the_box.value -%}
-    {%- assign tab_warranty = product.metafields.custom.warranty.value -%}
+    {%- comment -%}
+      Tasting sheet tabs — driven by product metafields. The technical tab also
+      picks up the auto-generated spec table built from the wine metafields.
+    {%- endcomment -%}
+    {%- assign tab_tasting = product.metafields.custom.tasting_notes.value -%}
+    {%- assign tab_technical = product.metafields.custom.technical_notes.value -%}
+    {%- assign tab_pairing = product.metafields.custom.food_pairing.value -%}
+    {%- assign tab_winery = product.metafields.custom.winery_story.value -%}
+    {%- assign tab_serving = product.metafields.custom.serving_notes.value -%}
 
     {%- capture _auto_specs -%}{%- render 'product-specs', product: product -%}{%- endcapture -%}
-    {%- assign _has_auto_specs = false -%}
-    {%- assign _auto_specs_stripped = _auto_specs | strip -%}
-    {%- if _auto_specs_stripped != blank -%}{%- assign _has_auto_specs = true -%}{%- endif -%}
+    {%- assign _auto_specs = _auto_specs | strip -%}
 
     {%- assign mf_tabs = '' -%}
-    {%- if tab_overview != blank -%}{%- assign mf_tabs = mf_tabs | append: 'overview,' -%}{%- endif -%}
-    {%- if tab_specs != blank or _has_auto_specs -%}{%- assign mf_tabs = mf_tabs | append: 'specs,' -%}{%- endif -%}
-    {%- if tab_compatibility != blank -%}{%- assign mf_tabs = mf_tabs | append: 'compatibility,' -%}{%- endif -%}
-    {%- if tab_in_the_box != blank -%}{%- assign mf_tabs = mf_tabs | append: 'in_the_box,' -%}{%- endif -%}
-    {%- if tab_warranty != blank -%}{%- assign mf_tabs = mf_tabs | append: 'warranty,' -%}{%- endif -%}
+    {%- if tab_tasting != blank -%}{%- assign mf_tabs = mf_tabs | append: 'tasting,' -%}{%- endif -%}
+    {%- if tab_technical != blank or _auto_specs != blank -%}{%- assign mf_tabs = mf_tabs | append: 'technical,' -%}{%- endif -%}
+    {%- if tab_pairing != blank -%}{%- assign mf_tabs = mf_tabs | append: 'pairing,' -%}{%- endif -%}
+    {%- if tab_winery != blank -%}{%- assign mf_tabs = mf_tabs | append: 'winery,' -%}{%- endif -%}
+    {%- if tab_serving != blank -%}{%- assign mf_tabs = mf_tabs | append: 'serving,' -%}{%- endif -%}
     {%- assign mf_tabs_arr = mf_tabs | split: ',' -%}
 
     <div class="mt-lg" data-tabs>
-      <div class="tabs" role="tablist">
-        {%- if mf_tabs_arr.size > 0 -%}
+      {%- if mf_tabs_arr.size > 0 -%}
+        <div class="tabs" role="tablist">
           {%- for tab_key in mf_tabs_arr -%}
-            {%- if tab_key == blank -%}{%- continue -%}{%- endif -%}
             <button
               class="tabs__tab {% if forloop.first %}is-active{% endif %}"
               data-tab="tab-{{ tab_key }}"
               role="tab"
               aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
             >
-              {%- case tab_key -%}
-                {%- when 'overview' -%}Overview
-                {%- when 'specs' -%}Specs
-                {%- when 'compatibility' -%}Compatibility
-                {%- when 'in_the_box' -%}In the Box
-                {%- when 'warranty' -%}Warranty
-              {%- endcase -%}
+              {{ 'products.tabs.' | append: tab_key | t }}
             </button>
           {%- endfor -%}
-        {%- else -%}
-          <button class="tabs__tab is-active" data-tab="tab-overview" role="tab" aria-selected="true">Overview</button>
-          <button class="tabs__tab" data-tab="tab-specs" role="tab" aria-selected="false">Specs</button>
-        {%- endif -%}
-      </div>
+        </div>
 
-      {%- if mf_tabs_arr.size > 0 -%}
         {%- for tab_key in mf_tabs_arr -%}
-          {%- if tab_key == blank -%}{%- continue -%}{%- endif -%}
           {%- case tab_key -%}
-            {%- when 'overview' -%}{%- assign tab_content = tab_overview -%}
-            {%- when 'specs' -%}{%- assign tab_content = tab_specs -%}
-            {%- when 'compatibility' -%}{%- assign tab_content = tab_compatibility -%}
-            {%- when 'in_the_box' -%}{%- assign tab_content = tab_in_the_box -%}
-            {%- when 'warranty' -%}{%- assign tab_content = tab_warranty -%}
+            {%- when 'tasting' -%}{%- assign tab_content = tab_tasting -%}
+            {%- when 'technical' -%}{%- assign tab_content = tab_technical -%}
+            {%- when 'pairing' -%}{%- assign tab_content = tab_pairing -%}
+            {%- when 'winery' -%}{%- assign tab_content = tab_winery -%}
+            {%- when 'serving' -%}{%- assign tab_content = tab_serving -%}
           {%- endcase -%}
           <div class="tabs__panel {% if forloop.first %}is-active{% endif %}" data-panel="tab-{{ tab_key }}" role="tabpanel">
             <div class="accordion__body pdp-tab-content">
-              {%- if tab_key == 'specs' -%}
-                {%- if tab_content != blank -%}{{ tab_content | newline_to_br }}{%- endif -%}
-                {{ _auto_specs }}
-              {%- else -%}
-                {{ tab_content | newline_to_br }}
-              {%- endif -%}
+              {{ tab_content | newline_to_br }}
+              {%- if tab_key == 'technical' -%}{{ _auto_specs }}{%- endif -%}
             </div>
           </div>
         {%- endfor -%}
       {%- else -%}
-        <div class="tabs__panel is-active" data-panel="tab-overview" role="tabpanel">
-          <div class="accordion__body">{{ product.description }}</div>
+        <div class="tabs" role="tablist">
+          <button class="tabs__tab is-active" data-tab="tab-tasting" role="tab" aria-selected="true">
+            {{ 'products.tabs.tasting' | t }}
+          </button>
         </div>
-        <div class="tabs__panel" data-panel="tab-specs" role="tabpanel">
-          <div class="accordion__body">
-            {%- if _has_auto_specs -%}
-              {{ _auto_specs }}
-            {%- else -%}
-              <p>Specifications coming soon.</p>
-            {%- endif -%}
-          </div>
+        <div class="tabs__panel is-active" data-panel="tab-tasting" role="tabpanel">
+          <div class="accordion__body">{{ product.description }}</div>
         </div>
       {%- endif -%}
     </div>
@@ -335,25 +309,7 @@
           "type": "text",
           "id": "text",
           "label": "Benefit text",
-          "default": "Free shipping over $99"
-        }
-      ]
-    },
-    {
-      "type": "tab",
-      "name": "Content tab",
-      "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Tab title",
-          "default": "Overview"
-        },
-        {
-          "type": "richtext",
-          "id": "content",
-          "label": "Tab content",
-          "default": "<p>Product details and information.</p>"
+          "default": "Enviament gratuït a partir de 60 €"
         }
       ]
     }
@@ -362,14 +318,9 @@
     {
       "name": "Product page",
       "blocks": [
-        { "type": "benefit", "settings": { "text": "Free shipping over $99" } },
-        { "type": "benefit", "settings": { "text": "2-year warranty included" } },
-        { "type": "benefit", "settings": { "text": "30-day easy returns" } },
-        { "type": "tab", "settings": { "title": "Overview", "content": "<p>Product details and information.</p>" } },
-        { "type": "tab", "settings": { "title": "Specs", "content": "<p>Technical specifications.</p>" } },
-        { "type": "tab", "settings": { "title": "Compatibility", "content": "<p>Compatible devices and systems.</p>" } },
-        { "type": "tab", "settings": { "title": "In the box", "content": "<p>What's included with your purchase.</p>" } },
-        { "type": "tab", "settings": { "title": "Warranty", "content": "<p>Warranty information and terms.</p>" } }
+        { "type": "benefit", "settings": { "text": "Enviament gratuït a partir de 60 €" } },
+        { "type": "benefit", "settings": { "text": "Embalatge protegit per a ampolles" } },
+        { "type": "benefit", "settings": { "text": "Vi ecològic certificat" } }
       ]
     }
   ]

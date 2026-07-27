@@ -9,36 +9,38 @@
  */
 {
   "accessibility": {
-    "skip_to_content": "Passer au contenu"
+    "skip_to_content": "Aller au contenu"
   },
   "general": {
     "language": "Langue",
+    "previous": "Précédent",
+    "next": "Suivant",
     "404": {
-      "subheading": "Page non trouvée",
-      "title": "Perdu dans le vide",
-      "description": "La page que vous recherchez n'existe pas ou a été déplacée. Retrouvons votre chemin.",
+      "subheading": "Page introuvable",
+      "title": "Cette bouteille n'existe pas",
+      "description": "La page que vous cherchez n'existe pas ou a été déplacée. Retournons à la cave.",
       "button": "Retour à l'accueil"
     }
   },
   "header": {
     "menu": "Menu",
     "search": "Rechercher",
-    "account": "Compte",
+    "account": "Mon compte",
     "cart": "Panier",
     "navigation": "Navigation principale",
     "mobile_menu": "Menu mobile",
     "close_menu": "Fermer le menu",
-    "search_placeholder": "Rechercher des produits, collections...",
+    "search_placeholder": "Rechercher vins, cavas, domaines...",
     "view_all": "Tout voir",
     "more": "Plus",
-    "support": "Assistance",
+    "support": "Service client",
     "help": "Aide",
     "policies": "Politiques",
     "home": "Accueil",
-    "shop_all": "Tout voir {{ title }}",
+    "shop_all": "Tout {{ title }}",
     "shipping_policy": "Politique de livraison",
     "returns_refunds": "Retours et remboursements",
-    "terms_of_service": "Conditions d'utilisation",
+    "terms_of_service": "Conditions générales de vente",
     "privacy_policy": "Politique de confidentialité"
   },
   "sections": {
@@ -54,36 +56,96 @@
   },
   "products": {
     "add_to_cart": "Ajouter au panier",
-    "buy_now": "Acheter maintenant",
+    "buy_now": "Acheter",
     "sold_out": "Épuisé",
     "quick_view": "Aperçu rapide",
-    "quantity": "Quantité",
-    "decrease_quantity": "Diminuer la quantité",
-    "increase_quantity": "Augmenter la quantité",
+    "quantity": "Bouteilles",
+    "decrease_quantity": "Retirer une bouteille",
+    "increase_quantity": "Ajouter une bouteille",
     "thumbnail": "Miniature",
     "reviews_count": "{{ count }} avis",
-    "color": "Couleur",
-    "badges": {
-      "new": "Nouveau",
-      "hot": "Populaire",
-      "sale": "Promo",
-      "refurbished": "Reconditionné certifié",
-      "open_box": "Boîte ouverte"
+    "yes": "Oui",
+    "no": "Non",
+    "units": {
+      "months": " mois",
+      "years": " ans",
+      "bottles": " bouteilles"
     },
-    "link_model": "Modèle",
-    "link_compatible": "Compatible avec"
+    "badges": {
+      "new": "Nouveauté",
+      "featured": "Coup de cœur",
+      "sale": "Promo",
+      "organic": "Bio",
+      "biodynamic": "Biodynamie",
+      "vegan": "Vegan",
+      "award": "Primé",
+      "last_bottles": "Dernières bouteilles"
+    },
+    "links": {
+      "format": "Format",
+      "vintage": "Millésime",
+      "pack": "Conditionnement",
+      "range": "Gamme",
+      "pairs_with": "S'accorde avec"
+    },
+    "tabs": {
+      "tasting": "Dégustation",
+      "technical": "Fiche technique",
+      "pairing": "Accords mets-vins",
+      "winery": "Le domaine",
+      "serving": "Service et conservation"
+    },
+    "specs": {
+      "winery": "Domaine",
+      "wine_type": "Type",
+      "do": "Appellation",
+      "region": "Région",
+      "country": "Pays",
+      "vintage": "Millésime",
+      "grape_varieties": "Cépages",
+      "alcohol_abv": "Degré d'alcool",
+      "ageing": "Élevage",
+      "barrel_months": "Élevage en barrique",
+      "lees_months": "Élevage sur lies",
+      "dosage": "Dosage",
+      "soil": "Sol",
+      "vine_age_years": "Âge des vignes",
+      "altitude_m": "Altitude",
+      "yield_hl_ha": "Rendement",
+      "harvest": "Vendanges",
+      "fermentation": "Fermentation",
+      "malolactic": "Fermentation malolactique",
+      "filtration": "Filtration",
+      "natural_wine": "Vin nature",
+      "organic_certified": "Certifié bio",
+      "biodynamic_certified": "Certifié biodynamie",
+      "vegan": "Convient aux vegans",
+      "sulfites_mg_l": "Sulfites totaux",
+      "residual_sugar_gl": "Sucre résiduel",
+      "total_acidity_gl": "Acidité totale",
+      "ph": "pH",
+      "production_bottles": "Production",
+      "winemaker": "Œnologie",
+      "bottle_format_cl": "Format",
+      "closure": "Bouchage",
+      "serving_temperature_c": "Température de service",
+      "decanting": "Carafage",
+      "cellaring_years": "Potentiel de garde",
+      "glass_type": "Verre recommandé",
+      "awards": "Prix et notes"
+    }
   },
   "collections": {
     "title": "Collections",
-    "products": "produits",
+    "products": "références",
     "sort_by": "Trier par",
     "filters": "Filtres",
     "pagination": "Pagination",
     "previous": "Page précédente",
     "next": "Page suivante",
     "clear_all": "Tout effacer",
-    "empty": "Aucun produit trouvé",
-    "continue_shopping": "Continuer vos achats"
+    "empty": "Aucun vin ne correspond",
+    "continue_shopping": "Continuer mes achats"
   },
   "cart": {
     "title": "Votre panier",
@@ -92,42 +154,52 @@
     "quantity": "Qté",
     "total": "Total",
     "subtotal": "Sous-total",
-    "checkout": "Paiement",
+    "checkout": "Passer commande",
     "empty": "Votre panier est vide",
-    "continue_shopping": "Continuer vos achats",
-    "complete_setup": "Complétez votre configuration",
+    "continue_shopping": "Continuer mes achats",
+    "complete_setup": "Complétez votre caisse",
     "decrease": "Diminuer la quantité",
     "increase": "Augmenter la quantité",
-    "shipping_note": "Frais de livraison et taxes calculés à la caisse.",
+    "shipping_note": "Livraison et taxes calculées à la commande.",
     "you_save": "Vous économisez",
-    "remove": "Supprimer",
+    "remove": "Retirer",
     "cancel": "Annuler",
-    "confirm_remove": "Supprimer cet article de votre panier ?"
+    "confirm_remove": "Retirer cet article du panier ?"
   },
   "search": {
     "title": "Recherche",
-    "placeholder": "Rechercher des produits...",
+    "placeholder": "Rechercher vins et cavas...",
     "submit": "Rechercher",
     "results_count": "{{ count }} résultats",
     "no_results": "Aucun résultat pour « {{ terms }} »",
-    "no_results_hint": "Essayez un autre terme ou parcourez nos collections."
+    "no_results_hint": "Essayez un autre terme ou explorez nos collections."
   },
   "newsletter": {
-    "placeholder": "Votre adresse e-mail",
+    "placeholder": "Votre e-mail",
     "email_label": "Adresse e-mail",
-    "subscribe": "S'abonner",
-    "success": "C'est fait ! Vérifie ta boîte mail pour confirmer."
+    "subscribe": "Je m'abonne",
+    "success": "C'est fait. Consultez votre boîte mail pour confirmer."
   },
   "footer": {
     "email_placeholder": "Votre e-mail",
-    "subscribe": "S'abonner",
-    "support": "Assistance",
+    "subscribe": "Je m'abonne",
+    "support": "Service client",
     "legal": "Mentions légales",
     "secure_checkout": "Paiement sécurisé",
-    "free_shipping": "Livraison gratuite dès 99 $",
-    "easy_returns": "Retours faciles",
-    "warranty_included": "Garantie incluse",
+    "free_shipping": "Livraison offerte dès 60 €",
+    "easy_returns": "Retours sans souci",
+    "protected_packaging": "Emballage renforcé pour bouteilles",
     "rights": "Tous droits réservés."
+  },
+  "contact": {
+    "form": {
+      "name": "Nom",
+      "email": "E-mail",
+      "subject": "Objet",
+      "message": "Message",
+      "send": "Envoyer le message",
+      "success": "Merci de nous avoir écrit. Nous vous répondons au plus vite."
+    }
   },
   "support": {
     "contact_us": "Nous contacter",
@@ -135,22 +207,21 @@
   },
   "blog": {
     "comments": "Commentaires",
-    "no_articles": "Aucun article pour le moment."
+    "no_articles": "Pas encore d'articles."
   },
-  "contact": {
-    "form": {
-      "name": "Nom",
-      "email": "Courriel",
-      "subject": "Objet",
-      "send": "Envoyer le message",
-      "success": "Merci de nous avoir contactés. Nous vous recontacterons dès que possible."
-    }
+  "age_gate": {
+    "title": "Avez-vous 18 ans ou plus ?",
+    "text": "La vente d'alcool est réservée aux personnes majeures. Confirmez votre âge pour entrer.",
+    "confirm": "Oui, je suis majeur",
+    "deny": "Non",
+    "denied": "Désolé, vous devez être majeur pour accéder à cette boutique.",
+    "disclaimer": "À consommer avec modération."
   },
   "bizmis": {
     "panel": {
-      "title": "Découvrez votre vendeur vocal",
-      "examples": "Je cherche un ordinateur portable qui tienne toute la journée.\nCes écouteurs se ressemblent. Lesquels sont les mieux pour courir ?\nEst-ce compatible charge rapide pour iPhone 15 ?\nOù est ma commande ? Le suivi n'a pas été mis à jour depuis plusieurs jours.\nLe chargeur est arrivé avec la mauvaise prise. Puis-je l'échanger ?\nLivrez-vous en Espagne ? La garantie y est-elle valable ?",
-      "example_tags": "Augmenter les ventes · Découverte produit\nAugmenter les ventes · Comparaison produit\nAugmenter les ventes · Conseil technique\nGagnez des heures de support · Suivi de commande\nGagnez des heures de support · Aide aux retours\nGagnez des heures de support · Questions avant-vente",
+      "title": "Découvrez votre sommelier vocal",
+      "examples": "Je cherche un rouge du Penedès pour accompagner un agneau rôti.\nCes deux cavas se ressemblent. Lequel est le plus sec ?\nCe blanc est-il bio et vegan ?\nOù en est ma commande ? Le suivi ne bouge plus depuis des jours.\nUne bouteille est arrivée cassée. Comment faire ?\nLivrez-vous en France, et le vin voyage-t-il protégé ?",
+      "example_tags": "Plus de ventes · Découverte produit\nPlus de ventes · Comparaison de bouteilles\nPlus de ventes · Conseil expert\nMoins d'heures de support · Suivi de commande\nMoins d'heures de support · Casse et retours\nMoins d'heures de support · Questions avant achat",
       "install": "Installer Bizmis",
       "just_say": "Dites simplement",
       "coach_hide": "Masquer les suggestions",
@@ -159,10 +230,10 @@
       "install_with_code": "Installer avec votre code d'accès anticipé"
     },
     "promo": {
-      "label": "Boutique démo Bizmis",
+      "label": "Boutique de démonstration Bizmis",
       "demo_badge": "BOUTIQUE DÉMO",
-      "message": "Vous êtes dans une boutique démo Bizmis. Tout cela fonctionne aussi sur votre boutique.",
-      "landing": "Voir Bizmis",
+      "message": "Vous naviguez sur une boutique de démonstration Bizmis. Tout cela fonctionne aussi sur la vôtre.",
+      "landing": "Visiter Bizmis",
       "other_demos": "Autres démos",
       "demos_hint": "Ces démos sont protégées par mot de passe.",
       "password_label": "Mot de passe"

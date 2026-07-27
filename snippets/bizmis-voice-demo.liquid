@@ -47,18 +47,18 @@
   assign benefit_support = support_tag_parts[0] | strip
 
   comment
-    Use case -> collection map, keyed by the canonical (en.default) example
+    Use case -> collection map, keyed by the Catalan (ca.default) example
     order so it stays correct across every locale:
-      0  "laptop with great battery life"     -> computers-peripherals
-      1  "earbuds ... better for running?"    -> audio
-      2  "fast-charge an iPhone 15"           -> charging-power
-      3  "where's my order?"                  -> outlet
-      4  "wrong plug type ... swap it?"       -> charging-power
-      5  "ship to Spain / warranty"           -> phones-wearables
+      0  negre del Penedès / maridatge        -> vins-negres
+      1  comparació de caves                  -> caves
+      2  ecològic i vegà                      -> vins-ecologics
+      3  estat de la comanda                  -> all
+      4  ampolla trencada / incidència        -> all
+      5  enviaments a França                  -> caves
     A scene block at the same position overrides its entry. Edit the handles
     below to match your store's collections.
   endcomment
-  assign scene_collection_map = 'computers-peripherals,audio,charging-power,outlet,charging-power,phones-wearables' | split: ','
+  assign scene_collection_map = 'vins-negres,caves,vins-ecologics,all,all,caves' | split: ','
 -%}
 
 {%- if part == 'scenes' -%}
