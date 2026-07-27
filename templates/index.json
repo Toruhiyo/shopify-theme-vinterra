@@ -1,0 +1,110 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "autoplay_interval": 3
+      }
+    },
+    "feature-strip": {
+      "type": "feature-strip",
+      "blocks": {
+        "f1": {
+          "type": "feature",
+          "settings": {
+            "icon": "shipping",
+            "text": "Free shipping"
+          }
+        },
+        "f2": {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "text": "2-year warranty"
+          }
+        },
+        "f3": {
+          "type": "feature",
+          "settings": {
+            "icon": "star",
+            "text": "Top rated"
+          }
+        },
+        "f4": {
+          "type": "feature",
+          "settings": {
+            "icon": "headphones",
+            "text": "24/7 support"
+          }
+        }
+      },
+      "block_order": ["f1", "f2", "f3", "f4"],
+      "settings": {}
+    },
+    "category-grid": {
+      "type": "category-grid",
+      "settings": {
+        "use_store_collections": true,
+        "subtitle": "Browse",
+        "title": "Shop by category",
+        "columns": "3"
+      }
+    },
+    "new-arrivals": {
+      "type": "featured-collection",
+      "settings": {
+        "subtitle": "Just landed",
+        "title": "New arrivals",
+        "collection": "new-arrivals",
+        "products_count": 8,
+        "columns": "4",
+        "layout": "carousel",
+        "show_vendor": true,
+        "show_view_all": true
+      }
+    },
+    "bizmis-voice-demo": {
+      "type": "bizmis-voice-demo",
+      "settings": {}
+    },
+    "featured-collection-2": {
+      "type": "featured-collection",
+      "settings": {
+        "subtitle": "This week",
+        "title": "Hot deals",
+        "products_count": 8,
+        "columns": "4",
+        "layout": "carousel",
+        "show_vendor": true,
+        "show_view_all": true
+      }
+    },
+    "accessories": {
+      "type": "accessories-upsell",
+      "settings": {
+        "subtitle": "You may also need",
+        "title": "Complete your setup",
+        "products_count": 8,
+        "show_vendor": false
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "feature-strip",
+    "featured-collection-2",
+    "bizmis-voice-demo",
+    "category-grid",
+    "new-arrivals",
+    "accessories"
+  ]
+}

@@ -1,0 +1,114 @@
+<section class="section-spacing contact-form-section" {{ section.shopify_attributes }}>
+  <div class="page-width">
+    <div class="contact-form__wrapper">
+      {%- if section.settings.text != blank -%}
+        <p class="contact-form__text text-muted mb-lg">{{ section.settings.text }}</p>
+      {%- endif -%}
+
+      {% form 'contact', class: 'contact-form' %}
+        {%- if form.posted_successfully? -%}
+          <p class="contact-form__success mb-lg" role="status">
+            {{ 'contact.form.success' | t }}
+          </p>
+        {%- endif -%}
+
+        {{ form.errors | default_errors }}
+
+        <div class="contact-form__grid">
+          <div class="contact-form__field">
+            <label for="contact-form-name" class="contact-form__label">
+              {{ 'contact.form.name' | t }}
+            </label>
+            <input
+              type="text"
+              id="contact-form-name"
+              name="contact[name]"
+              class="input"
+              value="{{ form.name }}"
+              autocomplete="name"
+              aria-required="true"
+            >
+          </div>
+          <div class="contact-form__field">
+            <label for="contact-form-email" class="contact-form__label">
+              {{ 'contact.form.email' | t }} <span aria-hidden="true">*</span>
+            </label>
+            <input
+              type="email"
+              id="contact-form-email"
+              name="contact[email]"
+              class="input"
+              value="{{ form.email }}"
+              autocomplete="email"
+              required
+              aria-required="true"
+            >
+          </div>
+        </div>
+
+        {%- if section.settings.show_subject -%}
+          <div class="contact-form__field">
+            <label for="contact-form-subject" class="contact-form__label">
+              {{ 'contact.form.subject' | t }}
+            </label>
+            <input
+              type="text"
+              id="contact-form-subject"
+              name="contact[subject]"
+              class="input"
+              value="{{ form.subject }}"
+              autocomplete="off"
+            >
+          </div>
+        {%- endif -%}
+
+        <div class="contact-form__field">
+          <label for="contact-form-message" class="contact-form__label">
+            {{ 'contact.form.message' | t }} <span aria-hidden="true">*</span>
+          </label>
+          <textarea
+            id="contact-form-message"
+            name="contact[body]"
+            class="input contact-form__textarea"
+            rows="5"
+            required
+            aria-required="true"
+          >{{ form.body }}</textarea>
+        </div>
+
+        <div class="contact-form__submit">
+          <button type="submit" class="btn btn--primary btn--lg">
+            {{ 'contact.form.send' | t }}
+          </button>
+        </div>
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "tag": "section",
+  "class": "contact-form-section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "Have a question or feedback? Send us a message and we'll get back to you as soon as we can."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_subject",
+      "label": "Show subject field",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact form"
+    }
+  ]
+}
+{% endschema %}

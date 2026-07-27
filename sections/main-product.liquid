@@ -1,0 +1,377 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign featured_image = current_variant.featured_image | default: product.featured_image
+-%}
+
+<section class="section-spacing section-spacing--pdp">
+  <div class="page-width">
+    <div class="pdp">
+      {%- comment -%} Gallery {%- endcomment -%}
+      <div class="pdp__gallery">
+        <div class="pdp__gallery-main">
+          <img
+            src="{{ featured_image | image_url: width: 1200 }}"
+            alt="{{ featured_image.alt | escape }}"
+            width="1200"
+            height="1200"
+            loading="eager"
+            id="pdp-main-image"
+          >
+        </div>
+
+        {%- if product.images.size > 1 -%}
+          <div class="pdp__gallery-thumbs">
+            {%- for image in product.images -%}
+              <button
+                class="pdp__gallery-thumb {% if image == featured_image %}is-active{% endif %}"
+                data-image-url="{{ image | image_url: width: 1200 }}"
+                aria-label="{{ 'products.thumbnail' | t }} {{ forloop.index }}"
+              >
+                <img
+                  src="{{ image | image_url: width: 120 }}"
+                  alt="{{ image.alt | escape }}"
+                  width="120"
+                  height="120"
+                  loading="lazy"
+                  data-full-src="{{ image | image_url: width: 1200 }}"
+                >
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Trust badges — inline below image {%- endcomment -%}
+        {%- if section.blocks.size > 0 -%}
+          {%- assign benefits = section.blocks | where: 'type', 'benefit' -%}
+          {%- if benefits.size > 0 -%}
+            <div class="pdp__trust-badges">
+              {%- for block in benefits -%}
+                <span class="pdp__trust-badge" {{ block.shopify_attributes }}>
+                  {%- assign _text = block.settings.text | downcase -%}
+                  {%- if _text contains 'shipping' -%}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                  {%- elsif _text contains 'warranty' -%}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  {%- elsif _text contains 'return' -%}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                  {%- else -%}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  {%- endif -%}
+                  {{ block.settings.text }}
+                </span>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Product Info (Sticky) {%- endcomment -%}
+      <div class="pdp__info">
+        {%- if product.vendor != blank -%}
+          <p class="pdp__vendor">{{ product.vendor }}</p>
+        {%- endif -%}
+
+        <h1 class="pdp__title">{{ product.title }}</h1>
+
+        {%- if product.tags contains 'subcategory-certified-refurbished' -%}
+          <div class="pdp__condition-badge pdp__condition-badge--refurbished">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"/><path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg>
+            {{ 'products.badges.refurbished' | t }}
+          </div>
+        {%- endif -%}
+        {%- if product.tags contains 'subcategory-open-box' -%}
+          <div class="pdp__condition-badge pdp__condition-badge--open-box">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            {{ 'products.badges.open_box' | t }}
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Rating {%- endcomment -%}
+        <div class="pdp__rating">
+          <div class="rating">
+            {%- for i in (1..5) -%}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            {%- endfor -%}
+          </div>
+          <span class="pdp__rating-count">{{ 'products.reviews_count' | t: count: 47 }}</span>
+        </div>
+
+        {%- comment -%} Price {%- endcomment -%}
+        <div class="pdp__price-row">
+          <span class="pdp__price {% if current_variant.compare_at_price > current_variant.price %}pdp__price--sale{% endif %}" data-display-price>
+            {{ current_variant.price | money }}
+          </span>
+          {%- if current_variant.compare_at_price > current_variant.price -%}
+            <s class="pdp__compare-price" data-strike-price>{{ current_variant.compare_at_price | money }}</s>
+            {%- assign savings = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price -%}
+            <span class="badge badge--sale" data-discount-badge>-{{ savings }}%</span>
+          {%- else -%}
+            <s class="pdp__compare-price" data-strike-price style="display:none;"></s>
+            <span class="badge badge--sale" data-discount-badge style="display:none;"></span>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Short Description {%- endcomment -%}
+        {%- if product.description != blank -%}
+          <div class="pdp__description">
+            {{ product.description | truncatewords: 40 }}
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Variant Selector {%- endcomment -%}
+        <form method="post" action="/cart/add" id="product-form" data-variant-selector>
+          <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-id-input>
+          <script data-product-variants type="application/json">
+            [
+              {%- for variant in product.variants -%}
+                {
+                  "id": {{ variant.id }},
+                  "available": {{ variant.available }},
+                  "price": {{ variant.price }},
+                  "compare_at_price": {{ variant.compare_at_price | default: 'null' }},
+                  "price_formatted": {{ variant.price | money | json }},
+                  "compare_at_price_formatted": {{ variant.compare_at_price | money | json }},
+                  "featured_image": {% if variant.featured_image %}{{ variant.featured_image | image_url: width: 1200 | json }}{% else %}null{% endif %},
+                  "options": {{ variant.options | json }}
+                }{% unless forloop.last %},{% endunless %}
+              {%- endfor -%}
+            ]
+          </script>
+
+          {%- comment -%} Product links (separate products linked by configurable metafields) {%- endcomment -%}
+          {% render 'product-links', product: product %}
+
+          {%- unless product.has_only_default_variant -%}
+            {%- for option in product.options_with_values -%}
+              {%- if option.name == 'Color' -%}{%- continue -%}{%- endif -%}
+              <div class="pdp__variants mb-md">
+                <p class="pdp__variant-label">{{ option.name }}</p>
+                <div class="variant-pills">
+                  {%- for value in option.values -%}
+                    {%- liquid
+                      assign is_active = false
+                      if option.selected_value == value
+                        assign is_active = true
+                      endif
+                    -%}
+                    <button
+                      type="button"
+                      class="variant-pill {% if is_active %}is-active{% endif %}"
+                      data-option-name="{{ option.name }}"
+                      data-option-value="{{ value }}"
+                    >
+                      {{ value }}
+                    </button>
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endunless -%}
+
+          {%- comment -%} Quantity {%- endcomment -%}
+          <div class="pdp__variants mb-md">
+            <p class="pdp__variant-label">{{ 'products.quantity' | t }}</p>
+            <div class="qty-selector">
+              <button type="button" data-qty-minus aria-label="{{ 'products.decrease_quantity' | t }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+              <input type="number" name="quantity" value="1" min="1" max="99" aria-label="{{ 'products.quantity' | t }}">
+              <button type="button" data-qty-plus aria-label="{{ 'products.increase_quantity' | t }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </button>
+            </div>
+          </div>
+
+          {%- comment -%} CTAs {%- endcomment -%}
+          <div class="pdp__ctas">
+            {%- if current_variant.available -%}
+              <button type="submit" class="btn btn--primary btn--lg btn--full" data-add-btn>
+                {{ 'products.add_to_cart' | t }} &mdash; {{ current_variant.price | money }}
+              </button>
+            {%- else -%}
+              <button type="button" class="btn btn--primary btn--lg btn--full" disabled>
+                {{ 'products.sold_out' | t }}
+              </button>
+            {%- endif -%}
+            <a href="/checkout" class="btn btn--outline btn--lg btn--full">{{ 'products.buy_now' | t }}</a>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+    {%- comment -%} Tabs Section — driven by product metafields {%- endcomment -%}
+    {%- assign tab_overview = product.metafields.custom.overview.value -%}
+    {%- assign tab_specs = product.metafields.custom.specs.value -%}
+    {%- assign tab_compatibility = product.metafields.custom.compatibility.value -%}
+    {%- assign tab_in_the_box = product.metafields.custom.in_the_box.value -%}
+    {%- assign tab_warranty = product.metafields.custom.warranty.value -%}
+
+    {%- capture _auto_specs -%}{%- render 'product-specs', product: product -%}{%- endcapture -%}
+    {%- assign _has_auto_specs = false -%}
+    {%- assign _auto_specs_stripped = _auto_specs | strip -%}
+    {%- if _auto_specs_stripped != blank -%}{%- assign _has_auto_specs = true -%}{%- endif -%}
+
+    {%- assign mf_tabs = '' -%}
+    {%- if tab_overview != blank -%}{%- assign mf_tabs = mf_tabs | append: 'overview,' -%}{%- endif -%}
+    {%- if tab_specs != blank or _has_auto_specs -%}{%- assign mf_tabs = mf_tabs | append: 'specs,' -%}{%- endif -%}
+    {%- if tab_compatibility != blank -%}{%- assign mf_tabs = mf_tabs | append: 'compatibility,' -%}{%- endif -%}
+    {%- if tab_in_the_box != blank -%}{%- assign mf_tabs = mf_tabs | append: 'in_the_box,' -%}{%- endif -%}
+    {%- if tab_warranty != blank -%}{%- assign mf_tabs = mf_tabs | append: 'warranty,' -%}{%- endif -%}
+    {%- assign mf_tabs_arr = mf_tabs | split: ',' -%}
+
+    <div class="mt-lg" data-tabs>
+      <div class="tabs" role="tablist">
+        {%- if mf_tabs_arr.size > 0 -%}
+          {%- for tab_key in mf_tabs_arr -%}
+            {%- if tab_key == blank -%}{%- continue -%}{%- endif -%}
+            <button
+              class="tabs__tab {% if forloop.first %}is-active{% endif %}"
+              data-tab="tab-{{ tab_key }}"
+              role="tab"
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            >
+              {%- case tab_key -%}
+                {%- when 'overview' -%}Overview
+                {%- when 'specs' -%}Specs
+                {%- when 'compatibility' -%}Compatibility
+                {%- when 'in_the_box' -%}In the Box
+                {%- when 'warranty' -%}Warranty
+              {%- endcase -%}
+            </button>
+          {%- endfor -%}
+        {%- else -%}
+          <button class="tabs__tab is-active" data-tab="tab-overview" role="tab" aria-selected="true">Overview</button>
+          <button class="tabs__tab" data-tab="tab-specs" role="tab" aria-selected="false">Specs</button>
+        {%- endif -%}
+      </div>
+
+      {%- if mf_tabs_arr.size > 0 -%}
+        {%- for tab_key in mf_tabs_arr -%}
+          {%- if tab_key == blank -%}{%- continue -%}{%- endif -%}
+          {%- case tab_key -%}
+            {%- when 'overview' -%}{%- assign tab_content = tab_overview -%}
+            {%- when 'specs' -%}{%- assign tab_content = tab_specs -%}
+            {%- when 'compatibility' -%}{%- assign tab_content = tab_compatibility -%}
+            {%- when 'in_the_box' -%}{%- assign tab_content = tab_in_the_box -%}
+            {%- when 'warranty' -%}{%- assign tab_content = tab_warranty -%}
+          {%- endcase -%}
+          <div class="tabs__panel {% if forloop.first %}is-active{% endif %}" data-panel="tab-{{ tab_key }}" role="tabpanel">
+            <div class="accordion__body pdp-tab-content">
+              {%- if tab_key == 'specs' -%}
+                {%- if tab_content != blank -%}{{ tab_content | newline_to_br }}{%- endif -%}
+                {{ _auto_specs }}
+              {%- else -%}
+                {{ tab_content | newline_to_br }}
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="tabs__panel is-active" data-panel="tab-overview" role="tabpanel">
+          <div class="accordion__body">{{ product.description }}</div>
+        </div>
+        <div class="tabs__panel" data-panel="tab-specs" role="tabpanel">
+          <div class="accordion__body">
+            {%- if _has_auto_specs -%}
+              {{ _auto_specs }}
+            {%- else -%}
+              <p>Specifications coming soon.</p>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{%- comment -%} Sticky Mobile Bar {%- endcomment -%}
+<div class="pdp-sticky-bar">
+  <div class="pdp-sticky-bar__price">
+    <span data-sticky-price>{{ current_variant.price | money }}</span>
+    <s class="pdp-sticky-bar__compare" data-sticky-compare style="display:none;"></s>
+    <span class="badge badge--sale" data-sticky-badge style="display:none;"></span>
+  </div>
+  {%- if current_variant.available -%}
+    <button
+      class="btn btn--primary"
+      onclick="document.getElementById('product-form').dispatchEvent(new Event('submit', {cancelable: true, bubbles: true}))"
+    >
+      {{ 'products.add_to_cart' | t }}
+    </button>
+  {%- else -%}
+    <button class="btn btn--primary" disabled>{{ 'products.sold_out' | t }}</button>
+  {%- endif -%}
+</div>
+
+<script>
+  (function() {
+    var thumbs = document.querySelectorAll('.pdp__gallery-thumb');
+    var mainImg = document.getElementById('pdp-main-image');
+
+    thumbs.forEach(function(thumb) {
+      thumb.addEventListener('click', function() {
+        thumbs.forEach(function(t) { t.classList.remove('is-active'); });
+        thumb.classList.add('is-active');
+        var url = thumb.dataset.imageUrl || thumb.querySelector('img').dataset.fullSrc;
+        if (mainImg && url) mainImg.src = url;
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product page",
+  "tag": "section",
+  "class": "main-product-section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Key benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Benefit text",
+          "default": "Free shipping over $99"
+        }
+      ]
+    },
+    {
+      "type": "tab",
+      "name": "Content tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tab title",
+          "default": "Overview"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Tab content",
+          "default": "<p>Product details and information.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product page",
+      "blocks": [
+        { "type": "benefit", "settings": { "text": "Free shipping over $99" } },
+        { "type": "benefit", "settings": { "text": "2-year warranty included" } },
+        { "type": "benefit", "settings": { "text": "30-day easy returns" } },
+        { "type": "tab", "settings": { "title": "Overview", "content": "<p>Product details and information.</p>" } },
+        { "type": "tab", "settings": { "title": "Specs", "content": "<p>Technical specifications.</p>" } },
+        { "type": "tab", "settings": { "title": "Compatibility", "content": "<p>Compatible devices and systems.</p>" } },
+        { "type": "tab", "settings": { "title": "In the box", "content": "<p>What's included with your purchase.</p>" } },
+        { "type": "tab", "settings": { "title": "Warranty", "content": "<p>Warranty information and terms.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,177 @@
+{%- liquid
+  assign _cat_menu_handles = 'catalog,main-menu' | split: ','
+  assign _cat_menu = nil
+  for _handle in _cat_menu_handles
+    assign _candidate = linklists[_handle]
+    if _candidate.links.size > 0
+      assign _cat_menu = _candidate
+      break
+    endif
+  endfor
+-%}
+
+<section class="section-spacing">
+  <div class="page-width">
+    {%- if section.settings.title != blank -%}
+      <div class="section-header">
+        <div>
+          {%- if section.settings.subtitle != blank -%}
+            <p class="section-header__subtitle">{{ section.settings.subtitle }}</p>
+          {%- endif -%}
+          <h2 class="section-header__title h2">{{ section.settings.title }}</h2>
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div class="grid grid--{{ section.settings.columns }}">
+      {%- if section.settings.use_store_collections and _cat_menu -%}
+        {%- for link in _cat_menu.links -%}
+          {%- liquid
+            assign _col = link.object
+            assign _has_image = false
+            if link.type == 'collection_link' and _col.image != blank
+              assign _has_image = true
+            endif
+          -%}
+          <a href="{{ link.url }}" class="category-tile">
+            <div class="category-tile__media">
+              {%- if _has_image -%}
+                <img
+                  src="{{ _col.image | image_url: width: 800 }}"
+                  alt="{{ link.title | escape }}"
+                  width="800"
+                  height="600"
+                  loading="lazy"
+                >
+              {%- else -%}
+                {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'placeholder' }}
+              {%- endif -%}
+            </div>
+            <div class="category-tile__overlay"></div>
+            <div class="category-tile__content">
+              <h3 class="category-tile__title">{{ link.title }}</h3>
+              {%- if link.type == 'collection_link' and _col.products_count -%}
+                <span class="category-tile__count">{{ _col.products_count }} {{ 'collections.products' | t }}</span>
+              {%- endif -%}
+            </div>
+          </a>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign tile_collection = block.settings.collection
+            assign tile_title = block.settings.title_override | default: tile_collection.title
+            assign tile_url = tile_collection.url | default: '#'
+            assign tile_count = tile_collection.products_count
+          -%}
+          <a href="{{ tile_url }}" class="category-tile" {{ block.shopify_attributes }}>
+            <div class="category-tile__media">
+              {%- if block.settings.image_override != blank -%}
+                <img
+                  src="{{ block.settings.image_override | image_url: width: 800 }}"
+                  alt="{{ tile_title | escape }}"
+                  width="800"
+                  height="600"
+                  loading="lazy"
+                >
+              {%- elsif tile_collection.image != blank -%}
+                <img
+                  src="{{ tile_collection.image | image_url: width: 800 }}"
+                  alt="{{ tile_title | escape }}"
+                  width="800"
+                  height="600"
+                  loading="lazy"
+                >
+              {%- else -%}
+                {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'placeholder' }}
+              {%- endif -%}
+            </div>
+            <div class="category-tile__overlay"></div>
+            <div class="category-tile__content">
+              <h3 class="category-tile__title">{{ tile_title }}</h3>
+              {%- if tile_count != blank -%}
+                <span class="category-tile__count">{{ tile_count }} {{ 'collections.products' | t }}</span>
+              {%- endif -%}
+            </div>
+          </a>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Category grid",
+  "tag": "section",
+  "class": "category-grid-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "use_store_collections",
+      "label": "Use Catalog menu categories",
+      "default": true,
+      "info": "When on, shows first-level items from the Catalog menu (same as navbar). When off, use the manual tiles below."
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Browse"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Shop by Category"
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "3"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category tile",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "text",
+          "id": "title_override",
+          "label": "Title override",
+          "info": "Leave blank to use the collection title"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_override",
+          "label": "Image override",
+          "info": "Leave blank to use the collection image"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Category grid",
+      "blocks": [
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,56 @@
+{%- comment -%}
+  Product Specs — renders a specs table from product metafields.
+  Iterates through a curated list of spec keys, checks if the product
+  has a value for each, and renders rows for those that exist.
+  Required param: product
+{%- endcomment -%}
+
+{%- liquid
+  assign _spec_keys = 'chipset,cpu,gpu,ram_gb,ram_type,storage_gb,display_size_in,display_type,display_resolution,refresh_rate_hz,peak_brightness_nits,panel_type,hdr_support,camera_main_mp,battery_mah,battery_hours,battery_days,battery_life,fast_charging,charging_watts,charging_standard,wireless,bluetooth_version,bluetooth_codecs,wifi_standard,connectivity_5g,dual_sim,esim,nfc,gps,ip_rating,water_resistance,water_resistance_m,os,biometric,sensor_type,sensor_dpi,polling_rate_hz,weight_g,weight_kg,case_size_mm,case_material,body_material,form_factor,foldable,screen_size_in,screen_size_inches,total_output_w,total_watts,total_wattage,total_power_watts,channels,driver_size_mm,driver_type,driver_count,impedance_ohms,anc,spatial_audio,codec,dolby_atmos,lumens,throw_type,light_source,resolution,hdmi_ports,hdmi_inputs,hdmi_version,usb_c_ports,usb_a_ports,usb_ports,port_count,thunderbolt_4,ethernet,wan_port,wan_speed_gbps,speeds_rpm,max_speed_gbps,coverage_sqft,node_count,max_devices,smart_platform,smart_home_protocols,voice_assistant,hub_required,color_range,response_time_ms,curvature,vesa_range,max_resolution,gpu_cores,cpu_cores,max_ram_gb,cooling,drive_type,interface,read_speed_mbps,speed_gbps,capacity_mah,magsafe,qi_compatible,gan,pass_through,plug_types,usb_c,outputs,power_source,material,woven_design,cable_length_m,cable_length_ft,cable_type,warranty_months,warranty_type,condition,refurbished_by,inspection_status' | split: ','
+
+  assign _spec_labels = 'Chipset,Processor,GPU,RAM,RAM Type,Storage,Display Size,Display Type,Display Resolution,Refresh Rate,Peak Brightness,Panel Type,HDR,Main Camera,Battery Capacity,Battery Life (hours),Battery Life (days),Battery Life,Fast Charging,Charging Power,Charging Standard,Wireless,Bluetooth,Bluetooth Codecs,Wi-Fi,5G,Dual SIM,eSIM,NFC,GPS,IP Rating,Water Resistance,Water Resistance Depth,Operating System,Biometric,Sensor Type,Sensor DPI,Polling Rate,Weight,Weight,Case Size,Case Material,Body Material,Form Factor,Foldable,Screen Size,Screen Size,Total Output,Total Output,Total Output,Total Output,Channels,Driver Size,Driver Type,Driver Count,Impedance,ANC,Spatial Audio,Codec,Dolby Atmos,Brightness,Throw Type,Light Source,Resolution,HDMI Ports,HDMI Inputs,HDMI Version,USB-C Ports,USB-A Ports,USB Ports,Total Ports,Thunderbolt 4,Ethernet,WAN Port,WAN Speed,Platter Speed,Max Speed,Coverage Area,Mesh Nodes,Max Devices,Smart Platform,Smart Home Protocols,Voice Assistant,Hub Required,Color Range,Response Time,Curvature,VESA Mount,Max Resolution,GPU Cores,CPU Cores,Max RAM,Cooling,Drive Type,Interface,Read Speed,Transfer Speed,Battery Capacity,MagSafe,Qi Compatible,GaN,Passthrough Charging,Plug Types,USB-C,Outputs,Power Source,Material,Woven Cable,Cable Length,Cable Length,Cable Type,Warranty,Warranty Type,Condition,Refurbished By,Inspection Status' | split: ','
+
+  assign _spec_suffixes = ',,,GB,,GB,″,,, Hz, nits,,,MP, mAh, hrs, days,,,,,,,,,,,,,,,,, m,,,,,, dpi, Hz, g, kg, mm,,,,″,″, W, W, W, W,, mm,,, Ω,,,,,,, lm,,,,,,,,,,,, Gbps, rpm, Gbps, sq ft,,,,,,, ms,,,,,,,, MB/s, Gbps, mAh,,,,,,,,,,, m, ft,,,,,,' | split: ','
+-%}
+
+{%- assign _labels_arr = _spec_labels -%}
+{%- assign _suffixes_arr = _spec_suffixes -%}
+{%- assign _has_specs = false -%}
+{%- assign _spec_rows = '' -%}
+
+{%- for _key in _spec_keys -%}
+  {%- assign _val = product.metafields.custom[_key].value -%}
+  {%- if _val == blank -%}{%- continue -%}{%- endif -%}
+
+  {%- comment -%} Skip internal / linking keys that might slip through {%- endcomment -%}
+  {%- if _key == 'sibling_group' or _key == 'model_family' or _key == 'variant_color' -%}{%- continue -%}{%- endif -%}
+
+  {%- assign _label = _labels_arr[forloop.index0] | strip -%}
+  {%- assign _suffix = _suffixes_arr[forloop.index0] | strip -%}
+
+  {%- assign _display = _val -%}
+  {%- if _val == 'true' -%}
+    {%- assign _display = 'Yes' -%}
+  {%- elsif _val == 'false' -%}
+    {%- assign _display = 'No' -%}
+  {%- elsif _suffix != blank -%}
+    {%- assign _display = _val | append: _suffix -%}
+  {%- endif -%}
+
+  {%- assign _has_specs = true -%}
+  {%- capture _row -%}
+    <tr>
+      <td class="specs-table__label">{{ _label }}</td>
+      <td class="specs-table__value">{{ _display }}</td>
+    </tr>
+  {%- endcapture -%}
+  {%- assign _spec_rows = _spec_rows | append: _row -%}
+{%- endfor -%}
+
+{%- if _has_specs -%}
+  <table class="specs-table">
+    <tbody>
+      {{ _spec_rows }}
+    </tbody>
+  </table>
+{%- endif -%}

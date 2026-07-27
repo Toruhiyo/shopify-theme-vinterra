@@ -1,0 +1,117 @@
+<section class="section-spacing">
+  <div class="page-width">
+    <h1 class="h2 mb-lg">{{ 'cart.title' | t }}</h1>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="/cart" method="post" data-cart-form>
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="border-bottom: 1px solid var(--color-border);">
+              <th class="micro text-muted" style="text-align: left; padding: 0.75rem 0;">{{ 'cart.product' | t }}</th>
+              <th class="micro text-muted" style="text-align: center; padding: 0.75rem 0;">{{ 'cart.quantity' | t }}</th>
+              <th class="micro text-muted" style="text-align: right; padding: 0.75rem 0;">{{ 'cart.total' | t }}</th>
+            </tr>
+          </thead>
+          <tbody data-cart-page-items>
+            {%- for item in cart.items -%}
+              <tr style="border-bottom: 1px solid var(--color-border);" data-cart-page-item data-item-key="{{ item.key }}" data-variant-id="{{ item.variant_id }}">
+                <td style="padding: 1rem 0;">
+                  <div style="display: flex; align-items: center; gap: 1rem;">
+                    {%- if item.image -%}
+                      <a href="{{ item.url }}" style="flex-shrink: 0;">
+                        <img
+                          src="{{ item.image | image_url: width: 80 }}"
+                          alt="{{ item.title | escape }}"
+                          width="80"
+                          height="80"
+                          style="border-radius: var(--radius-button); background: var(--color-card);"
+                          loading="lazy"
+                        >
+                      </a>
+                    {%- endif -%}
+                    <div>
+                      <p style="font-weight: 600; font-size: 0.9375rem;">
+                        <a href="{{ item.url }}">{{ item.product.title }}</a>
+                      </p>
+                      {%- unless item.product.has_only_default_variant -%}
+                        <p class="text-muted" style="font-size: 0.8125rem;">{{ item.variant.title }}</p>
+                      {%- endunless -%}
+                      {%- assign _has_compare = false -%}
+                      {%- assign _strike_price = 0 -%}
+                      {%- if item.variant.compare_at_price > item.variant.price -%}
+                        {%- assign _has_compare = true -%}
+                        {%- assign _strike_price = item.variant.compare_at_price -%}
+                      {%- elsif item.original_price > item.final_price -%}
+                        {%- assign _has_compare = true -%}
+                        {%- assign _strike_price = item.original_price -%}
+                      {%- endif -%}
+                      <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.25rem;">
+                        <span style="font-weight: 700; font-size: 0.875rem;">{{ item.final_price | money }}</span>
+                        {%- if _has_compare -%}
+                          <s class="text-muted" style="font-size: 0.8125rem;">{{ _strike_price | money }}</s>
+                          {%- assign _cart_savings = _strike_price | minus: item.final_price | times: 100 | divided_by: _strike_price -%}
+                          <span class="badge badge--sale">-{{ _cart_savings }}%</span>
+                        {%- endif -%}
+                      </div>
+                      {%- if item.discount_allocations.size > 0 -%}
+                        {%- for da in item.discount_allocations -%}
+                          <p style="font-size: 0.75rem; color: var(--color-primary); margin-top: 0.125rem;">{{ da.discount_application.title }}</p>
+                        {%- endfor -%}
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </td>
+                <td style="text-align: center; padding: 1rem 0;">
+                  <div class="qty-selector" style="display: inline-flex;">
+                    <button type="button" data-qty-minus>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                    <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" max="99" data-line="{{ forloop.index }}" data-qty-input aria-label="{{ 'cart.quantity' | t }}">
+                    <button type="button" data-qty-plus>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                    </button>
+                  </div>
+                </td>
+                <td style="text-align: right; padding: 1rem 0;" data-line-total>
+                  <span style="font-weight: 700;">{{ item.final_line_price | money }}</span>
+                  {%- if item.original_line_price > item.final_line_price -%}
+                    <br><s class="text-muted" style="font-size: 0.8125rem;">{{ item.original_line_price | money }}</s>
+                  {%- endif -%}
+                </td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+
+        <div style="display: flex; justify-content: flex-end; margin-top: 2rem;">
+          <div style="max-width: 20rem; width: 100%;" data-cart-page-summary>
+            <div class="flex justify-between mb-sm" style="font-size: 0.875rem; color: var(--color-primary); display: none;" data-cart-page-savings>
+              <span style="font-weight: 500;">{{ 'cart.you_save' | t | default: 'You save' }}</span>
+              <span style="font-weight: 600;" data-savings-amount></span>
+            </div>
+            <div class="flex justify-between mb-md" style="font-size: 1.125rem;">
+              <span style="font-weight: 600;">{{ 'cart.subtotal' | t }}</span>
+              <span style="font-weight: 700;" data-cart-page-subtotal>{{ cart.total_price | money }}</span>
+            </div>
+            <p class="text-muted mb-md" style="font-size: 0.8125rem;">{{ 'cart.shipping_note' | t }}</p>
+            <button type="submit" name="checkout" class="btn btn--primary btn--full btn--lg">{{ 'cart.checkout' | t }}</button>
+          </div>
+        </div>
+      </form>
+    {%- else -%}
+      <div class="text-center" style="padding: 4rem 0;">
+        <p class="h3 mb-md">{{ 'cart.empty' | t }}</p>
+        <a href="/" class="btn btn--primary">{{ 'cart.continue_shopping' | t }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart page",
+  "tag": "section",
+  "class": "main-cart-section",
+  "settings": []
+}
+{% endschema %}

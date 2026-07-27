@@ -1,0 +1,103 @@
+{%- comment -%}
+  Renders a product card.
+  Accepts:
+  - product: {Object} product Liquid object
+  - show_vendor: {Boolean} show vendor name
+  - aspect_ratio: {String} image aspect ratio (e.g. "1/1", "4/3")
+{%- endcomment -%}
+
+{%- liquid
+  assign show_vendor = show_vendor | default: false
+  assign aspect_ratio = aspect_ratio | default: '1 / 1'
+  assign has_hover_image = false
+  if product.images.size > 1
+    assign has_hover_image = true
+  endif
+-%}
+
+<div class="product-card" data-variant-id="{{ product.selected_or_first_available_variant.id }}">
+  <a href="{{ product.url }}" class="product-card__link" aria-label="{{ product.title | escape }}"></a>
+
+  <div class="product-card__media" style="--card-aspect-ratio: {{ aspect_ratio }};">
+    {%- if product.featured_image -%}
+      <img
+        src="{{ product.featured_image | image_url: width: 600 }}"
+        alt="{{ product.featured_image.alt | escape }}"
+        width="600"
+        height="600"
+        loading="lazy"
+      >
+      {%- if has_hover_image -%}
+        <img
+          class="product-card__hover-image"
+          src="{{ product.images[1] | image_url: width: 600 }}"
+          alt="{{ product.images[1].alt | escape }}"
+          width="600"
+          height="600"
+          loading="lazy"
+        >
+      {%- endif -%}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+    {%- endif -%}
+
+    {%- comment -%} Badges row: left = condition tags, right = discount {%- endcomment -%}
+    <div class="product-card__badge-row">
+      <div class="product-card__badges product-card__badges--left">
+        {%- if product.tags contains 'new' -%}
+          <span class="badge badge--new">{{ 'products.badges.new' | t }}</span>
+        {%- endif -%}
+        {%- if product.tags contains 'hot' -%}
+          <span class="badge badge--hot">{{ 'products.badges.hot' | t }}</span>
+        {%- endif -%}
+        {%- if product.tags contains 'subcategory-certified-refurbished' -%}
+          <span class="badge badge--refurbished">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"/><path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg>
+            {{ 'products.badges.refurbished' | t }}
+          </span>
+        {%- endif -%}
+        {%- if product.tags contains 'subcategory-open-box' -%}
+          <span class="badge badge--open-box">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            {{ 'products.badges.open_box' | t }}
+          </span>
+        {%- endif -%}
+      </div>
+      {%- if product.compare_at_price > product.price -%}
+        {%- assign savings = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+        <span class="badge badge--sale" data-discount-badge>-{{ savings }}%</span>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Quick Actions {%- endcomment -%}
+    <div class="product-card__actions">
+      <a href="{{ product.url }}" class="btn btn--outline btn--sm">{{ 'products.quick_view' | t }}</a>
+      {%- if product.available -%}
+        <form method="post" action="/cart/add">
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <input type="hidden" name="quantity" value="1">
+          <button type="submit" class="btn btn--primary btn--sm btn--full">{{ 'products.add_to_cart' | t }}</button>
+        </form>
+      {%- else -%}
+        <button class="btn btn--outline btn--sm btn--full" disabled>{{ 'products.sold_out' | t }}</button>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="product-card__info">
+    {%- if show_vendor and product.vendor != blank -%}
+      <p class="product-card__vendor">{{ product.vendor }}</p>
+    {%- endif -%}
+
+    <h3 class="product-card__title">{{ product.title }}</h3>
+
+    <div class="product-card__price {% if product.compare_at_price > product.price %}product-card__price--sale{% endif %}" data-price-wrapper>
+      <span data-display-price>{{ product.price | money }}</span>
+      {%- if product.compare_at_price > product.price -%}
+        <s data-strike-price>{{ product.compare_at_price | money }}</s>
+      {%- else -%}
+        <s data-strike-price style="display:none;"></s>
+      {%- endif -%}
+    </div>
+  </div>
+</div>

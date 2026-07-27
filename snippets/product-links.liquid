@@ -1,0 +1,275 @@
+{%- comment -%}
+  Product Links — Renders linked products as variant-like selectors.
+  Each linking metafield group shows as a labelled row of swatches or pills.
+
+  Active state: determined by matching display values (not product IDs),
+  so the current product is always highlighted even after dedup.
+
+  When no linked siblings exist for a dimension but the product has the
+  spec metafield, a single active pill is rendered (solo fallback).
+
+  Required param: product
+{%- endcomment -%}
+
+{%- liquid
+  assign LINK_REF_KEYS        = 'color_variants,memory_variants,storage_variants,screen_size_variants,case_size_variants,processor_variants,connectivity_variants,capacity_variants,wattage_variants,cable_length_variants,config_variants,size_variants,compatible_products'
+  assign LINK_REF_LABELS       = 'Color,Memory,Internal Storage,Screen Size,Case Size,Processor,Connectivity,Capacity,Power Output,Cable Length,Configuration,Size,Compatible with'
+  assign LINK_IMAGE_KEYS       = 'color_variants,compatible_products'
+  assign LINK_VALUE_METAFIELDS = ',ram_gb,storage_gb,display_size_in,case_size_mm,chipset,connectivity,capacity_mah,total_output_w,cable_length_m,,,'
+  assign LINK_VALUE_SUFFIXES   = ', GB, GB,″, mm,,, mAh, W, m,,,'
+  assign LINK_MAX_ITEMS        = 12
+-%}
+
+{%- assign _ref_keys = LINK_REF_KEYS | split: ',' -%}
+{%- assign _ref_labels = LINK_REF_LABELS | split: ',' -%}
+{%- assign _val_mfs = LINK_VALUE_METAFIELDS | split: ',' -%}
+{%- assign _val_suffixes = LINK_VALUE_SUFFIXES | split: ',' -%}
+{%- assign _separator = ' — ' -%}
+{%- assign _rendered_keys = '' -%}
+
+{%- for idx in (0..19) -%}
+  {%- if idx >= _ref_keys.size -%}{%- break -%}{%- endif -%}
+  {%- assign _key = _ref_keys[idx] | strip -%}
+  {%- if _key == blank -%}{%- continue -%}{%- endif -%}
+  {%- assign _label = _ref_labels[idx] | strip -%}
+  {%- assign _refs = product.metafields.custom[_key].value -%}
+  {%- assign _use_image = false -%}
+  {%- if LINK_IMAGE_KEYS contains _key -%}
+    {%- assign _use_image = true -%}
+  {%- endif -%}
+  {%- assign _val_mf = _val_mfs[idx] | strip -%}
+  {%- assign _val_suffix = _val_suffixes[idx] | strip -%}
+
+  {%- if _refs != blank and _refs.size > 0 -%}
+    {%- comment -%} Compute CURRENT product display value for active-state matching {%- endcomment -%}
+    {%- assign _current_dval = '' -%}
+    {%- if _use_image -%}
+      {%- assign _current_dval = product.metafields.custom.variant_color.value | default: '' -%}
+      {%- if _current_dval == blank -%}
+        {%- assign _ct_segs = product.title | split: _separator -%}
+        {%- if _ct_segs.size > 1 -%}{%- assign _current_dval = _ct_segs[1] -%}{%- else -%}{%- assign _current_dval = product.title -%}{%- endif -%}
+      {%- endif -%}
+    {%- elsif _val_mf != blank -%}
+      {%- assign _current_dval = product.metafields.custom[_val_mf].value -%}
+      {%- if _current_dval == blank and _key == 'screen_size_variants' -%}
+        {%- assign _current_dval = product.metafields.custom.screen_size_in.value -%}
+        {%- if _current_dval == blank -%}{%- assign _current_dval = product.metafields.custom.screen_size_inches.value -%}{%- endif -%}
+      {%- endif -%}
+      {%- if _current_dval == blank and _key == 'processor_variants' -%}
+        {%- assign _current_dval = product.metafields.custom.cpu.value -%}
+        {%- if _current_dval == blank -%}{%- assign _current_dval = product.metafields.custom.processor.value -%}{%- endif -%}
+      {%- endif -%}
+      {%- if _current_dval == blank and _key == 'wattage_variants' -%}
+        {%- assign _current_dval = product.metafields.custom.total_watts.value -%}
+        {%- if _current_dval == blank -%}{%- assign _current_dval = product.metafields.custom.total_wattage.value -%}{%- endif -%}
+        {%- if _current_dval == blank -%}{%- assign _current_dval = product.metafields.custom.wattage.value -%}{%- endif -%}
+        {%- if _current_dval == blank -%}{%- assign _current_dval = product.metafields.custom.charging_watts.value -%}{%- endif -%}
+      {%- endif -%}
+      {%- if _current_dval == blank and _key == 'capacity_variants' -%}
+        {%- assign _current_dval = product.metafields.custom.battery_mah.value -%}
+      {%- endif -%}
+      {%- if _current_dval != blank -%}
+        {%- if _key == 'storage_variants' or _key == 'memory_variants' -%}
+          {%- assign _cnum = _current_dval | times: 1 -%}
+          {%- if _cnum >= 1000 -%}
+            {%- assign _ctb = _cnum | divided_by: 1000 -%}
+            {%- assign _current_dval = _ctb | append: ' TB' -%}
+          {%- else -%}
+            {%- assign _current_dval = _cnum | append: ' ' | append: _val_suffix -%}
+          {%- endif -%}
+        {%- else -%}
+          {%- assign _current_dval = _current_dval | append: _val_suffix -%}
+        {%- endif -%}
+      {%- endif -%}
+    {%- else -%}
+      {%- assign _ct_parts = product.title | split: _separator -%}
+      {%- assign _current_dval = _ct_parts | last -%}
+    {%- endif -%}
+    {%- assign _current_dedup = _current_dval | strip | downcase -%}
+
+    {%- assign _rendered = 0 -%}
+    {%- assign _seen_values = '' -%}
+    {%- capture _pills_html -%}
+      {%- for _ref in _refs -%}
+        {%- if _rendered >= LINK_MAX_ITEMS -%}{%- break -%}{%- endif -%}
+        {%- if _ref == blank or _ref.handle == blank -%}{%- continue -%}{%- endif -%}
+        {%- if _use_image -%}
+          {%- assign _display_val = _ref.metafields.custom.variant_color.value | default: '' -%}
+          {%- if _display_val == blank -%}
+            {%- assign _title_segs = _ref.title | split: _separator -%}
+            {%- if _title_segs.size > 1 -%}{%- assign _display_val = _title_segs[1] -%}{%- else -%}{%- assign _display_val = _ref.title -%}{%- endif -%}
+          {%- endif -%}
+        {%- elsif _val_mf != blank -%}
+          {%- assign _raw_val = _ref.metafields.custom[_val_mf].value -%}
+          {%- if _raw_val == blank and _key == 'screen_size_variants' -%}
+            {%- assign _raw_val = _ref.metafields.custom.screen_size_in.value -%}
+            {%- if _raw_val == blank -%}{%- assign _raw_val = _ref.metafields.custom.screen_size_inches.value -%}{%- endif -%}
+          {%- endif -%}
+          {%- if _raw_val == blank and _key == 'processor_variants' -%}
+            {%- assign _raw_val = _ref.metafields.custom.cpu.value -%}
+            {%- if _raw_val == blank -%}{%- assign _raw_val = _ref.metafields.custom.processor.value -%}{%- endif -%}
+          {%- endif -%}
+          {%- if _raw_val == blank and _key == 'wattage_variants' -%}
+            {%- assign _raw_val = _ref.metafields.custom.total_watts.value -%}
+            {%- if _raw_val == blank -%}{%- assign _raw_val = _ref.metafields.custom.total_wattage.value -%}{%- endif -%}
+            {%- if _raw_val == blank -%}{%- assign _raw_val = _ref.metafields.custom.wattage.value -%}{%- endif -%}
+            {%- if _raw_val == blank -%}{%- assign _raw_val = _ref.metafields.custom.charging_watts.value -%}{%- endif -%}
+          {%- endif -%}
+          {%- if _raw_val == blank and _key == 'capacity_variants' -%}
+            {%- assign _raw_val = _ref.metafields.custom.battery_mah.value -%}
+          {%- endif -%}
+          {%- if _raw_val != blank -%}
+            {%- if _key == 'storage_variants' or _key == 'memory_variants' -%}
+              {%- assign _num = _raw_val | times: 1 -%}
+              {%- if _num >= 1000 -%}{%- assign _tb = _num | divided_by: 1000 -%}{%- assign _display_val = _tb | append: ' TB' -%}
+              {%- else -%}{%- assign _display_val = _num | append: ' ' | append: _val_suffix -%}{%- endif -%}
+            {%- else -%}
+              {%- assign _display_val = _raw_val | append: _val_suffix -%}
+            {%- endif -%}
+          {%- else -%}
+            {%- assign _title_parts = _ref.title | split: _separator -%}
+            {%- assign _display_val = _title_parts | last -%}
+          {%- endif -%}
+        {%- else -%}
+          {%- assign _title_parts = _ref.title | split: _separator -%}
+          {%- assign _display_val = _title_parts | last -%}
+        {%- endif -%}
+
+        {%- assign _dedup_key = _display_val | strip | downcase -%}
+        {%- assign _dedup_token = '||' | append: _dedup_key | append: '||' -%}
+        {%- if _seen_values contains _dedup_token -%}{%- continue -%}{%- endif -%}
+        {%- assign _seen_values = _seen_values | append: _dedup_token -%}
+
+        {%- assign _is_current = false -%}
+        {%- if _dedup_key == _current_dedup -%}{%- assign _is_current = true -%}{%- endif -%}
+
+        <a href="{% if _is_current %}{{ product.url }}{% else %}{{ _ref.url }}{% endif %}"
+           class="{% if _use_image %}product-link-swatch{% else %}product-link-pill{% endif %}{% if _is_current %} is-active{% endif %}"
+           aria-label="{{ _ref.title }}" title="{% if _is_current %}{{ product.title }}{% else %}{{ _ref.title }}{% endif %}" data-product-link>
+          {%- if _use_image -%}
+            {%- if _is_current and product.featured_image -%}
+              <img src="{{ product.featured_image | image_url: width: 140 }}" alt="{{ product.title | escape }}" loading="lazy" width="70" height="70">
+            {%- elsif _ref.featured_image -%}
+              <img src="{{ _ref.featured_image | image_url: width: 140 }}" alt="{{ _ref.title | escape }}" loading="lazy" width="70" height="70">
+            {%- endif -%}
+            <span class="product-link-swatch__label">{{ _display_val }}</span>
+          {%- else -%}
+            {{- _display_val -}}
+          {%- endif -%}
+        </a>
+        {%- assign _rendered = _rendered | plus: 1 -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+
+    {%- if _rendered > 0 -%}
+      {%- assign _rendered_keys = _rendered_keys | append: _key | append: ',' -%}
+      <div class="pdp__variants mb-md">
+        <p class="pdp__variant-label">{{ _label }}</p>
+        <div class="product-link-group" data-product-link-group>{{ _pills_html }}</div>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- comment -%}
+  Solo fallback — hardcoded per-dimension checks.
+  For each key dimension, if the main loop didn't render it but the product
+  has the spec metafield, render a single active pill.
+{%- endcomment -%}
+
+{%- unless _rendered_keys contains 'color_variants' -%}
+  {%- assign _sv = product.metafields.custom.variant_color.value -%}
+  {%- if _sv != blank -%}
+    <div class="pdp__variants mb-md">
+      <p class="pdp__variant-label">Color</p>
+      <div class="product-link-group" data-product-link-group>
+        <a href="{{ product.url }}" class="product-link-swatch is-active" data-product-link>
+          {%- if product.featured_image -%}<img src="{{ product.featured_image | image_url: width: 140 }}" alt="{{ product.title | escape }}" loading="lazy" width="70" height="70">{%- endif -%}
+          <span class="product-link-swatch__label">{{ _sv }}</span>
+        </a>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endunless -%}
+
+{%- unless _rendered_keys contains 'memory_variants' -%}
+  {%- assign _sv = product.metafields.custom.ram_gb.value -%}
+  {%- if _sv != blank -%}
+    {%- assign _sn = _sv | times: 1 -%}
+    {%- if _sn >= 1000 -%}{%- assign _sd = _sn | divided_by: 1000 | append: ' TB' -%}
+    {%- else -%}{%- assign _sd = _sn | append: ' GB' -%}{%- endif -%}
+    <div class="pdp__variants mb-md">
+      <p class="pdp__variant-label">Memory</p>
+      <div class="product-link-group" data-product-link-group>
+        <a href="{{ product.url }}" class="product-link-pill is-active" data-product-link>{{ _sd }}</a>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endunless -%}
+
+{%- unless _rendered_keys contains 'storage_variants' -%}
+  {%- assign _sv = product.metafields.custom.storage_gb.value -%}
+  {%- if _sv != blank -%}
+    {%- assign _sn = _sv | times: 1 -%}
+    {%- if _sn >= 1000 -%}{%- assign _sd = _sn | divided_by: 1000 | append: ' TB' -%}
+    {%- else -%}{%- assign _sd = _sn | append: ' GB' -%}{%- endif -%}
+    <div class="pdp__variants mb-md">
+      <p class="pdp__variant-label">Internal Storage</p>
+      <div class="product-link-group" data-product-link-group>
+        <a href="{{ product.url }}" class="product-link-pill is-active" data-product-link>{{ _sd }}</a>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endunless -%}
+
+{%- unless _rendered_keys contains 'screen_size_variants' -%}
+  {%- assign _sv = product.metafields.custom.display_size_in.value -%}
+  {%- if _sv == blank -%}{%- assign _sv = product.metafields.custom.screen_size_in.value -%}{%- endif -%}
+  {%- if _sv == blank -%}{%- assign _sv = product.metafields.custom.screen_size_inches.value -%}{%- endif -%}
+  {%- if _sv != blank -%}
+    <div class="pdp__variants mb-md">
+      <p class="pdp__variant-label">Screen Size</p>
+      <div class="product-link-group" data-product-link-group>
+        <a href="{{ product.url }}" class="product-link-pill is-active" data-product-link>{{ _sv }}″</a>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endunless -%}
+
+{%- unless _rendered_keys contains 'case_size_variants' -%}
+  {%- assign _sv = product.metafields.custom.case_size_mm.value -%}
+  {%- if _sv != blank -%}
+    <div class="pdp__variants mb-md">
+      <p class="pdp__variant-label">Case Size</p>
+      <div class="product-link-group" data-product-link-group>
+        <a href="{{ product.url }}" class="product-link-pill is-active" data-product-link>{{ _sv }} mm</a>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endunless -%}
+
+{%- unless _rendered_keys contains 'processor_variants' -%}
+  {%- assign _sv = product.metafields.custom.chipset.value -%}
+  {%- if _sv == blank -%}{%- assign _sv = product.metafields.custom.cpu.value -%}{%- endif -%}
+  {%- if _sv == blank -%}{%- assign _sv = product.metafields.custom.processor.value -%}{%- endif -%}
+  {%- if _sv != blank -%}
+    <div class="pdp__variants mb-md">
+      <p class="pdp__variant-label">Processor</p>
+      <div class="product-link-group" data-product-link-group>
+        <a href="{{ product.url }}" class="product-link-pill is-active" data-product-link>{{ _sv }}</a>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endunless -%}
+
+{%- unless _rendered_keys contains 'connectivity_variants' -%}
+  {%- assign _sv = product.metafields.custom.connectivity.value -%}
+  {%- if _sv != blank -%}
+    <div class="pdp__variants mb-md">
+      <p class="pdp__variant-label">Connectivity</p>
+      <div class="product-link-group" data-product-link-group>
+        <a href="{{ product.url }}" class="product-link-pill is-active" data-product-link>{{ _sv }}</a>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endunless -%}

@@ -1,0 +1,145 @@
+{
+  "accessibility": {
+    "skip_to_content": "コンテンツへスキップ"
+  },
+  "general": {
+    "language": "言語",
+    "404": {
+      "subheading": "ページが見つかりません",
+      "title": "迷子になりました",
+      "description": "お探しのページは存在しないか、移動した可能性があります。ホームへお戻りください。",
+      "button": "ホームに戻る"
+    }
+  },
+  "header": {
+    "menu": "メニュー",
+    "search": "検索",
+    "account": "アカウント",
+    "cart": "カート",
+    "navigation": "メインナビゲーション",
+    "mobile_menu": "モバイルメニュー",
+    "close_menu": "メニューを閉じる",
+    "search_placeholder": "商品、コレクションを検索...",
+    "view_all": "すべて見る",
+    "more": "もっと見る",
+    "support": "サポート",
+    "help": "ヘルプ",
+    "policies": "ポリシー",
+    "home": "ホーム",
+    "shop_all": "{{ title }}をすべて見る",
+    "shipping_policy": "配送ポリシー",
+    "returns_refunds": "返品・返金",
+    "terms_of_service": "利用規約",
+    "privacy_policy": "プライバシーポリシー"
+  },
+  "sections": {
+    "announcement_bar": {
+      "label": "お知らせ"
+    },
+    "featured_collection": {
+      "view_all": "すべて見る"
+    },
+    "accessories": {
+      "view_all": "すべて見る"
+    }
+  },
+  "products": {
+    "add_to_cart": "カートに追加",
+    "buy_now": "今すぐ購入",
+    "sold_out": "売り切れ",
+    "quick_view": "クイックビュー",
+    "quantity": "数量",
+    "decrease_quantity": "数量を減らす",
+    "increase_quantity": "数量を増やす",
+    "thumbnail": "サムネイル",
+    "reviews_count": "{{ count }}件のレビュー",
+    "color": "カラー",
+    "badges": {
+      "new": "新着",
+      "hot": "人気",
+      "sale": "セール"
+    }
+  },
+  "collections": {
+    "title": "コレクション",
+    "products": "商品",
+    "sort_by": "並び替え",
+    "filters": "フィルター",
+    "pagination": "ページネーション",
+    "previous": "前のページ",
+    "next": "次のページ",
+    "clear_all": "すべてクリア",
+    "empty": "商品が見つかりません",
+    "continue_shopping": "ショッピングを続ける"
+  },
+  "cart": {
+    "title": "カート",
+    "close": "カートを閉じる",
+    "product": "商品",
+    "quantity": "数量",
+    "total": "合計",
+    "subtotal": "小計",
+    "checkout": "レジに進む",
+    "empty": "カートは空です",
+    "continue_shopping": "ショッピングを続ける",
+    "complete_setup": "設定を完了",
+    "decrease": "数量を減らす",
+    "increase": "数量を増やす",
+    "shipping_note": "送料と税はチェックアウト時に計算されます。"
+  },
+  "search": {
+    "title": "検索",
+    "placeholder": "商品を検索...",
+    "submit": "検索",
+    "results_count": "{{ count }}件の検索結果",
+    "no_results": "「{{ terms }}」の検索結果はありません",
+    "no_results_hint": "別の検索キーワードをお試しいただくか、コレクションをご覧ください。"
+  },
+  "newsletter": {
+    "placeholder": "メールアドレスを入力",
+    "email_label": "メールアドレス",
+    "subscribe": "登録する",
+    "success": "登録完了！確認メールをご確認ください。"
+  },
+  "footer": {
+    "email_placeholder": "メールアドレス",
+    "subscribe": "登録する",
+    "support": "サポート",
+    "legal": "法的情報",
+    "secure_checkout": "安全なチェックアウト",
+    "free_shipping": "¥9,900以上で送料無料",
+    "easy_returns": "簡単返品",
+    "warranty_included": "保証付き",
+    "rights": "All rights reserved."
+  },
+  "support": {
+    "contact_us": "お問い合わせ",
+    "faq": "よくある質問"
+  },
+  "blog": {
+    "comments": "コメント",
+    "no_articles": "記事はまだありません。"
+  },
+  "bizmis": {
+    "panel": {
+      "title": "音声で接客するストアクラーク",
+      "examples": "一日中使えるノートパソコンを探しています。\nこのイヤホンは見た目が同じです。ランニング向きなのはどちらですか？\niPhone 15の急速充電に対応していますか？\n注文はどこにありますか？追跡情報が何日も更新されていません。\n充電器のプラグが違いました。交換できますか？\nスペインへ発送できますか？保証は現地でも有効ですか？",
+      "example_tags": "売上を伸ばす · 商品の発見\n売上を伸ばす · 商品の比較\n売上を伸ばす · 専門的な案内\nサポート時間を節約 · 注文状況\nサポート時間を節約 · 返品サポート\nサポート時間を節約 · 購入前の質問",
+      "install": "Bizmis をインストール",
+      "just_say": "こう話すだけ",
+      "coach_hide": "ヒントを隠す",
+      "coach_show": "ヒントを表示",
+      "coach_examples": "例文",
+      "install_with_code": "アーリーアクセスコードでインストール"
+    },
+    "promo": {
+      "label": "Bizmis デモストア",
+      "demo_badge": "デモストア",
+      "message": "ここは Bizmis のデモストアです。すべての機能はあなたのストアでも動作します。",
+      "landing": "Bizmis を見る",
+      "other_demos": "他のデモ",
+      "demos_hint": "これらのデモはパスワードで保護されています。",
+      "password_label": "パスワード"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main-page": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "contact-form": {
+      "type": "contact-form",
+      "settings": {
+        "text": "Have a question or feedback? Send us a message and we'll get back to you as soon as we can.",
+        "show_subject": true
+      }
+    }
+  },
+  "order": ["main-page", "contact-form"]
+}

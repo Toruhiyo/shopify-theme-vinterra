@@ -1,0 +1,76 @@
+{%- comment -%}
+  Floating Bizmis coachmark (BIZ-134).
+
+  A compact speech bubble that pops above the Bizmis voice widget, rotating the
+  use cases one at a time with a TikTok-style karaoke caption (each tagged with
+  its benefit / sub-benefit), so a visitor knows what to say within seconds of
+  landing. It tracks the widget element so it stays anchored even while the
+  widget is dragged. The early-access code rides in from bizmis.ai/demo
+  (?code=) and is applied by bizmis-demo.js via the shared data-bizmis-* hooks.
+{%- endcomment -%}
+
+{%- if settings.bizmis_demo_enabled -%}
+  {%- comment -%}
+    When the coachmark is off we still render a hidden config node so
+    bizmis-demo.js keeps the early-access code and hydrates every Install
+    Bizmis CTA (promo bar + voice demo band).
+  {%- endcomment -%}
+  {%- unless settings.bizmis_coachmark_enabled -%}
+    <span data-bizmis-coach data-fallback-code="{{ settings.bizmis_demo_fallback_code | escape }}" hidden></span>
+  {%- else -%}
+  {%- liquid
+    assign prompts = 'bizmis.panel.examples' | t | newline_to_br | split: '<br />'
+    assign tags = 'bizmis.panel.example_tags' | t | newline_to_br | split: '<br />'
+  -%}
+  <aside class="bizmis-coach" data-bizmis-coach data-fallback-code="{{ settings.bizmis_demo_fallback_code | escape }}" aria-label="{{ 'bizmis.panel.title' | t | escape }}" aria-live="polite" hidden>
+    <div class="bizmis-coach__bubble" data-bizmis-coach-bubble>
+      <button
+        type="button"
+        class="bizmis-coach__close"
+        data-bizmis-coach-close
+        aria-label="{{ 'bizmis.panel.coach_hide' | t | escape }}"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="bizmis-coach__eyebrow" aria-hidden="true">
+        <span class="bizmis-coach__tag-benefit" data-bizmis-coach-benefit></span>
+        <span class="bizmis-coach__tag-sub" data-bizmis-coach-sub hidden></span>
+      </div>
+
+      <div class="bizmis-coach__slides" data-bizmis-coach-slides>
+        {%- for prompt in prompts -%}
+          {%- assign trimmed = prompt | strip -%}
+          {%- if trimmed != blank -%}
+            {%- assign tag = tags[forloop.index0] | strip -%}
+            {%- assign tag_parts = tag | split: '·' -%}
+            {%- assign benefit = tag_parts[0] | strip -%}
+            {%- assign sub = '' -%}
+            {%- if tag_parts.size > 1 -%}
+              {%- assign sub = tag_parts[1] | strip -%}
+            {%- endif -%}
+            <figure
+              class="bizmis-coach__slide"
+              data-bizmis-coach-slide
+              data-benefit="{{ benefit | escape }}"
+              data-sub="{{ sub | escape }}"
+            >
+              <blockquote class="bizmis-coach__prompt">{% assign words = trimmed | split: ' ' %}{% for word in words %}<span class="bizmis-coach__word">{{ word }}</span>{% endfor %}</blockquote>
+            </figure>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+    </div>
+
+    <button
+      type="button"
+      class="bizmis-coach__chip"
+      data-bizmis-coach-expand
+      aria-label="{{ 'bizmis.panel.coach_show' | t | escape }}"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"/></svg>
+      {{ 'bizmis.panel.coach_examples' | t }}
+    </button>
+  </aside>
+  {%- endunless -%}
+{%- endif -%}

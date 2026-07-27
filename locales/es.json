@@ -1,0 +1,173 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "accessibility": {
+    "skip_to_content": "Saltar al contenido"
+  },
+  "general": {
+    "language": "Idioma",
+    "404": {
+      "subheading": "Página no encontrada",
+      "title": "Te has perdido",
+      "description": "La página que buscas no existe o se ha movido. Vamos a llevarte de vuelta.",
+      "button": "Volver al inicio"
+    }
+  },
+  "header": {
+    "menu": "Menú",
+    "search": "Buscar",
+    "account": "Cuenta",
+    "cart": "Carrito",
+    "navigation": "Navegación principal",
+    "mobile_menu": "Menú móvil",
+    "close_menu": "Cerrar menú",
+    "search_placeholder": "Busca productos, colecciones...",
+    "view_all": "Ver todo",
+    "more": "Más",
+    "support": "Soporte",
+    "help": "Ayuda",
+    "policies": "Legal",
+    "home": "Inicio",
+    "shop_all": "Comprar {{ title }}",
+    "shipping_policy": "Envíos",
+    "returns_refunds": "Devoluciones y reembolsos",
+    "terms_of_service": "Términos y condiciones",
+    "privacy_policy": "Política de privacidad"
+  },
+  "sections": {
+    "announcement_bar": {
+      "label": "Anuncio"
+    },
+    "featured_collection": {
+      "view_all": "Ver todo"
+    },
+    "accessories": {
+      "view_all": "Ver todo"
+    }
+  },
+  "products": {
+    "add_to_cart": "Añadir al carrito",
+    "buy_now": "Comprar ya",
+    "sold_out": "Agotado",
+    "quick_view": "Vista rápida",
+    "quantity": "Cantidad",
+    "decrease_quantity": "Reducir cantidad",
+    "increase_quantity": "Aumentar cantidad",
+    "thumbnail": "Miniatura",
+    "reviews_count": "{{ count }} reseñas",
+    "color": "Color",
+    "badges": {
+      "new": "Nuevo",
+      "hot": "Popular",
+      "sale": "Oferta",
+      "refurbished": "Reacondicionado certificado",
+      "open_box": "Caja abierta"
+    },
+    "link_options": "Opciones",
+    "link_model": "Modelo",
+    "link_compatible": "Compatible con"
+  },
+  "collections": {
+    "title": "Colecciones",
+    "products": "productos",
+    "sort_by": "Ordenar",
+    "filters": "Filtros",
+    "pagination": "Paginación",
+    "previous": "Página anterior",
+    "next": "Página siguiente",
+    "clear_all": "Borrar todo",
+    "empty": "No hemos encontrado ningún producto",
+    "continue_shopping": "Seguir comprando"
+  },
+  "cart": {
+    "title": "Tu carrito",
+    "close": "Cerrar el carrito",
+    "product": "Producto",
+    "quantity": "Cant.",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "checkout": "Finalizar compra",
+    "empty": "Tu carrito está vacío",
+    "continue_shopping": "Seguir comprando",
+    "complete_setup": "Completa tu configuración",
+    "decrease": "Reducir cantidad",
+    "increase": "Aumentar cantidad",
+    "shipping_note": "Los gastos de envío y los impuestos se calculan al finalizar la compra.",
+    "you_save": "Ahorras",
+    "remove": "Eliminar",
+    "cancel": "Cancelar",
+    "confirm_remove": "¿Quieres quitar este artículo del carrito?"
+  },
+  "search": {
+    "title": "Buscar",
+    "placeholder": "Busca productos...",
+    "submit": "Buscar",
+    "results_count": "{{ count }} resultados",
+    "no_results": "No hay resultados para \"{{ terms }}\"",
+    "no_results_hint": "Prueba con otra búsqueda o explora nuestras colecciones."
+  },
+  "newsletter": {
+    "placeholder": "Introduce tu email",
+    "email_label": "Email",
+    "subscribe": "Suscríbete",
+    "success": "¡Ya estás dentro! Revisa tu email para confirmar."
+  },
+  "footer": {
+    "email_placeholder": "Tu email",
+    "subscribe": "Suscríbete",
+    "support": "Ayuda",
+    "legal": "Legal",
+    "secure_checkout": "Compra segura",
+    "free_shipping": "Envío gratis desde $99",
+    "easy_returns": "Devoluciones sencillas",
+    "warranty_included": "Garantía incluida",
+    "rights": "Todos los derechos reservados."
+  },
+  "support": {
+    "contact_us": "Contacta con nosotros",
+    "faq": "Preguntas frecuentes"
+  },
+  "blog": {
+    "comments": "Comentarios",
+    "no_articles": "Aún no hay artículos."
+  },
+  "contact": {
+    "form": {
+      "name": "Nombre",
+      "email": "Email",
+      "subject": "Asunto",
+      "message": "Mensaje",
+      "send": "Enviar mensaje",
+      "success": "Gracias por escribirnos. Te responderemos lo antes posible."
+    }
+  },
+  "bizmis": {
+    "panel": {
+      "title": "Conoce a tu dependiente virtual por voz",
+      "examples": "Busco un portátil que aguante todo el día.\nEstos auriculares parecen iguales. ¿Cuál es mejor para correr?\n¿Tiene carga rápida para iPhone 15?\n¿Dónde está mi pedido? El seguimiento lleva días sin actualizarse.\nEl cargador ha llegado con el enchufe equivocado. ¿Puedo cambiarlo?\n¿Enviáis a España? ¿La garantía vale allí?",
+      "example_tags": "Aumenta ventas · Descubrir producto\nAumenta ventas · Comparar productos\nAumenta ventas · Guía técnica\nAhorra horas de soporte · Estado del pedido\nAhorra horas de soporte · Guía de devoluciones\nAhorra horas de soporte · Preguntas previas",
+      "install": "Instalar Bizmis",
+      "just_say": "Solo di",
+      "coach_hide": "Ocultar sugerencias",
+      "coach_show": "Mostrar sugerencias",
+      "coach_examples": "Ejemplos",
+      "install_with_code": "Instala con tu código de acceso anticipado"
+    },
+    "promo": {
+      "label": "Tienda demo de Bizmis",
+      "demo_badge": "TIENDA DEMO",
+      "message": "Estás en una tienda demo de Bizmis. Todo esto funciona también en tu tienda.",
+      "landing": "Ir a Bizmis",
+      "other_demos": "Otras demos",
+      "demos_hint": "Estas demos están protegidas con contraseña.",
+      "password_label": "Contraseña"
+    }
+  }
+}

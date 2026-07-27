@@ -1,0 +1,28 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "show_trust_row": true,
+        "brand_text": "Premium gaming gear and peripherals built for competitive players. Level up your setup with cutting-edge tech.",
+        "support_heading": "Support",
+        "newsletter_heading": "Stay in the Loop",
+        "newsletter_text": "Get drops, deals, and new gear first.",
+        "newsletter_placeholder": "Enter your email",
+        "newsletter_button": "Subscribe"
+      }
+    }
+  },
+  "order": ["footer"]
+}

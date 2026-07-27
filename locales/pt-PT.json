@@ -1,0 +1,145 @@
+{
+  "accessibility": {
+    "skip_to_content": "Saltar para o conteúdo"
+  },
+  "general": {
+    "language": "Idioma",
+    "404": {
+      "subheading": "Página não encontrada",
+      "title": "Perdido no vazio",
+      "description": "A página que procura não existe ou foi movida. Vamos colocá-lo de volta no caminho certo.",
+      "button": "Voltar ao início"
+    }
+  },
+  "header": {
+    "menu": "Menu",
+    "search": "Pesquisar",
+    "account": "Conta",
+    "cart": "Carrinho",
+    "navigation": "Navegação principal",
+    "mobile_menu": "Menu móvel",
+    "close_menu": "Fechar menu",
+    "search_placeholder": "Pesquisar produtos, coleções...",
+    "view_all": "Ver tudo",
+    "more": "Mais",
+    "support": "Suporte",
+    "help": "Ajuda",
+    "policies": "Políticas",
+    "home": "Início",
+    "shop_all": "Ver tudo {{ title }}",
+    "shipping_policy": "Política de envio",
+    "returns_refunds": "Devoluções e reembolsos",
+    "terms_of_service": "Termos de serviço",
+    "privacy_policy": "Política de privacidade"
+  },
+  "sections": {
+    "announcement_bar": {
+      "label": "Anúncio"
+    },
+    "featured_collection": {
+      "view_all": "Ver tudo"
+    },
+    "accessories": {
+      "view_all": "Ver tudo"
+    }
+  },
+  "products": {
+    "add_to_cart": "Adicionar ao carrinho",
+    "buy_now": "Comprar agora",
+    "sold_out": "Esgotado",
+    "quick_view": "Visualização rápida",
+    "quantity": "Quantidade",
+    "decrease_quantity": "Diminuir quantidade",
+    "increase_quantity": "Aumentar quantidade",
+    "thumbnail": "Miniatura",
+    "reviews_count": "{{ count }} avaliações",
+    "color": "Cor",
+    "badges": {
+      "new": "Novo",
+      "hot": "Popular",
+      "sale": "Promoção"
+    }
+  },
+  "collections": {
+    "title": "Coleções",
+    "products": "produtos",
+    "sort_by": "Ordenar por",
+    "filters": "Filtros",
+    "pagination": "Paginação",
+    "previous": "Página anterior",
+    "next": "Página seguinte",
+    "clear_all": "Limpar tudo",
+    "empty": "Nenhum produto encontrado",
+    "continue_shopping": "Continuar a comprar"
+  },
+  "cart": {
+    "title": "O seu carrinho",
+    "close": "Fechar carrinho",
+    "product": "Produto",
+    "quantity": "Qtd",
+    "total": "Total",
+    "subtotal": "Subtotal",
+    "checkout": "Finalizar compra",
+    "empty": "O seu carrinho está vazio",
+    "continue_shopping": "Continuar a comprar",
+    "complete_setup": "Concluir configuração",
+    "decrease": "Diminuir quantidade",
+    "increase": "Aumentar quantidade",
+    "shipping_note": "Portes e impostos calculados no checkout."
+  },
+  "search": {
+    "title": "Pesquisar",
+    "placeholder": "Pesquisar produtos...",
+    "submit": "Pesquisar",
+    "results_count": "{{ count }} resultados",
+    "no_results": "Nenhum resultado para \"{{ terms }}\"",
+    "no_results_hint": "Tente outro termo de pesquisa ou navegue pelas nossas coleções."
+  },
+  "newsletter": {
+    "placeholder": "Introduza o seu email",
+    "email_label": "Endereço de email",
+    "subscribe": "Subscrever",
+    "success": "Tudo certo! Confirma no teu email."
+  },
+  "footer": {
+    "email_placeholder": "O seu email",
+    "subscribe": "Subscrever",
+    "support": "Suporte",
+    "legal": "Legal",
+    "secure_checkout": "Checkout seguro",
+    "free_shipping": "Portes grátis acima de 99€",
+    "easy_returns": "Devoluções fáceis",
+    "warranty_included": "Garantia incluída",
+    "rights": "Todos os direitos reservados."
+  },
+  "support": {
+    "contact_us": "Contacte-nos",
+    "faq": "FAQ"
+  },
+  "blog": {
+    "comments": "Comentários",
+    "no_articles": "Ainda não há artigos."
+  },
+  "bizmis": {
+    "panel": {
+      "title": "Conheça o seu assistente de loja por voz",
+      "examples": "Procuro um portátil que aguente o dia todo.\nEstes auriculares parecem iguais. Quais são melhores para correr?\nTem carregamento rápido para iPhone 15?\nOnde está a minha encomenda? O rastreio não atualiza há dias.\nO carregador veio com a ficha errada. Posso trocá-lo?\nEnviam para Espanha? A garantia é válida lá?",
+      "example_tags": "Aumente vendas · Descoberta de produto\nAumente vendas · Comparação de produtos\nAumente vendas · Orientação técnica\nPoupe horas de suporte · Estado da encomenda\nPoupe horas de suporte · Ajuda com trocas\nPoupe horas de suporte · Dúvidas pré-compra",
+      "install": "Instalar o Bizmis",
+      "just_say": "Basta dizer",
+      "coach_hide": "Ocultar sugestões",
+      "coach_show": "Mostrar sugestões",
+      "coach_examples": "Exemplos",
+      "install_with_code": "Instale com o seu código de acesso antecipado"
+    },
+    "promo": {
+      "label": "Loja demo da Bizmis",
+      "demo_badge": "LOJA DEMO",
+      "message": "Está numa loja demo da Bizmis. Tudo isto funciona também na sua loja.",
+      "landing": "Ir para a Bizmis",
+      "other_demos": "Outras demos",
+      "demos_hint": "Estas demos estão protegidas por palavra-passe.",
+      "password_label": "Palavra-passe"
+    }
+  }
+}

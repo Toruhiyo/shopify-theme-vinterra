@@ -1,0 +1,17 @@
+<section class="section-spacing">
+  <div class="page-width">
+    <h1 class="h1 mb-lg">{{ page.title }}</h1>
+    <div class="rte" style="max-width: 46rem; line-height: 1.8; color: var(--color-muted-fg); font-size: 1.0625rem;">
+      {{ page.content }}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page content",
+  "tag": "section",
+  "class": "main-page-section",
+  "settings": []
+}
+{% endschema %}

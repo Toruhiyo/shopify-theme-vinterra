@@ -1,0 +1,70 @@
+<section class="section-spacing" style="background: var(--color-card); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+  <div class="page-width">
+    <div class="newsletter">
+      {%- if section.settings.subtitle != blank -%}
+        <p class="section-header__subtitle" style="margin-bottom: 0.25rem;">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h2 class="h2 mb-sm">{{ section.settings.title }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.text != blank -%}
+        <p class="text-muted mb-lg" style="max-width: 28rem; margin-left: auto; margin-right: auto;">{{ section.settings.text }}</p>
+      {%- endif -%}
+
+      {% form 'customer', id: 'newsletter-section' %}
+        {%- if form.posted_successfully? -%}
+          <p class="newsletter__success" data-newsletter-success role="status" style="margin: 0; color: var(--color-primary); font-weight: 500;">{{ 'newsletter.success' | t }}</p>
+        {%- else -%}
+          <div class="newsletter__form">
+            <input
+              type="email"
+              name="contact[email]"
+              class="input"
+              placeholder="{{ 'newsletter.placeholder' | t }}"
+              required
+              autocomplete="email"
+              aria-label="{{ 'newsletter.email_label' | t }}"
+            >
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <button type="submit" class="btn btn--primary">{{ 'newsletter.subscribe' | t }}</button>
+          </div>
+        {%- endif -%}
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "class": "newsletter-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Stay Ahead"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Join the Squad"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "Get early access to new drops, exclusive deals, and pro tips delivered to your inbox."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter"
+    }
+  ]
+}
+{% endschema %}

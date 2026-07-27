@@ -1,0 +1,194 @@
+{%- liquid
+  comment
+    Plain merchant-style promo slideshow. The hero carries zero Bizmis chrome
+    on purpose: the demo store has to look like a real storefront so the only
+    Bizmis surfaces a lead sees are the orange promo bar and the widget,
+    exactly as they would on their own store.
+  endcomment
+
+  assign height_class = ''
+  if section.settings.height == 'large'
+    assign height_class = 'hero--large'
+  endif
+
+  assign default_hero_images = 'hero-slide-headphones.png,hero-slide-laptop.png,hero-slide-smartphone.png,hero-slide-earbuds.png,hero-slide-smartwatch.png,hero-slide-speaker.png'
+
+  assign has_block_images = false
+  for block in section.blocks
+    if block.settings.image != blank
+      assign has_block_images = true
+      break
+    endif
+  endfor
+
+  if has_block_images
+    assign slide_count = section.blocks.size
+  else
+    assign fallback_images = default_hero_images | split: ','
+    assign slide_count = fallback_images.size
+  endif
+
+  assign interval = section.settings.autoplay_interval | times: 1000
+-%}
+
+<section
+  class="hero {{ height_class }}"
+  data-hero-slideshow
+  data-autoplay-interval="{{ interval }}"
+  {{ section.shopify_attributes }}
+>
+  <div class="hero__slides">
+    {%- if has_block_images -%}
+      {%- for block in section.blocks -%}
+        <div
+          class="hero__slide{% if forloop.first %} is-active{% endif %}"
+          data-hero-slide="{{ forloop.index0 }}"
+          {{ block.shopify_attributes }}
+        >
+          <div class="hero__media">
+            {%- if block.settings.image != blank -%}
+              <img
+                src="{{ block.settings.image | image_url: width: 2000 }}"
+                alt="{{ block.settings.image.alt | default: shop.name | escape }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                {%- if forloop.first %} fetchpriority="high"{% endif %}
+              >
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    {%- else -%}
+      {%- for img_file in fallback_images -%}
+        <div
+          class="hero__slide{% if forloop.first %} is-active{% endif %}"
+          data-hero-slide="{{ forloop.index0 }}"
+        >
+          <div class="hero__media">
+            <img
+              src="{{ img_file | strip | asset_url }}"
+              alt="{{ shop.name | escape }}"
+              width="1536"
+              height="1024"
+              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+              {%- if forloop.first %} fetchpriority="high"{% endif %}
+            >
+          </div>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+
+  <div class="page-width hero__container">
+    <div class="hero__content">
+      {%- if section.settings.subtitle != blank -%}
+        <p class="hero__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h1 class="hero__title">
+          <span class="hero__title-line">{{ section.settings.title }}</span>
+          {%- if section.settings.cta_text != blank -%}
+            {%- comment -%}
+              The CTA is the title's second line: same scale, brand color,
+              underlined, clickable. Starts a voice chat with the clerk.
+            {%- endcomment -%}
+            <button type="button" class="hero__title-cta" data-open-voice-clerk>
+              {{- section.settings.cta_text -}}
+            </button>
+          {%- endif -%}
+        </h1>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if slide_count > 1 -%}
+    <div class="hero__nav" aria-label="Slideshow navigation">
+      <button class="hero__arrow hero__arrow--prev" data-hero-prev aria-label="Previous slide">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+
+      <div class="hero__dots">
+        {%- for i in (1..slide_count) -%}
+          <button
+            class="hero__dot{% if forloop.first %} is-active{% endif %}"
+            data-hero-dot="{{ forloop.index0 }}"
+            aria-label="Go to slide {{ forloop.index }}"
+          ></button>
+        {%- endfor -%}
+      </div>
+
+      <button class="hero__arrow hero__arrow--next" data-hero-next aria-label="Next slide">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Hero banner",
+  "tag": "section",
+  "class": "hero-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Height",
+      "options": [
+        { "value": "medium", "label": "Medium (70vh)" },
+        { "value": "large", "label": "Large (85vh)" }
+      ],
+      "default": "large"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_interval",
+      "label": "Auto-rotate interval (seconds)",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Consumer electronics, curated"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "The store clerk is in."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Voice clerk line (second title line)",
+      "default": "Just say what you need.",
+      "info": "Rendered as the highlighted second line of the heading. Opens a voice chat with the store clerk."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background image"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Hero banner"
+    }
+  ]
+}
+{% endschema %}

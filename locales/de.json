@@ -1,0 +1,145 @@
+{
+  "accessibility": {
+    "skip_to_content": "Zum Inhalt springen"
+  },
+  "general": {
+    "language": "Sprache",
+    "404": {
+      "subheading": "Seite nicht gefunden",
+      "title": "Im Nichts verloren",
+      "description": "Die gesuchte Seite existiert nicht oder wurde verschoben. Wir bringen Sie zurück.",
+      "button": "Zurück zur Startseite"
+    }
+  },
+  "header": {
+    "menu": "Menü",
+    "search": "Suchen",
+    "account": "Konto",
+    "cart": "Warenkorb",
+    "navigation": "Hauptnavigation",
+    "mobile_menu": "Mobilmenü",
+    "close_menu": "Menü schließen",
+    "search_placeholder": "Produkte, Kollektionen suchen...",
+    "view_all": "Alle anzeigen",
+    "more": "Mehr",
+    "support": "Support",
+    "help": "Hilfe",
+    "policies": "Richtlinien",
+    "home": "Startseite",
+    "shop_all": "Alle {{ title }} anzeigen",
+    "shipping_policy": "Versandrichtlinie",
+    "returns_refunds": "Rückgabe & Erstattung",
+    "terms_of_service": "Nutzungsbedingungen",
+    "privacy_policy": "Datenschutzrichtlinie"
+  },
+  "sections": {
+    "announcement_bar": {
+      "label": "Ankündigung"
+    },
+    "featured_collection": {
+      "view_all": "Alle anzeigen"
+    },
+    "accessories": {
+      "view_all": "Alle anzeigen"
+    }
+  },
+  "products": {
+    "add_to_cart": "In den Warenkorb",
+    "buy_now": "Jetzt kaufen",
+    "sold_out": "Ausverkauft",
+    "quick_view": "Schnellansicht",
+    "quantity": "Menge",
+    "decrease_quantity": "Menge verringern",
+    "increase_quantity": "Menge erhöhen",
+    "thumbnail": "Vorschaubild",
+    "reviews_count": "{{ count }} Bewertungen",
+    "color": "Farbe",
+    "badges": {
+      "new": "Neu",
+      "hot": "Beliebt",
+      "sale": "Sale"
+    }
+  },
+  "collections": {
+    "title": "Kollektionen",
+    "products": "Produkte",
+    "sort_by": "Sortieren nach",
+    "filters": "Filter",
+    "pagination": "Seitennummerierung",
+    "previous": "Vorherige Seite",
+    "next": "Nächste Seite",
+    "clear_all": "Alle löschen",
+    "empty": "Keine Produkte gefunden",
+    "continue_shopping": "Weiter einkaufen"
+  },
+  "cart": {
+    "title": "Ihr Warenkorb",
+    "close": "Warenkorb schließen",
+    "product": "Produkt",
+    "quantity": "Anz.",
+    "total": "Gesamt",
+    "subtotal": "Zwischensumme",
+    "checkout": "Zur Kasse",
+    "empty": "Ihr Warenkorb ist leer",
+    "continue_shopping": "Weiter einkaufen",
+    "complete_setup": "Einrichtung abschließen",
+    "decrease": "Menge verringern",
+    "increase": "Menge erhöhen",
+    "shipping_note": "Versand und Steuern werden an der Kasse berechnet."
+  },
+  "search": {
+    "title": "Suchen",
+    "placeholder": "Produkte suchen...",
+    "submit": "Suchen",
+    "results_count": "{{ count }} Ergebnisse",
+    "no_results": "Keine Ergebnisse für \"{{ terms }}\"",
+    "no_results_hint": "Versuchen Sie einen anderen Suchbegriff oder durchsuchen Sie unsere Kollektionen."
+  },
+  "newsletter": {
+    "placeholder": "E-Mail eingeben",
+    "email_label": "E-Mail-Adresse",
+    "subscribe": "Abonnieren",
+    "success": "Du bist dabei! Bestätige es in deinem Postfach."
+  },
+  "footer": {
+    "email_placeholder": "Ihre E-Mail",
+    "subscribe": "Abonnieren",
+    "support": "Support",
+    "legal": "Rechtliches",
+    "secure_checkout": "Sicherer Checkout",
+    "free_shipping": "Kostenloser Versand ab 99€",
+    "easy_returns": "Einfache Rückgabe",
+    "warranty_included": "Garantie inklusive",
+    "rights": "Alle Rechte vorbehalten."
+  },
+  "support": {
+    "contact_us": "Kontakt",
+    "faq": "FAQ"
+  },
+  "blog": {
+    "comments": "Kommentare",
+    "no_articles": "Noch keine Artikel."
+  },
+  "bizmis": {
+    "panel": {
+      "title": "Lernen Sie Ihren sprachgesteuerten Verkäufer kennen",
+      "examples": "Ich suche einen Laptop, der den ganzen Tag durchhält.\nDiese Kopfhörer sehen gleich aus. Welche sind besser zum Joggen?\nHat das Schnellladen fürs iPhone 15?\nWo ist meine Bestellung? Die Sendungsverfolgung wurde seit Tagen nicht aktualisiert.\nDas Ladegerät kam mit dem falschen Stecker. Kann ich es umtauschen?\nLiefern Sie nach Spanien? Gilt die Garantie dort?",
+      "example_tags": "Umsatz steigern · Produktsuche\nUmsatz steigern · Produktvergleich\nUmsatz steigern · Technische Beratung\nSupport-Stunden sparen · Bestellstatus\nSupport-Stunden sparen · Retourenhilfe\nSupport-Stunden sparen · Vorab-Fragen",
+      "install": "Bizmis installieren",
+      "just_say": "Sag einfach",
+      "coach_hide": "Vorschläge ausblenden",
+      "coach_show": "Vorschläge anzeigen",
+      "coach_examples": "Beispiele",
+      "install_with_code": "Mit Ihrem Early-Access-Code installieren"
+    },
+    "promo": {
+      "label": "Bizmis Demo-Store",
+      "demo_badge": "DEMO-STORE",
+      "message": "Du browst gerade in einem Bizmis Demo-Store. Alles hier funktioniert auch in deinem Store.",
+      "landing": "Zu Bizmis",
+      "other_demos": "Weitere Demos",
+      "demos_hint": "Diese Demos sind passwortgeschützt.",
+      "password_label": "Passwort"
+    }
+  }
+}

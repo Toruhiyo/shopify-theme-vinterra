@@ -1,0 +1,43 @@
+{%- comment -%}
+  Policy page — uses global `policy` object (title, body).
+  Layout: optional sidebar with links to all shop policies + constrained content.
+{%- endcomment -%}
+
+<section class="section-spacing policy-page">
+  <div class="page-width">
+    <div class="policy-page__layout">
+      {%- if shop.policies.size > 0 -%}
+        <aside class="policy-page__nav" aria-label="{{ 'footer.legal' | t }}">
+          <nav class="policy-page__nav-inner">
+            {%- for p in shop.policies -%}
+              {%- if p != blank and p.body != blank -%}
+                <a
+                  href="{{ p.url }}"
+                  class="policy-page__nav-link {% if p.url == policy.url %}is-active{% endif %}"
+                >
+                  {{ p.title }}
+                </a>
+              {%- endif -%}
+            {%- endfor -%}
+          </nav>
+        </aside>
+      {%- endif -%}
+
+      <div class="policy-page__content">
+        <h1 class="policy-page__title">{{ policy.title }}</h1>
+        <div class="policy-page__body rte">
+          {{ policy.body }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Policy content",
+  "tag": "section",
+  "class": "main-policy-section",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,146 @@
+{%- liquid
+  assign _fallback_handles = 'featured,hot-deals,hottest-deals,deals,highlighted' | split: ','
+  assign collection = section.settings.collection
+  if collection == blank
+    for _handle in _fallback_handles
+      assign _candidate = collections[_handle]
+      if _candidate != blank and _candidate.products_count > 0
+        assign collection = _candidate
+        break
+      endif
+    endfor
+  endif
+  if collection == blank
+    assign collection = collections.all
+  endif
+  assign limit = section.settings.products_count
+  assign columns = section.settings.columns | default: 4
+  assign show_vendor = section.settings.show_vendor
+  assign aspect_ratio = section.settings.aspect_ratio
+-%}
+
+<section class="section-spacing">
+  <div class="page-width">
+    <div class="section-header">
+      <div>
+        {%- if section.settings.subtitle != blank -%}
+          <p class="section-header__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+        <h2 class="section-header__title h2">{{ section.settings.title | default: collection.title }}</h2>
+      </div>
+
+      {%- if section.settings.show_view_all -%}
+        <a href="{{ collection.url }}" class="btn btn--outline btn--sm">{{ 'sections.featured_collection.view_all' | t }}</a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.layout == 'carousel' -%}
+      <div class="carousel" data-carousel>
+        <div class="carousel__track">
+          {%- for product in collection.products limit: limit -%}
+            <div class="carousel__slide">
+              {% render 'product-card', product: product, show_vendor: show_vendor, aspect_ratio: aspect_ratio %}
+            </div>
+          {%- endfor -%}
+        </div>
+        <button class="carousel__arrow carousel__arrow--prev" data-carousel-prev aria-label="{{ 'general.previous' | t | default: 'Previous' }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="carousel__arrow carousel__arrow--next" data-carousel-next aria-label="{{ 'general.next' | t | default: 'Next' }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+        </button>
+      </div>
+    {%- else -%}
+      <div class="grid grid--{{ columns }}">
+        {%- for product in collection.products limit: limit -%}
+          {% render 'product-card', product: product, show_vendor: show_vendor, aspect_ratio: aspect_ratio %}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "tag": "section",
+  "class": "featured-collection-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Curated"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Hottest deals"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_count",
+      "label": "Products to show",
+      "min": 2,
+      "max": 24,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Desktop columns",
+      "options": [
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" },
+        { "value": "5", "label": "5" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "grid", "label": "Grid" },
+        { "value": "carousel", "label": "Carousel" }
+      ],
+      "default": "grid"
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Image ratio",
+      "options": [
+        { "value": "1 / 1", "label": "Square (1:1)" },
+        { "value": "4 / 3", "label": "Landscape (4:3)" },
+        { "value": "3 / 4", "label": "Portrait (3:4)" }
+      ],
+      "default": "1 / 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show 'View all' button",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection"
+    }
+  ]
+}
+{% endschema %}

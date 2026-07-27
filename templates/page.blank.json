@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main-blank": {
+      "type": "main-blank",
+      "settings": {}
+    }
+  },
+  "order": ["main-blank"]
+}

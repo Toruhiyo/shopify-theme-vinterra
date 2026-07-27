@@ -1,0 +1,129 @@
+<div class="cart-drawer__backdrop" data-cart-backdrop></div>
+
+<div class="cart-drawer" data-cart-drawer aria-label="{{ 'cart.title' | t }}" role="dialog" aria-modal="true">
+  <div class="cart-drawer__header">
+    <h2 class="cart-drawer__title">{{ 'cart.title' | t }} ({{ cart.item_count }})</h2>
+    <button class="header__icon-btn" data-cart-close aria-label="{{ 'cart.close' | t }}">
+      {% render 'icon-close' %}
+    </button>
+  </div>
+
+  {%- if cart.item_count > 0 -%}
+    <div class="cart-drawer__items" data-cart-items>
+      {%- for item in cart.items -%}
+        <div class="cart-drawer__item" data-cart-item data-line="{{ forloop.index }}" data-variant-id="{{ item.variant_id }}" data-item-key="{{ item.key }}">
+          <div class="cart-drawer__item-image">
+            {%- if item.image -%}
+              <img
+                src="{{ item.image | image_url: width: 120 }}"
+                alt="{{ item.title | escape }}"
+                width="120"
+                height="120"
+                loading="lazy"
+              >
+            {%- endif -%}
+          </div>
+          <div class="cart-drawer__item-details">
+            <div class="cart-drawer__item-top">
+              <p class="cart-drawer__item-title">
+                <a href="{{ item.url }}">{{ item.product.title }}</a>
+              </p>
+              <button type="button" class="cart-drawer__remove" data-remove-item aria-label="{{ 'cart.remove' | t | default: 'Remove item' }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+              </button>
+            </div>
+            {%- unless item.product.has_only_default_variant -%}
+              <p class="cart-drawer__item-variant">{{ item.variant.title }}</p>
+            {%- endunless -%}
+            <div class="cart-drawer__item-bottom">
+              <div class="qty-selector">
+                <button type="button" data-qty-minus aria-label="{{ 'cart.decrease' | t }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+                <input type="number" value="{{ item.quantity }}" min="0" max="99" data-qty-input aria-label="{{ 'cart.quantity' | t }}">
+                <button type="button" data-qty-plus aria-label="{{ 'cart.increase' | t }}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+              </div>
+              <span class="cart-drawer__item-price" data-line-price>
+                {{ item.final_line_price | money }}
+                {%- if item.original_line_price > item.final_line_price -%}
+                  <s class="cart-drawer__item-compare">{{ item.original_line_price | money }}</s>
+                {%- endif -%}
+              </span>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- comment -%} Remove confirmation modal {%- endcomment -%}
+    <div class="cart-drawer__modal-backdrop" data-modal-backdrop style="display:none;"></div>
+    <div class="cart-drawer__modal" data-remove-modal role="dialog" aria-modal="true" style="display:none;">
+      <p class="cart-drawer__modal-text">{{ 'cart.confirm_remove' | t | default: 'Remove this item from your cart?' }}</p>
+      <div class="cart-drawer__modal-actions">
+        <button type="button" class="btn btn--outline btn--sm" data-modal-cancel>{{ 'cart.cancel' | t | default: 'Cancel' }}</button>
+        <button type="button" class="btn btn--primary btn--sm" data-modal-confirm>{{ 'cart.remove' | t | default: 'Remove' }}</button>
+      </div>
+    </div>
+
+    {%- comment -%} Upsell {%- endcomment -%}
+    {%- if settings.cart_upsell_enabled and settings.cart_upsell_collection != blank -%}
+      {%- assign upsell_collection = collections[settings.cart_upsell_collection] -%}
+      {%- if upsell_collection != blank and upsell_collection.products.size > 0 -%}
+        <div class="cart-drawer__upsell">
+          <p class="cart-drawer__upsell-title">{{ 'cart.complete_setup' | t }}</p>
+          <div class="cart-drawer__upsell-grid">
+            {%- for product in upsell_collection.products limit: 3 -%}
+              <a href="{{ product.url }}" class="cart-drawer__upsell-item">
+                {%- if product.featured_image -%}
+                  <img
+                    src="{{ product.featured_image | image_url: width: 120 }}"
+                    alt="{{ product.title | escape }}"
+                    width="120"
+                    height="120"
+                    loading="lazy"
+                  >
+                {%- endif -%}
+                <p class="cart-drawer__upsell-item-title">{{ product.title | truncatewords: 4 }}</p>
+                <p class="cart-drawer__upsell-item-price">
+                  {{ product.price | money }}
+                  {%- if product.compare_at_price > product.price -%}
+                    <s class="cart-drawer__item-compare">{{ product.compare_at_price | money }}</s>
+                  {%- endif -%}
+                </p>
+              </a>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+
+    <div class="cart-drawer__footer">
+      {%- assign _drawer_savings = 0 -%}
+      {%- for item in cart.items -%}
+        {%- if item.original_line_price > item.final_line_price -%}
+          {%- assign _ds = item.original_line_price | minus: item.final_line_price -%}
+          {%- assign _drawer_savings = _drawer_savings | plus: _ds -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if _drawer_savings > 0 -%}
+        <div class="cart-drawer__savings">
+          <span>{{ 'cart.you_save' | t | default: 'You save' }}</span>
+          <span>-{{ _drawer_savings | money }}</span>
+        </div>
+      {%- endif -%}
+      <div class="cart-drawer__subtotal">
+        <span>{{ 'cart.subtotal' | t }}</span>
+        <span>{{ cart.total_price | money }}</span>
+      </div>
+      <a href="/checkout" class="btn btn--primary btn--full btn--lg">{{ 'cart.checkout' | t }}</a>
+    </div>
+  {%- else -%}
+    <div class="cart-drawer__empty">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <p>{{ 'cart.empty' | t }}</p>
+      <a href="/" class="btn btn--primary">{{ 'cart.continue_shopping' | t }}</a>
+    </div>
+  {%- endif -%}
+</div>

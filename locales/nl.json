@@ -1,0 +1,145 @@
+{
+  "accessibility": {
+    "skip_to_content": "Ga naar inhoud"
+  },
+  "general": {
+    "language": "Taal",
+    "404": {
+      "subheading": "Pagina niet gevonden",
+      "title": "Verloren in de leegte",
+      "description": "De pagina die je zoekt bestaat niet of is verplaatst. We brengen je terug op weg.",
+      "button": "Terug naar home"
+    }
+  },
+  "header": {
+    "menu": "Menu",
+    "search": "Zoeken",
+    "account": "Account",
+    "cart": "Winkelwagen",
+    "navigation": "Hoofdnavigatie",
+    "mobile_menu": "Mobiel menu",
+    "close_menu": "Menu sluiten",
+    "search_placeholder": "Zoek producten, collecties...",
+    "view_all": "Alles bekijken",
+    "more": "Meer",
+    "support": "Support",
+    "help": "Help",
+    "policies": "Beleid",
+    "home": "Home",
+    "shop_all": "Bekijk alles {{ title }}",
+    "shipping_policy": "Verzendbeleid",
+    "returns_refunds": "Retourneren & terugbetaling",
+    "terms_of_service": "Servicevoorwaarden",
+    "privacy_policy": "Privacybeleid"
+  },
+  "sections": {
+    "announcement_bar": {
+      "label": "Mededeling"
+    },
+    "featured_collection": {
+      "view_all": "Alles bekijken"
+    },
+    "accessories": {
+      "view_all": "Alles bekijken"
+    }
+  },
+  "products": {
+    "add_to_cart": "In winkelwagen",
+    "buy_now": "Nu kopen",
+    "sold_out": "Uitverkocht",
+    "quick_view": "Snelle weergave",
+    "quantity": "Aantal",
+    "decrease_quantity": "Aantal verlagen",
+    "increase_quantity": "Aantal verhogen",
+    "thumbnail": "Miniatuur",
+    "reviews_count": "{{ count }} beoordelingen",
+    "color": "Kleur",
+    "badges": {
+      "new": "Nieuw",
+      "hot": "Populair",
+      "sale": "Sale"
+    }
+  },
+  "collections": {
+    "title": "Collecties",
+    "products": "producten",
+    "sort_by": "Sorteren op",
+    "filters": "Filters",
+    "pagination": "Paginering",
+    "previous": "Vorige pagina",
+    "next": "Volgende pagina",
+    "clear_all": "Alles wissen",
+    "empty": "Geen producten gevonden",
+    "continue_shopping": "Verder winkelen"
+  },
+  "cart": {
+    "title": "Je winkelwagen",
+    "close": "Winkelwagen sluiten",
+    "product": "Product",
+    "quantity": "Aantal",
+    "total": "Totaal",
+    "subtotal": "Subtotaal",
+    "checkout": "Afrekenen",
+    "empty": "Je winkelwagen is leeg",
+    "continue_shopping": "Verder winkelen",
+    "complete_setup": "Setup voltooien",
+    "decrease": "Aantal verlagen",
+    "increase": "Aantal verhogen",
+    "shipping_note": "Verzendkosten en belastingen worden berekend bij het afrekenen."
+  },
+  "search": {
+    "title": "Zoeken",
+    "placeholder": "Zoek producten...",
+    "submit": "Zoeken",
+    "results_count": "{{ count }} resultaten",
+    "no_results": "Geen resultaten voor \"{{ terms }}\"",
+    "no_results_hint": "Probeer een andere zoekterm of bekijk onze collecties."
+  },
+  "newsletter": {
+    "placeholder": "Voer je e-mail in",
+    "email_label": "E-mailadres",
+    "subscribe": "Abonneren",
+    "success": "Je bent erbij! Check je inbox om te bevestigen."
+  },
+  "footer": {
+    "email_placeholder": "Je e-mail",
+    "subscribe": "Abonneren",
+    "support": "Support",
+    "legal": "Juridisch",
+    "secure_checkout": "Veilig afrekenen",
+    "free_shipping": "Gratis verzending vanaf €99",
+    "easy_returns": "Makkelijk retourneren",
+    "warranty_included": "Garantie inbegrepen",
+    "rights": "Alle rechten voorbehouden."
+  },
+  "support": {
+    "contact_us": "Neem contact op",
+    "faq": "FAQ"
+  },
+  "blog": {
+    "comments": "Reacties",
+    "no_articles": "Nog geen artikelen."
+  },
+  "bizmis": {
+    "panel": {
+      "title": "Maak kennis met je spraakgestuurde verkoper",
+      "examples": "Ik zoek een laptop die de hele dag meegaat.\nDeze oordopjes lijken hetzelfde. Welke zijn beter voor hardlopen?\nOndersteunt dit snelladen voor iPhone 15?\nWaar is mijn bestelling? De tracking is al dagen niet bijgewerkt.\nDe oplader is met de verkeerde stekker geleverd. Kan ik hem ruilen?\nLeveren jullie in Spanje? Geldt de garantie daar ook?",
+      "example_tags": "Verhoog omzet · Productontdekking\nVerhoog omzet · Productvergelijking\nVerhoog omzet · Technisch advies\nBespaar supporturen · Bestelstatus\nBespaar supporturen · Retourhulp\nBespaar supporturen · Vooraankoopvragen",
+      "install": "Bizmis installeren",
+      "just_say": "Zeg gewoon",
+      "coach_hide": "Suggesties verbergen",
+      "coach_show": "Suggesties tonen",
+      "coach_examples": "Voorbeelden",
+      "install_with_code": "Installeren met je early-accesscode"
+    },
+    "promo": {
+      "label": "Bizmis demowinkel",
+      "demo_badge": "DEMOWINKEL",
+      "message": "Je bekijkt een Bizmis demowinkel. Alles hier werkt ook in jouw winkel.",
+      "landing": "Naar Bizmis",
+      "other_demos": "Andere demo's",
+      "demos_hint": "Deze demo's zijn met een wachtwoord beveiligd.",
+      "password_label": "Wachtwoord"
+    }
+  }
+}

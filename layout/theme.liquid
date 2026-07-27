@@ -1,0 +1,156 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}" data-overlayscrollbars-initialize>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0">
+  {%- assign _bg_check = settings.color_background | remove: '#' | downcase | slice: 0 -%}
+  <meta name="theme-color" content="{% if _bg_check == '0' or _bg_check == '1' %}#FFFFFF{% else %}{{ settings.color_background }}{% endif %}">
+
+  <title>
+    {{ page_title }}
+    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+    {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  {% render 'meta-tags' %}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  {% style %}
+    {{ settings.font_heading | font_face: font_display: 'swap' }}
+    {{ settings.font_body | font_face: font_display: 'swap' }}
+  {% endstyle %}
+
+  {{ 'overlayscrollbars.min.css' | asset_url | stylesheet_tag }}
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  {{ content_for_header }}
+  {% render 'favicon' %}
+
+  {%- assign type_modifier = 1.0 -%}
+  {%- if settings.typography_scale == 'small' -%}
+    {%- assign type_modifier = 0.9 -%}
+  {%- elsif settings.typography_scale == 'large' -%}
+    {%- assign type_modifier = 1.1 -%}
+  {%- endif -%}
+
+  {%- comment -%}
+    Detect legacy dark-theme settings that haven't been overwritten yet.
+    If the background color's red channel starts with 0 or 1 (hex), it's a very
+    dark color from the old theme — override with Crimson Index defaults.
+  {%- endcomment -%}
+  {%- assign _bg_hex = settings.color_background | remove: '#' | downcase -%}
+  {%- assign _r = _bg_hex | slice: 0 -%}
+  {%- assign _use_defaults = false -%}
+  {%- if _r == '0' or _r == '1' -%}
+    {%- assign _use_defaults = true -%}
+  {%- endif -%}
+
+  {% style %}
+    :root {
+      --font-heading: {{ settings.font_heading.family }}, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-heading-weight: {{ settings.font_heading.weight }};
+      --font-heading-style: {{ settings.font_heading.style }};
+
+      --font-body: {{ settings.font_body.family }}, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-body-weight: {{ settings.font_body.weight }};
+      --font-body-style: {{ settings.font_body.style }};
+      --font-body-size: {{ settings.font_body_size | default: 16 }}px;
+
+      --heading-scale: {{ settings.font_heading_scale | default: 100 | divided_by: 100.0 }};
+      --type-scale: {{ type_modifier }};
+      --page-width: {{ settings.page_width | default: 1280 }}px;
+      --section-spacing: {{ settings.spacing_grid | default: 64 }}px;
+      --radius-button: {{ settings.button_radius | default: 10 }}px;
+      --radius-card: {{ settings.card_radius | default: 16 }}px;
+
+      {%- if _use_defaults -%}
+      --color-bg: #FFFFFF;
+      --color-fg: #111111;
+      --color-card: #F5F5F7;
+      --color-muted: #F5F5F7;
+      --color-muted-fg: #6E6E73;
+      --color-border: #E5E5EA;
+      --color-border-raw: #E5E5EA;
+      --color-primary: #D1001A;
+      --color-primary-fg: #FFFFFF;
+      --color-success: #34C759;
+      --color-warning: #FF9500;
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+      --shadow-elevated: 0 4px 16px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.03);
+      {%- else -%}
+      --color-bg: {{ settings.color_background }};
+      --color-fg: {{ settings.color_foreground }};
+      --color-card: {{ settings.color_card }};
+      --color-muted: {{ settings.color_muted }};
+      --color-muted-fg: {{ settings.color_muted_foreground }};
+      --color-border: {% if settings.borders_visible %}{{ settings.color_border }}{% else %}transparent{% endif %};
+      --color-border-raw: {{ settings.color_border }};
+      --color-primary: {{ settings.color_primary }};
+      --color-primary-fg: {{ settings.color_primary_foreground }};
+      --color-success: {{ settings.color_success }};
+      --color-warning: {{ settings.color_warning }};
+      --shadow-card: {% if settings.minimal_shadows %}0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02){% else %}none{% endif %};
+      --shadow-elevated: {% if settings.minimal_shadows %}0 4px 16px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.03){% else %}none{% endif %};
+      {%- endif -%}
+    }
+  {% endstyle %}
+
+  <script>
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+    window.Shopify = window.Shopify || {};
+    window.Shopify.money_format = {{ shop.money_format | json }};
+  </script>
+</head>
+
+<body class="template-{{ template.name }}{% if template.suffix %} template-{{ template.name }}-{{ template.suffix }}{% endif %}{% if settings.bizmis_demo_enabled %} bizmis-demo{% endif %}" data-overlayscrollbars-initialize>
+
+  <div class="loader" id="page-loader" aria-hidden="true">
+    <img src="{{ 'logo-mono.png' | asset_url }}" alt="{{ shop.name }}" class="loader__logo" width="160" height="40">
+  </div>
+  <script>window.addEventListener('load',function(){var l=document.getElementById('page-loader');if(l){l.classList.add('is-hidden');l.addEventListener('transitionend',function(){l.remove()})}})</script>
+
+  <a class="skip-link" href="#main-content">{{ 'accessibility.skip_to_content' | t }}</a>
+
+  {% sections 'header-group' %}
+
+  <main id="main-content" role="main" tabindex="-1">
+    {%- if request.path == '/blank' or request.path == '/blank/' -%}
+      {% render 'blank-page' %}
+    {%- elsif request.path contains '/policies/' -%}
+      {% render 'policy-page' %}
+    {%- else -%}
+      {{ content_for_layout }}
+    {%- endif -%}
+  </main>
+
+  {% sections 'footer-group' %}
+
+  {% render 'cart-drawer' %}
+
+  {% render 'bizmis-demo-panel' %}
+
+  <script src="{{ 'overlayscrollbars.browser.es6.min.js' | asset_url }}" defer></script>
+  <script src="{{ 'scrollbar.js' | asset_url }}" defer></script>
+
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+
+  {%- if settings.bizmis_demo_enabled -%}
+    <script src="{{ 'bizmis-demo.js' | asset_url }}" defer></script>
+  {%- endif -%}
+
+  {%- if request.design_mode -%}
+    <script src="{{ 'theme-editor.js' | asset_url }}" defer></script>
+  {%- endif -%}
+</body>
+</html>

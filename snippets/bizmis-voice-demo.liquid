@@ -1,0 +1,195 @@
+{%- comment -%}
+  Bizmis voice demo — standalone live component, rendered in two parts.
+
+  part: 'flow'   -> the interactive flow: benefit pills, rotating sub-benefit +
+                    enabling feature, spoken phrase (karaoke sweep), progress rail.
+  part: 'scenes' -> the coordinated use case scenes as full-bleed background
+                    slides, crossfading in sync with the flow.
+
+  Both parts must live under a common ancestor carrying data-voice-demo-scope;
+  VoiceDemo (theme.js) drives the rotation through the data-voice-demo-* hooks.
+
+  Usage:
+    <section data-voice-demo-scope>
+      {% render 'bizmis-voice-demo', part: 'scenes', scene_blocks: section.blocks %}
+      {% render 'bizmis-voice-demo', part: 'flow' %}
+    </section>
+
+  Accepts:
+  - part: 'flow' (default) or 'scenes'.
+  - scene_blocks: optional "scene" blocks; the block at position N overrides
+    the collection/image/label of the use case shown at that position.
+{%- endcomment -%}
+
+{%- liquid
+  assign part = part | default: 'flow'
+
+  assign prompts = 'bizmis.panel.examples' | t | newline_to_br | split: '<br />'
+  assign tags = 'bizmis.panel.example_tags' | t | newline_to_br | split: '<br />'
+
+  comment
+    Walk the examples in natural order: all of benefit 1's sub-benefits straight
+    through (first half), then all of benefit 2's (second half). The benefit
+    pills derive their labels from the first tag of each half.
+  endcomment
+  assign total = prompts.size
+  assign half = total | divided_by: 2
+  assign last_index = total | minus: 1
+  assign order = ''
+  for i in (0..last_index)
+    assign order = order | append: i | append: ','
+  endfor
+  assign order_list = order | split: ','
+
+  assign sales_tag_parts = tags[0] | split: '·'
+  assign benefit_sales = sales_tag_parts[0] | strip
+  assign support_tag_parts = tags[half] | split: '·'
+  assign benefit_support = support_tag_parts[0] | strip
+
+  comment
+    Use case -> collection map, keyed by the canonical (en.default) example
+    order so it stays correct across every locale:
+      0  "laptop with great battery life"     -> computers-peripherals
+      1  "earbuds ... better for running?"    -> audio
+      2  "fast-charge an iPhone 15"           -> charging-power
+      3  "where's my order?"                  -> outlet
+      4  "wrong plug type ... swap it?"       -> charging-power
+      5  "ship to Spain / warranty"           -> phones-wearables
+    A scene block at the same position overrides its entry. Edit the handles
+    below to match your store's collections.
+  endcomment
+  assign scene_collection_map = 'computers-peripherals,audio,charging-power,outlet,charging-power,phones-wearables' | split: ','
+-%}
+
+{%- if part == 'scenes' -%}
+  <div class="voice-demo-scenes">
+    {%- for idx_str in order_list -%}
+      {%- assign idx = idx_str | times: 1 -%}
+      {%- assign trimmed = prompts[idx] | strip -%}
+      {%- if trimmed != blank -%}
+        {%- liquid
+          assign pos = forloop.index0
+          assign scene_block = scene_blocks[pos]
+
+          comment
+            Visual priority: block image override -> dedicated studio shot
+            (assets/bizmis-hero-scene-{idx}.png, one per canonical use case)
+            -> mapped collection imagery as last resort.
+          endcomment
+          assign scene_img = scene_block.settings.image
+          assign scene_asset = 'bizmis-hero-scene-' | append: idx | append: '.png'
+
+          assign scene_collection = scene_block.settings.collection
+          if scene_collection == blank
+            assign mapped_handle = scene_collection_map[idx]
+            if mapped_handle != blank
+              assign scene_collection = collections[mapped_handle]
+            endif
+          endif
+
+          assign scene_label = scene_block.settings.label
+          if scene_label == blank
+            assign scene_label = scene_collection.title
+          endif
+
+          assign btype = 'support'
+          if idx < half
+            assign btype = 'sales'
+          endif
+        -%}
+        <div
+          class="voice-demo-scenes__scene{% if forloop.first %} is-active{% endif %}"
+          data-voice-demo-scene
+          data-benefit-type="{{ btype }}"
+        >
+          {%- comment -%}
+            The demo band renders below the fold, so every scene loads lazily.
+          {%- endcomment -%}
+          {%- if scene_img != blank -%}
+            <img
+              src="{{ scene_img | image_url: width: 1400 }}"
+              alt="{{ scene_label | escape }}"
+              width="1400"
+              height="875"
+              loading="lazy"
+            >
+          {%- else -%}
+            <img
+              src="{{ scene_asset | asset_url }}"
+              alt="{{ scene_label | escape }}"
+              width="1400"
+              height="933"
+              loading="lazy"
+            >
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+{%- else -%}
+  <div class="voice-demo" data-voice-demo>
+    <header class="voice-demo__header">
+      <div class="voice-demo__benefits">
+        {%- if benefit_sales != blank -%}
+          <button type="button" class="voice-demo__benefit" data-benefit-pill="sales" aria-label="{{ benefit_sales | escape }}">
+            <svg class="voice-demo__benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+            {{ benefit_sales }}
+          </button>
+        {%- endif -%}
+        {%- if benefit_support != blank -%}
+          <button type="button" class="voice-demo__benefit" data-benefit-pill="support" aria-label="{{ benefit_support | escape }}">
+            <svg class="voice-demo__benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+            {{ benefit_support }}
+          </button>
+        {%- endif -%}
+      </div>
+
+      <div class="voice-demo__outcome" aria-hidden="true">
+        <span class="voice-demo__subbenefit" data-voice-demo-sub hidden></span>
+        <span class="voice-demo__feature" data-voice-demo-feature hidden></span>
+      </div>
+    </header>
+
+    <div class="voice-demo__ask" data-voice-demo-ask aria-hidden="true">
+      <span class="voice-demo__say">
+        <svg class="voice-demo__say-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 10v3"/><path d="M6 6v11"/><path d="M10 3v18"/><path d="M14 8v7"/><path d="M18 5v13"/><path d="M22 10v3"/></svg>
+        {{ 'bizmis.panel.just_say' | t }}
+      </span>
+
+      <div class="voice-demo__slides">
+      {%- for idx_str in order_list -%}
+        {%- assign idx = idx_str | times: 1 -%}
+        {%- assign trimmed = prompts[idx] | strip -%}
+        {%- if trimmed != blank -%}
+          {%- assign tag = tags[idx] | strip -%}
+          {%- assign tag_parts = tag | split: '·' -%}
+          {%- assign benefit = tag_parts[0] | strip -%}
+          {%- assign sub = '' -%}
+          {%- if tag_parts.size > 1 -%}
+            {%- assign sub = tag_parts[1] | strip -%}
+          {%- endif -%}
+          {%- assign feature = '' -%}
+          {%- if tag_parts.size > 2 -%}
+            {%- assign feature = tag_parts[2] | strip -%}
+          {%- endif -%}
+          {%- assign btype = 'support' -%}
+          {%- if idx < half -%}
+            {%- assign btype = 'sales' -%}
+          {%- endif -%}
+          <blockquote
+            class="voice-demo__quote"
+            data-voice-demo-slide
+            data-benefit="{{ benefit | escape }}"
+            data-sub="{{ sub | escape }}"
+            data-feature="{{ feature | escape }}"
+            data-benefit-type="{{ btype }}"
+          >{% assign words = trimmed | split: ' ' %}{% for word in words %}<span class="voice-demo__word">{{ word }}</span>{% endfor %}</blockquote>
+        {%- endif -%}
+      {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="voice-demo__rail" data-voice-demo-dots></div>
+  </div>
+{%- endif -%}

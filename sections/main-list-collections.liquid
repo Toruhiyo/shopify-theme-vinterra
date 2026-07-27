@@ -1,0 +1,39 @@
+<section class="section-spacing">
+  <div class="page-width">
+    <h1 class="h2 mb-lg">{{ 'collections.title' | t }}</h1>
+
+    <div class="grid grid--3">
+      {%- for collection in collections -%}
+        <a href="{{ collection.url }}" class="category-tile">
+          <div class="category-tile__media">
+            {%- if collection.featured_image -%}
+              <img
+                src="{{ collection.featured_image | image_url: width: 800 }}"
+                alt="{{ collection.title | escape }}"
+                width="800"
+                height="600"
+                loading="lazy"
+              >
+            {%- else -%}
+              {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'placeholder' }}
+            {%- endif -%}
+          </div>
+          <div class="category-tile__overlay"></div>
+          <div class="category-tile__content">
+            <h3 class="category-tile__title">{{ collection.title }}</h3>
+            <span class="category-tile__count">{{ collection.products_count }} {{ 'collections.products' | t }}</span>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collections list",
+  "tag": "section",
+  "class": "main-list-collections-section",
+  "settings": []
+}
+{% endschema %}

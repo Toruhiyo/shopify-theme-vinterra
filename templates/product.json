@@ -1,0 +1,98 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-product": {
+      "type": "main-product",
+      "blocks": {
+        "b1": {
+          "type": "benefit",
+          "settings": {
+            "text": "Free shipping over $99"
+          }
+        },
+        "b2": {
+          "type": "benefit",
+          "settings": {
+            "text": "2-year warranty included"
+          }
+        },
+        "b3": {
+          "type": "benefit",
+          "settings": {
+            "text": "30-day easy returns"
+          }
+        },
+        "tab-overview": {
+          "type": "tab",
+          "settings": {
+            "title": "Overview",
+            "content": "<p>Product details and information.</p>"
+          }
+        },
+        "tab-specs": {
+          "type": "tab",
+          "settings": {
+            "title": "Specs",
+            "content": "<p>Technical specifications.</p>"
+          }
+        },
+        "tab-compat": {
+          "type": "tab",
+          "settings": {
+            "title": "Compatibility",
+            "content": "<p>Compatible devices and systems.</p>"
+          }
+        },
+        "tab-box": {
+          "type": "tab",
+          "settings": {
+            "title": "In the box",
+            "content": "<p>What's included with your purchase.</p>"
+          }
+        },
+        "tab-warranty": {
+          "type": "tab",
+          "settings": {
+            "title": "Warranty",
+            "content": "<p>Warranty information and terms.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "tab-overview",
+        "tab-specs",
+        "tab-compat",
+        "tab-box",
+        "tab-warranty"
+      ],
+      "settings": {}
+    },
+    "related-products": {
+      "type": "featured-collection",
+      "settings": {
+        "subtitle": "You may also like",
+        "title": "Related Products",
+        "products_count": 4,
+        "columns": "4",
+        "layout": "grid",
+        "show_vendor": true,
+        "show_view_all": false
+      }
+    }
+  },
+  "order": [
+    "main-product",
+    "related-products"
+  ]
+}

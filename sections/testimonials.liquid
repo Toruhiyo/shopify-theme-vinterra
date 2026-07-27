@@ -1,0 +1,127 @@
+<section class="section-spacing">
+  <div class="page-width">
+    {%- if section.settings.title != blank -%}
+      <div class="section-header" style="justify-content: center;">
+        <div class="text-center">
+          {%- if section.settings.subtitle != blank -%}
+            <p class="section-header__subtitle">{{ section.settings.subtitle }}</p>
+          {%- endif -%}
+          <h2 class="section-header__title h2">{{ section.settings.title }}</h2>
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div class="grid grid--3">
+      {%- for block in section.blocks -%}
+        <div class="testimonial-card" {{ block.shopify_attributes }}>
+          <div class="testimonial-card__stars rating">
+            {%- for i in (1..5) -%}
+              {%- if i <= block.settings.rating -%}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              {%- else -%}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+          <p class="testimonial-card__text">"{{ block.settings.text }}"</p>
+          <p class="testimonial-card__author">{{ block.settings.author }}</p>
+          {%- if block.settings.product_name != blank and block.settings.product_name | strip != '' -%}
+            <p class="testimonial-card__product">{{ block.settings.product_name }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "tag": "section",
+  "class": "testimonials-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Reviews"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "What customers say"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Review text",
+          "default": "Exceptional build quality. Every detail is thoughtfully designed and the materials feel premium."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author name",
+          "default": "Alex R."
+        },
+        {
+          "type": "text",
+          "id": "product_name",
+          "label": "Product name (optional)",
+          "default": " "
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "Exceptional build quality. Every detail is thoughtfully designed and the materials feel premium.",
+            "author": "Alex R.",
+            "product_name": " "
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "Clean, minimal design that looks even better in person. Exactly what I was looking for.",
+            "author": "Maya T.",
+            "product_name": " "
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "text": "Outstanding customer service and fast delivery. The product exceeded my expectations.",
+            "author": "Jordan K.",
+            "product_name": " "
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

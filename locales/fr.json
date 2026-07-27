@@ -1,0 +1,171 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "accessibility": {
+    "skip_to_content": "Passer au contenu"
+  },
+  "general": {
+    "language": "Langue",
+    "404": {
+      "subheading": "Page non trouvée",
+      "title": "Perdu dans le vide",
+      "description": "La page que vous recherchez n'existe pas ou a été déplacée. Retrouvons votre chemin.",
+      "button": "Retour à l'accueil"
+    }
+  },
+  "header": {
+    "menu": "Menu",
+    "search": "Rechercher",
+    "account": "Compte",
+    "cart": "Panier",
+    "navigation": "Navigation principale",
+    "mobile_menu": "Menu mobile",
+    "close_menu": "Fermer le menu",
+    "search_placeholder": "Rechercher des produits, collections...",
+    "view_all": "Tout voir",
+    "more": "Plus",
+    "support": "Assistance",
+    "help": "Aide",
+    "policies": "Politiques",
+    "home": "Accueil",
+    "shop_all": "Tout voir {{ title }}",
+    "shipping_policy": "Politique de livraison",
+    "returns_refunds": "Retours et remboursements",
+    "terms_of_service": "Conditions d'utilisation",
+    "privacy_policy": "Politique de confidentialité"
+  },
+  "sections": {
+    "announcement_bar": {
+      "label": "Annonce"
+    },
+    "featured_collection": {
+      "view_all": "Tout voir"
+    },
+    "accessories": {
+      "view_all": "Tout voir"
+    }
+  },
+  "products": {
+    "add_to_cart": "Ajouter au panier",
+    "buy_now": "Acheter maintenant",
+    "sold_out": "Épuisé",
+    "quick_view": "Aperçu rapide",
+    "quantity": "Quantité",
+    "decrease_quantity": "Diminuer la quantité",
+    "increase_quantity": "Augmenter la quantité",
+    "thumbnail": "Miniature",
+    "reviews_count": "{{ count }} avis",
+    "color": "Couleur",
+    "badges": {
+      "new": "Nouveau",
+      "hot": "Populaire",
+      "sale": "Promo",
+      "refurbished": "Reconditionné certifié",
+      "open_box": "Boîte ouverte"
+    },
+    "link_model": "Modèle",
+    "link_compatible": "Compatible avec"
+  },
+  "collections": {
+    "title": "Collections",
+    "products": "produits",
+    "sort_by": "Trier par",
+    "filters": "Filtres",
+    "pagination": "Pagination",
+    "previous": "Page précédente",
+    "next": "Page suivante",
+    "clear_all": "Tout effacer",
+    "empty": "Aucun produit trouvé",
+    "continue_shopping": "Continuer vos achats"
+  },
+  "cart": {
+    "title": "Votre panier",
+    "close": "Fermer le panier",
+    "product": "Produit",
+    "quantity": "Qté",
+    "total": "Total",
+    "subtotal": "Sous-total",
+    "checkout": "Paiement",
+    "empty": "Votre panier est vide",
+    "continue_shopping": "Continuer vos achats",
+    "complete_setup": "Complétez votre configuration",
+    "decrease": "Diminuer la quantité",
+    "increase": "Augmenter la quantité",
+    "shipping_note": "Frais de livraison et taxes calculés à la caisse.",
+    "you_save": "Vous économisez",
+    "remove": "Supprimer",
+    "cancel": "Annuler",
+    "confirm_remove": "Supprimer cet article de votre panier ?"
+  },
+  "search": {
+    "title": "Recherche",
+    "placeholder": "Rechercher des produits...",
+    "submit": "Rechercher",
+    "results_count": "{{ count }} résultats",
+    "no_results": "Aucun résultat pour « {{ terms }} »",
+    "no_results_hint": "Essayez un autre terme ou parcourez nos collections."
+  },
+  "newsletter": {
+    "placeholder": "Votre adresse e-mail",
+    "email_label": "Adresse e-mail",
+    "subscribe": "S'abonner",
+    "success": "C'est fait ! Vérifie ta boîte mail pour confirmer."
+  },
+  "footer": {
+    "email_placeholder": "Votre e-mail",
+    "subscribe": "S'abonner",
+    "support": "Assistance",
+    "legal": "Mentions légales",
+    "secure_checkout": "Paiement sécurisé",
+    "free_shipping": "Livraison gratuite dès 99 $",
+    "easy_returns": "Retours faciles",
+    "warranty_included": "Garantie incluse",
+    "rights": "Tous droits réservés."
+  },
+  "support": {
+    "contact_us": "Nous contacter",
+    "faq": "FAQ"
+  },
+  "blog": {
+    "comments": "Commentaires",
+    "no_articles": "Aucun article pour le moment."
+  },
+  "contact": {
+    "form": {
+      "name": "Nom",
+      "email": "Courriel",
+      "subject": "Objet",
+      "send": "Envoyer le message",
+      "success": "Merci de nous avoir contactés. Nous vous recontacterons dès que possible."
+    }
+  },
+  "bizmis": {
+    "panel": {
+      "title": "Découvrez votre vendeur vocal",
+      "examples": "Je cherche un ordinateur portable qui tienne toute la journée.\nCes écouteurs se ressemblent. Lesquels sont les mieux pour courir ?\nEst-ce compatible charge rapide pour iPhone 15 ?\nOù est ma commande ? Le suivi n'a pas été mis à jour depuis plusieurs jours.\nLe chargeur est arrivé avec la mauvaise prise. Puis-je l'échanger ?\nLivrez-vous en Espagne ? La garantie y est-elle valable ?",
+      "example_tags": "Augmenter les ventes · Découverte produit\nAugmenter les ventes · Comparaison produit\nAugmenter les ventes · Conseil technique\nGagnez des heures de support · Suivi de commande\nGagnez des heures de support · Aide aux retours\nGagnez des heures de support · Questions avant-vente",
+      "install": "Installer Bizmis",
+      "just_say": "Dites simplement",
+      "coach_hide": "Masquer les suggestions",
+      "coach_show": "Afficher les suggestions",
+      "coach_examples": "Exemples",
+      "install_with_code": "Installer avec votre code d'accès anticipé"
+    },
+    "promo": {
+      "label": "Boutique démo Bizmis",
+      "demo_badge": "BOUTIQUE DÉMO",
+      "message": "Vous êtes dans une boutique démo Bizmis. Tout cela fonctionne aussi sur votre boutique.",
+      "landing": "Voir Bizmis",
+      "other_demos": "Autres démos",
+      "demos_hint": "Ces démos sont protégées par mot de passe.",
+      "password_label": "Mot de passe"
+    }
+  }
+}

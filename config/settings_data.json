@@ -1,0 +1,42 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "color_background": "#FFFFFF",
+    "color_foreground": "#111111",
+    "color_card": "#F5F5F7",
+    "color_muted": "#F5F5F7",
+    "color_muted_foreground": "#6E6E73",
+    "color_border": "#E5E5EA",
+    "color_primary": "#D1001A",
+    "color_primary_foreground": "#FFFFFF",
+    "color_success": "#34C759",
+    "color_warning": "#FF9500",
+    "font_body_size": 16,
+    "font_heading_scale": 100,
+    "typography_scale": "normal",
+    "page_width": 1280,
+    "spacing_grid": 64,
+    "button_radius": 10,
+    "card_radius": 16,
+    "borders_visible": true,
+    "minimal_shadows": true,
+    "cart_type": "drawer",
+    "cart_upsell_enabled": true,
+    "content_for_index": [],
+    "blocks": {
+      "9413881465143053370": {
+        "type": "shopify://apps/bizmis/blocks/app-embed/7c794697-2a86-4a22-9ab7-ca15d62a64a9",
+        "disabled": false,
+        "settings": {}
+      }
+    }
+  }
+}

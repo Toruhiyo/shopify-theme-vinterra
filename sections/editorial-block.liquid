@@ -1,0 +1,131 @@
+<section class="section-spacing">
+  <div class="page-width">
+    <div class="editorial {% if section.settings.reversed %}editorial--reversed{% endif %}">
+      <div class="editorial__media">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 1000 }}"
+            alt="{{ section.settings.image.alt | escape }}"
+            width="1000"
+            height="750"
+            loading="lazy"
+          >
+        {%- else -%}
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder' }}
+        {%- endif -%}
+      </div>
+
+      <div class="editorial__content">
+        {%- if section.settings.subtitle != blank -%}
+          <p class="editorial__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.title != blank -%}
+          <h2 class="editorial__title h2">{{ section.settings.title }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.text != blank -%}
+          <div class="editorial__text">{{ section.settings.text }}</div>
+        {%- endif -%}
+
+        {%- assign specs = section.blocks | where: 'type', 'spec' -%}
+        {%- if specs.size > 0 -%}
+          <div class="editorial__specs">
+            {%- for block in specs -%}
+              <div class="editorial__spec" {{ block.shopify_attributes }}>
+                <div class="editorial__spec-value">{{ block.settings.value }}</div>
+                <div class="editorial__spec-label">{{ block.settings.label }}</div>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.cta_text != blank -%}
+          <a href="{{ section.settings.cta_link }}" class="btn btn--primary">{{ section.settings.cta_text }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Editorial block",
+  "tag": "section",
+  "class": "editorial-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "reversed",
+      "label": "Reverse layout",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Crafted"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Designed with intent"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Every detail has been considered. Premium materials, precise engineering, and a relentless focus on what matters most.</p>"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button text",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "spec",
+      "name": "Spec highlight",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "58g"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Weight"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Editorial block",
+      "blocks": [
+        { "type": "spec", "settings": { "value": "100%", "label": "Satisfaction" } },
+        { "type": "spec", "settings": { "value": "2 yr", "label": "Warranty" } },
+        { "type": "spec", "settings": { "value": "48h", "label": "Delivery" } },
+        { "type": "spec", "settings": { "value": "24/7", "label": "Support" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

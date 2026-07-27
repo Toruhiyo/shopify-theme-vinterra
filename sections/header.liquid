@@ -1,0 +1,257 @@
+{%- liquid
+  assign _menu_fallbacks = 'catalog,main-menu' | split: ','
+  assign menu = nil
+  for _handle in _menu_fallbacks
+    assign _candidate = linklists[_handle]
+    if _candidate.links.size > 0
+      assign menu = _candidate
+      break
+    endif
+  endfor
+  if menu == nil
+    assign menu = section.settings.menu
+  endif
+-%}
+
+<header class="header" data-header>
+  <div class="header__primary">
+    <div class="page-width">
+      <div class="header__inner">
+        <div class="header__logo">
+          <a href="/">
+            <img
+              class="header__logo-img--full"
+              src="{%- if section.settings.logo != blank -%}{{ section.settings.logo | image_url: width: 200 }}{%- else -%}{{ 'logo-transparent.png' | asset_url }}{%- endif -%}"
+              alt="{{ shop.name }}"
+              width="160"
+              height="40"
+              loading="eager"
+            >
+            {%- comment -%} Compact mark for phones, where the wordmark crowds the icon row. {%- endcomment -%}
+            <img
+              class="header__logo-img--initial"
+              src="{{ 'logo-initial.png' | asset_url }}"
+              alt="{{ shop.name }}"
+              width="169"
+              height="164"
+              loading="eager"
+            >
+          </a>
+        </div>
+
+        <nav class="header__nav" role="navigation" aria-label="{{ 'header.navigation' | t }}">
+          <div class="header__nav-list" data-nav-list>
+          {%- for link in menu.links -%}
+            {%- if link.links.size > 0 -%}
+              <div class="header__nav-item" data-nav-mega data-nav-item>
+                <a
+                  href="{{ link.url }}"
+                  class="header__nav-link"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  {{ link.title }}
+                  <span class="header__nav-chevron">{% render 'icon-chevron' %}</span>
+                </a>
+
+                <div class="mega-menu" data-mega-panel role="menu">
+                  <div class="page-width">
+                    <div class="mega-menu__tiles">
+                      {%- for child in link.links -%}
+                        <a href="{{ child.url }}" class="mega-menu__tile" role="menuitem">
+                          <div class="mega-menu__tile-media">
+                            {%- if child.object.image != blank -%}
+                              <img
+                                src="{{ child.object.image | image_url: width: 400 }}"
+                                alt="{{ child.title | escape }}"
+                                width="400"
+                                height="300"
+                                loading="lazy"
+                              >
+                            {%- elsif child.object.featured_image != blank -%}
+                              <img
+                                src="{{ child.object.featured_image | image_url: width: 400 }}"
+                                alt="{{ child.title | escape }}"
+                                width="400"
+                                height="300"
+                                loading="lazy"
+                              >
+                            {%- else -%}
+                              <div class="mega-menu__tile-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                              </div>
+                            {%- endif -%}
+                          </div>
+                          <span class="mega-menu__tile-title">{{ child.title }}</span>
+                        </a>
+                      {%- endfor -%}
+                    </div>
+                    {%- if link.url != blank and link.url != '#' -%}
+                      <div class="mega-menu__footer">
+                        <a href="{{ link.url }}" class="mega-menu__view-all">
+                          {{ link.title }}
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </a>
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+            {%- else -%}
+              <div class="header__nav-item" data-nav-item>
+                <a href="{{ link.url }}" class="header__nav-link">{{ link.title }}</a>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+
+            <div class="header__nav-item header__nav-item--more" data-more aria-hidden="true">
+              <a href="#" class="header__nav-link" aria-haspopup="true" aria-expanded="false" data-more-trigger>
+                {{ 'header.more' | t }}
+                <span class="header__nav-chevron">{% render 'icon-chevron' %}</span>
+              </a>
+              <div class="header__more-dropdown" data-more-content role="menu"></div>
+            </div>
+          </div>
+        </nav>
+
+        <div class="header__icons">
+          {%- if localization.available_languages.size > 1 -%}
+            <div class="locale-selector" data-locale-selector>
+              <button class="header__icon-btn locale-selector__trigger" type="button" aria-expanded="false" aria-label="{{ 'general.language' | t }}">
+                <svg class="locale-selector__globe" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18"/></svg>
+                <span class="locale-selector__code">{{ localization.language.iso_code | upcase }}</span>
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2.5 4L5 6.5 7.5 4"/></svg>
+              </button>
+              <div class="locale-selector__dropdown" aria-hidden="true">
+                {%- form 'localization' -%}
+                  {%- for language in localization.available_languages -%}
+                    <button
+                      class="locale-selector__option{% if language.iso_code == localization.language.iso_code %} is-active{% endif %}"
+                      type="submit"
+                      name="locale_code"
+                      value="{{ language.iso_code }}"
+                    >
+                      {{ language.endonym_name }}
+                    </button>
+                  {%- endfor -%}
+                {%- endform -%}
+              </div>
+            </div>
+          {%- endif -%}
+
+          <button class="header__icon-btn" data-search-toggle aria-label="{{ 'header.search' | t }}">
+            {% render 'icon-search' %}
+          </button>
+          <a href="{{ routes.account_url }}" class="header__icon-btn header__icon-btn--account" aria-label="{{ 'header.account' | t }}">
+            {% render 'icon-account' %}
+          </a>
+          <button class="header__icon-btn" data-cart-toggle aria-label="{{ 'header.cart' | t }}">
+            {% render 'icon-cart' %}
+            <span class="header__cart-count" data-cart-count {% if cart.item_count == 0 %}style="display:none;"{% endif %}>{{ cart.item_count }}</span>
+          </button>
+          <button class="header__icon-btn header__menu-toggle" data-menu-toggle aria-label="{{ 'header.menu' | t }}">
+            {% render 'icon-menu' %}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+{%- comment -%} Mobile Menu {%- endcomment -%}
+<div class="mobile-menu" data-mobile-menu aria-label="{{ 'header.mobile_menu' | t }}">
+  <div class="mobile-menu__header">
+    <span class="header__logo">{{ shop.name }}</span>
+    <button class="header__icon-btn" data-menu-close aria-label="{{ 'header.close_menu' | t }}">
+      {% render 'icon-close' %}
+    </button>
+  </div>
+
+  <nav class="mobile-menu__nav">
+    <a href="/" class="mobile-menu__link">{{ 'header.home' | t }}</a>
+
+    {%- for link in menu.links -%}
+      {%- if link.links.size > 0 -%}
+        <div class="mobile-menu__group" data-mobile-accordion>
+          <button class="mobile-menu__link mobile-menu__link--parent" aria-expanded="false" data-mobile-accordion-trigger>
+            <span>{{ link.title }}</span>
+            <span class="mobile-menu__chevron">{% render 'icon-chevron' %}</span>
+          </button>
+          <div class="mobile-menu__submenu" data-mobile-accordion-content aria-hidden="true">
+            {%- if link.url != blank and link.url != '#' -%}
+              <a href="{{ link.url }}" class="mobile-menu__sublink mobile-menu__sublink--all">{{ link.title }}</a>
+            {%- endif -%}
+
+            {%- for child in link.links -%}
+              {%- if child.links.size > 0 -%}
+                <div class="mobile-menu__subgroup" data-mobile-accordion>
+                  <button class="mobile-menu__sublink mobile-menu__sublink--parent" aria-expanded="false" data-mobile-accordion-trigger>
+                    <span>{{ child.title }}</span>
+                    <span class="mobile-menu__chevron">{% render 'icon-chevron' %}</span>
+                  </button>
+                  <div class="mobile-menu__submenu mobile-menu__submenu--nested" data-mobile-accordion-content aria-hidden="true">
+                    {%- if child.url != blank and child.url != '#' -%}
+                      <a href="{{ child.url }}" class="mobile-menu__grandchild-link mobile-menu__grandchild-link--all">{{ child.title }}</a>
+                    {%- endif -%}
+                    {%- for grandchild in child.links -%}
+                      <a href="{{ grandchild.url }}" class="mobile-menu__grandchild-link">{{ grandchild.title }}</a>
+                    {%- endfor -%}
+                  </div>
+                </div>
+              {%- else -%}
+                <a href="{{ child.url }}" class="mobile-menu__sublink">{{ child.title }}</a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- else -%}
+        <a href="{{ link.url }}" class="mobile-menu__link">{{ link.title }}</a>
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- comment -%}
+      Account entry point for the smallest phones, where the header hides
+      the account icon to keep the icon row from clipping.
+    {%- endcomment -%}
+    <a href="{{ routes.account_url }}" class="mobile-menu__link mobile-menu__link--account">{{ 'header.account' | t }}</a>
+  </nav>
+</div>
+
+{%- comment -%} Search Overlay {%- endcomment -%}
+<div class="search-overlay" data-search-overlay>
+  <div class="search-overlay__inner">
+    <form action="{{ routes.search_url }}" method="get" role="search">
+      <input
+        type="search"
+        name="q"
+        class="search-overlay__input"
+        placeholder="{{ 'header.search_placeholder' | t }}"
+        autocomplete="off"
+        aria-label="{{ 'header.search' | t }}"
+      >
+    </form>
+  </div>
+</div>
+
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": "div",
+  "class": "header-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation menu",
+      "default": "main-menu",
+      "info": "Primary navigation. Supports up to 2 levels of nesting (Category → Subcategory)."
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,332 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Crimson Index",
+    "theme_version": "1.0.0",
+    "theme_author": "Bizmis",
+    "theme_documentation_url": "https://github.com/Toruhiyo/shopify-theme-crimson-index",
+    "theme_support_url": "https://github.com/Toruhiyo/shopify-theme-crimson-index/issues"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Core palette"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_foreground",
+        "label": "Foreground",
+        "default": "#111111"
+      },
+      {
+        "type": "color",
+        "id": "color_card",
+        "label": "Card / Surface",
+        "default": "#F5F5F7"
+      },
+      {
+        "type": "color",
+        "id": "color_muted",
+        "label": "Muted background",
+        "default": "#F5F5F7"
+      },
+      {
+        "type": "color",
+        "id": "color_muted_foreground",
+        "label": "Secondary text",
+        "default": "#6E6E73"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Borders / Dividers",
+        "default": "#E5E5EA"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary accent (red)",
+        "default": "#D1001A"
+      },
+      {
+        "type": "color",
+        "id": "color_primary_foreground",
+        "label": "Primary foreground",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_success",
+        "label": "Success",
+        "default": "#34C759"
+      },
+      {
+        "type": "color",
+        "id": "color_warning",
+        "label": "Warning",
+        "default": "#FF9500"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Heading font",
+        "default": "inter_n6"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Body font",
+        "default": "inter_n4"
+      },
+      {
+        "type": "range",
+        "id": "font_body_size",
+        "label": "Body font size (px)",
+        "min": 14,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "font_heading_scale",
+        "label": "Heading size scale (%)",
+        "min": 80,
+        "max": 150,
+        "step": 5,
+        "unit": "%",
+        "default": 100
+      },
+      {
+        "type": "select",
+        "id": "typography_scale",
+        "label": "Typography scale",
+        "options": [
+          { "value": "small", "label": "Small" },
+          { "value": "normal", "label": "Normal" },
+          { "value": "large", "label": "Large" }
+        ],
+        "default": "normal",
+        "info": "Adjusts overall type sizing across the theme"
+      }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Max content width (px)",
+        "min": 1000,
+        "max": 1600,
+        "step": 20,
+        "unit": "px",
+        "default": 1280
+      },
+      {
+        "type": "range",
+        "id": "spacing_grid",
+        "label": "Section spacing (px)",
+        "min": 16,
+        "max": 80,
+        "step": 8,
+        "unit": "px",
+        "default": 64
+      },
+      {
+        "type": "range",
+        "id": "button_radius",
+        "label": "Button radius (px)",
+        "min": 0,
+        "max": 24,
+        "step": 2,
+        "unit": "px",
+        "default": 10
+      },
+      {
+        "type": "range",
+        "id": "card_radius",
+        "label": "Card radius (px)",
+        "min": 0,
+        "max": 24,
+        "step": 2,
+        "unit": "px",
+        "default": 16
+      },
+      {
+        "type": "checkbox",
+        "id": "borders_visible",
+        "label": "Show borders",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "minimal_shadows",
+        "label": "Minimal shadows",
+        "default": true,
+        "info": "Adds very subtle shadows to cards and elevated elements"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart type",
+        "options": [
+          { "value": "drawer", "label": "Drawer" },
+          { "value": "page", "label": "Page" }
+        ],
+        "default": "drawer"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_upsell_enabled",
+        "label": "Show cart upsell products",
+        "default": true
+      },
+      {
+        "type": "collection",
+        "id": "cart_upsell_collection",
+        "label": "Upsell collection"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_twitter",
+        "label": "X (Twitter)"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube",
+        "label": "YouTube"
+      },
+      {
+        "type": "text",
+        "id": "social_twitch",
+        "label": "Twitch"
+      },
+      {
+        "type": "text",
+        "id": "social_discord",
+        "label": "Discord"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok",
+        "label": "TikTok"
+      }
+    ]
+  },
+  {
+    "name": "Support menu",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "support_menu",
+        "label": "Support menu",
+        "info": "Used in header Support dropdown and footer. Add Contact Us, FAQ, etc."
+      }
+    ]
+  },
+  {
+    "name": "Bizmis Demo",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Demo-store helpers for the Bizmis early-access invite flow. The install CTA and early-access code are read from the ?ref= and ?code= query params carried in from bizmis.ai/demo."
+      },
+      {
+        "type": "checkbox",
+        "id": "bizmis_demo_enabled",
+        "default": true,
+        "label": "Enable Bizmis demo mode",
+        "info": "Master switch: shows the top demo promo bar, hydrates the Install Bizmis CTAs with the early-access code, and powers the hero voice demo."
+      },
+      {
+        "type": "checkbox",
+        "id": "bizmis_coachmark_enabled",
+        "default": true,
+        "label": "Show floating coachmark",
+        "info": "Speech bubble above the voice widget with a single suggested phrase, so visitors know what to say right away."
+      },
+      {
+        "type": "url",
+        "id": "bizmis_app_listing_url",
+        "label": "Shopify App Store listing URL",
+        "info": "Where the install CTA points. The early-access code rides along as a query param."
+      },
+      {
+        "type": "text",
+        "id": "bizmis_app_listing_url_fallback",
+        "default": "https://apps.shopify.com/bizmis",
+        "label": "Listing URL fallback",
+        "info": "Used when the URL field above is left blank."
+      },
+      {
+        "type": "text",
+        "id": "bizmis_demo_fallback_code",
+        "label": "Fallback early-access code",
+        "info": "Optional. Shown when a visitor lands without a ?code= param."
+      },
+      {
+        "type": "header",
+        "content": "Promo bar links"
+      },
+      {
+        "type": "url",
+        "id": "bizmis_landing_url",
+        "label": "Bizmis landing URL",
+        "info": "Promo bar link to the Bizmis marketing site. Defaults to https://www.bizmis.ai/ when blank."
+      },
+      {
+        "type": "textarea",
+        "id": "bizmis_demos",
+        "label": "Other demo stores",
+        "info": "One per line as 'Label | URL'. Shown in the promo bar 'Other demos' menu.",
+        "default": "Paper & Pine Books | https://paper-and-pine-books.myshopify.com/"
+      },
+      {
+        "type": "text",
+        "id": "bizmis_demos_password",
+        "label": "Demo store password",
+        "default": "bizmis",
+        "info": "Shown in the 'Other demos' menu so visitors can unlock the password-protected demos."
+      },
+      {
+        "type": "header",
+        "content": "Coachmark copy"
+      },
+      {
+        "type": "paragraph",
+        "content": "All copy (title, example prompts, tags, buttons) is localized in the theme locale files under bizmis.panel.*"
+      }
+    ]
+  }
+]

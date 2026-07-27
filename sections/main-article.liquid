@@ -1,0 +1,46 @@
+<section class="section-spacing">
+  <div class="page-width" style="max-width: 48rem; margin: 0 auto;">
+    <p class="micro text-muted mb-sm">{{ article.published_at | date: '%B %d, %Y' }} &middot; {{ article.author }}</p>
+    <h1 class="h1 mb-lg">{{ article.title }}</h1>
+
+    {%- if article.image -%}
+      <div style="aspect-ratio: 16/9; overflow: hidden; border-radius: var(--radius-card); margin-bottom: 2rem;">
+        <img
+          src="{{ article.image | image_url: width: 1200 }}"
+          alt="{{ article.title | escape }}"
+          width="1200"
+          height="675"
+          loading="eager"
+          style="width: 100%; height: 100%; object-fit: cover;"
+        >
+      </div>
+    {%- endif -%}
+
+    <div class="rte" style="line-height: 1.8; color: var(--color-muted-fg);">
+      {{ article.content }}
+    </div>
+
+    {%- if blog.comments_enabled? -%}
+      <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-border);">
+        <h2 class="h3 mb-lg">{{ 'blog.comments' | t }} ({{ article.comments_count }})</h2>
+
+        {%- for comment in article.comments -%}
+          <div style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--color-border);">
+            <p style="font-weight: 600; font-size: 0.875rem;">{{ comment.author }}</p>
+            <p class="micro text-muted mb-sm">{{ comment.created_at | date: '%B %d, %Y' }}</p>
+            <p style="color: var(--color-muted-fg); font-size: 0.9375rem;">{{ comment.content }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Article",
+  "tag": "section",
+  "class": "main-article-section",
+  "settings": []
+}
+{% endschema %}

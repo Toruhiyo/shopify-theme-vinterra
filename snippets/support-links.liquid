@@ -1,0 +1,13 @@
+{%- comment -%}
+  Support links — shared by header Support dropdown and footer.
+  Usage: {% render 'support-links', link_class: 'footer__link' %}
+{%- endcomment -%}
+{%- assign link_class = link_class | default: 'footer__link' -%}
+{%- if settings.support_menu != blank and settings.support_menu.links.size > 0 -%}
+  {%- for link in settings.support_menu.links -%}
+    <a href="{{ link.url }}" class="{{ link_class }}">{{ link.title }}</a>
+  {%- endfor -%}
+{%- else -%}
+  <a href="/pages/contact" class="{{ link_class }}">{{ 'support.contact_us' | t }}</a>
+  <a href="/pages/faq" class="{{ link_class }}">{{ 'support.faq' | t }}</a>
+{%- endif -%}

@@ -1,0 +1,44 @@
+<section class="section-spacing">
+  <div class="page-width">
+    <h1 class="h2 mb-lg">{{ blog.title }}</h1>
+
+    <div class="grid grid--3">
+      {%- for article in blog.articles -%}
+        <a href="{{ article.url }}" class="card" style="display: block;">
+          {%- if article.image -%}
+            <div style="aspect-ratio: 16/9; overflow: hidden;">
+              <img
+                src="{{ article.image | image_url: width: 600 }}"
+                alt="{{ article.title | escape }}"
+                width="600"
+                height="338"
+                loading="lazy"
+                style="width: 100%; height: 100%; object-fit: cover; transition: transform 500ms ease;"
+                onmouseover="this.style.transform='scale(1.03)'"
+                onmouseout="this.style.transform='scale(1)'"
+              >
+            </div>
+          {%- endif -%}
+          <div style="padding: 1.25rem;">
+            <p class="micro text-muted mb-sm">{{ article.published_at | date: '%B %d, %Y' }}</p>
+            <h3 class="h4 mb-sm">{{ article.title }}</h3>
+            <p class="text-muted" style="font-size: 0.875rem;">{{ article.excerpt_or_content | strip_html | truncatewords: 20 }}</p>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+
+    {%- if blog.articles.size == 0 -%}
+      <p class="text-center text-muted" style="padding: 4rem 0;">{{ 'blog.no_articles' | t }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog",
+  "tag": "section",
+  "class": "main-blog-section",
+  "settings": []
+}
+{% endschema %}
