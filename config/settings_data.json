@@ -26,7 +26,7 @@
     "font_heading_scale": 100,
     "typography_scale": "normal",
     "page_width": 1320,
-    "spacing_grid": 72,
+    "spacing_grid": 88,
     "button_radius": 2,
     "card_radius": 4,
     "borders_visible": true,

@@ -1,5 +1,5 @@
 /* ============================================================
-   VINTERRA — Theme JavaScript
+   VINITECA MARTÍ — Theme JavaScript
    ============================================================ */
 
 (function () {
@@ -1856,10 +1856,13 @@
     window.addEventListener('bizmis:voicechat-ended', () => setVoiceClerkLocked(false));
   }
 
-  /* Measure the demo promo bar so the index header floats just below it (and the
-     hero fills exactly the remaining viewport). Handles wrapping on small screens. */
+  /* Measure whichever bar sits above the header — the Bizmis demo promo bar or
+     the merchant announcement bar — so the index header floats just below it
+     (and the hero fills exactly the remaining viewport). Without this the
+     absolutely positioned header lands on top of the announcement text.
+     Handles wrapping on small screens. */
   function initPromoBar() {
-    const bar = document.querySelector('.promo-bar');
+    const bar = document.querySelector('.promo-bar, .announcement-bar');
     if (!bar) return;
     const apply = () => document.body.style.setProperty('--promo-height', `${bar.offsetHeight}px`);
     apply();
@@ -1869,7 +1872,7 @@
 
   /* Age verification. Blocks the storefront until the visitor confirms they are
      of legal drinking age; the answer is remembered so it only ever asks once. */
-  const AGE_GATE_STORAGE_KEY = 'vinterra:age-confirmed';
+  const AGE_GATE_STORAGE_KEY = 'viniteca-marti:age-confirmed';
 
   class AgeGate {
     constructor(root) {

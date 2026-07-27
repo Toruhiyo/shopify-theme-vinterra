@@ -1,5 +1,5 @@
 /* ============================================================
-   VINTERRA — Design System
+   VINITECA MARTÍ — Design System
    Warm, editorial cellar retail: parchment surfaces, wine accent
    ============================================================ */
 
@@ -353,17 +353,18 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.875rem 2rem;
+  padding: 0.95rem 2rem;
   font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 0.9375rem;
+  font-weight: 600;
+  font-size: 0.78rem;
   line-height: 1;
   border-radius: var(--radius-button);
   transition: all 180ms ease;
   white-space: nowrap;
   position: relative;
   overflow: hidden;
-  letter-spacing: 0;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .btn--primary {
@@ -413,13 +414,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn--sm {
-  padding: 0.625rem 1.25rem;
-  font-size: 0.8125rem;
+  padding: 0.7rem 1.25rem;
+  font-size: 0.6875rem;
 }
 
 .btn--lg {
-  padding: 1.125rem 2.5rem;
-  font-size: 1rem;
+  padding: 1.15rem 2.5rem;
+  font-size: 0.85rem;
 }
 
 .btn--full {
@@ -1056,7 +1057,7 @@ textarea.input {
 /* Transparent while it sits over the hero; turns into solid chrome once the
    hero has scrolled past. Text stays dark since the hero is light. */
 .header__primary > .page-width {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(251, 248, 243, 0.94);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--color-border);
@@ -1068,6 +1069,41 @@ textarea.input {
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   border-bottom-color: transparent;
+}
+
+/* Floating over the hero the whole chrome inverts to cream on the dark scrim,
+   with the gold accent standing in for the wine ink. */
+.header.is-transparent .header__nav-link,
+.header.is-transparent .header__icon-btn,
+.header.is-transparent .header__icons .locale-selector__trigger {
+  color: rgba(253, 249, 242, 0.84);
+}
+
+.header.is-transparent .header__nav-link:hover,
+.header.is-transparent .header__nav-link.is-active,
+.header.is-transparent .header__nav-item.is-mega-active .header__nav-link,
+.header.is-transparent .header__icon-btn:hover {
+  color: #FDF9F2;
+}
+
+.header.is-transparent .header__nav-link::after {
+  background: #DDBA76;
+}
+
+.header.is-transparent .header__icons .locale-selector__trigger {
+  border-color: rgba(253, 249, 242, 0.32);
+}
+
+.header.is-transparent .header__icons .locale-selector__trigger:hover,
+.header.is-transparent .header__icons .locale-selector.is-open .locale-selector__trigger {
+  border-color: rgba(253, 249, 242, 0.7);
+  background: rgba(253, 249, 242, 0.14);
+  color: #FDF9F2;
+}
+
+.header.is-transparent .header__cart-count {
+  background: #DDBA76;
+  color: #2A1206;
 }
 
 .header__primary {
@@ -1094,24 +1130,45 @@ textarea.input {
 }
 
 .header__logo img {
-  height: 24px;
+  height: 26px;
   width: auto;
   object-fit: contain;
 }
 
-.header__logo-img--initial {
+.header__logo-img--initial,
+.header__logo-img--light {
   display: none;
+}
+
+/* Over the hero the theme wordmark swaps to its cream cut; back to wine ink as
+   soon as the header turns solid. A merchant upload has no light cut, so it
+   keeps its artwork and gets a shadow instead. */
+.header.is-transparent .header__logo--themed .header__logo-img--full {
+  display: none;
+}
+
+.header.is-transparent .header__logo--themed .header__logo-img--light {
+  display: block;
+}
+
+.header.is-transparent .header__logo:not(.header__logo--themed) img {
+  filter: drop-shadow(0 1px 8px rgba(22, 12, 9, 0.5));
 }
 
 /* Phones swap the wordmark for the compact initial mark. */
 @media (max-width: 749px) {
-  .header__logo-img--full {
+  .header__logo-img--full,
+  .header.is-transparent .header__logo--themed .header__logo-img--light {
     display: none;
   }
 
   .header__logo-img--initial {
     display: block;
-    height: 28px;
+    height: 30px;
+  }
+
+  .header.is-transparent .header__logo-img--initial {
+    filter: brightness(0) invert(1);
   }
 }
 
@@ -1130,16 +1187,19 @@ textarea.input {
     gap: 0;
     flex: 1;
     min-width: 0;
+    margin-left: 2rem;
   }
 }
 
 /* No overflow clipping: the "More" dropdown is positioned inside the list and
    would be cut off. NavOverflow hides items that don't fit instead. */
+/* Left-aligned next to the wordmark. Spreading the items across the full bar
+   only reads as deliberate with a long menu; a short one just looks scattered. */
 .header__nav-list {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0;
+  justify-content: flex-start;
+  gap: 0.25rem;
   flex: 1;
   min-width: 0;
 }
@@ -1160,9 +1220,11 @@ textarea.input {
   display: inline-flex;
   align-items: center;
   gap: 0.2rem;
-  padding: 0.75rem 0.625rem;
-  font-size: 0.8125rem;
+  padding: 0.75rem 0.75rem;
+  font-size: 0.75rem;
   font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--color-muted-fg);
   transition: color 180ms ease;
   white-space: nowrap;
@@ -1192,10 +1254,10 @@ textarea.input {
 .header__nav-link::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 0.625rem;
-  right: 0.625rem;
-  height: 1.5px;
+  bottom: 0.35rem;
+  left: 0.75rem;
+  right: 0.75rem;
+  height: 1px;
   background: var(--color-fg);
   transform: scaleX(0);
   transition: transform 200ms ease;
@@ -2113,15 +2175,23 @@ textarea.input {
   background: var(--color-primary);
   color: var(--color-primary-fg);
   text-align: center;
-  padding: 0.5rem 1rem;
-  font-size: 0.8125rem;
+  padding: 0.6rem 1rem;
+  font-size: 0.6875rem;
   font-weight: 500;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1.3;
 }
 
 .announcement-bar a {
   text-decoration: underline;
-  text-underline-offset: 2px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(253, 249, 242, 0.45);
+  transition: text-decoration-color 180ms ease;
+}
+
+.announcement-bar a:hover {
+  text-decoration-color: currentColor;
 }
 
 /* --- Hero Section (merchant-style promo slideshow) --- */
@@ -2144,17 +2214,30 @@ textarea.input {
   min-height: 100dvh;
 }
 
-/* Light scrim under the floating transparent header so the nav stays
-   readable over busy promo photography. */
+/* Cellar scrim. The slideshow runs from sunlit vineyards to near-black barrel
+   rooms, so the copy can only stay legible over a fixed dark wash: heavier on
+   the left where the headline sits, plus top and bottom bands for the floating
+   chrome and the slideshow pill. */
 .hero::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 9rem;
+  inset: 0;
   z-index: 2;
-  background: linear-gradient(to bottom, rgba(251, 248, 243, 0.88) 0%, rgba(251, 248, 243, 0.38) 55%, transparent 100%);
+  background:
+    linear-gradient(
+      to right,
+      rgba(22, 12, 9, 0.82) 0%,
+      rgba(22, 12, 9, 0.62) 32%,
+      rgba(22, 12, 9, 0.18) 62%,
+      rgba(22, 12, 9, 0.32) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(22, 12, 9, 0.5) 0%,
+      rgba(22, 12, 9, 0) 26%,
+      rgba(22, 12, 9, 0) 62%,
+      rgba(22, 12, 9, 0.55) 100%
+    );
   pointer-events: none;
 }
 
@@ -2186,6 +2269,17 @@ textarea.input {
   object-fit: cover;
 }
 
+/* Slow drift on the visible slide keeps the still photography alive without
+   pulling attention off the headline. */
+.hero__slide.is-active .hero__media img {
+  animation: hero-drift 9s ease-out both;
+}
+
+@keyframes hero-drift {
+  from { transform: scale(1.07); }
+  to { transform: scale(1); }
+}
+
 /* Welcome copy in the left column, over the white side of the studio shots.
    Invites the visitor to talk to the clerk in the merchant's own voice. */
 .hero__container {
@@ -2199,18 +2293,31 @@ textarea.input {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1.1rem;
-  max-width: 30rem;
+  gap: 1.35rem;
+  max-width: 34rem;
 }
 
 .hero__subtitle {
   margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
   font-family: var(--font-body);
   font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+  font-weight: 600;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: #DDBA76;
+}
+
+/* Gold rule leading into the eyebrow, the way estate labels set their region. */
+.hero__subtitle::before {
+  content: '';
+  width: 2.25rem;
+  height: 1px;
+  flex: none;
+  background: currentColor;
+  opacity: 0.75;
 }
 
 .hero__title {
@@ -2219,11 +2326,12 @@ textarea.input {
      as the promise and the voice-clerk CTA lands on its own second line. */
   max-width: 9em;
   font-family: var(--font-heading);
-  font-weight: 600;
-  font-size: clamp(2.2rem, 4.2vw, 3.4rem);
-  line-height: 1.08;
-  letter-spacing: -0.005em;
-  color: var(--color-fg, #111);
+  font-weight: 500;
+  font-size: clamp(2.6rem, 5vw, 4.25rem);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  color: var(--color-primary-fg, #FDF9F2);
+  text-shadow: 0 1px 30px rgba(22, 12, 9, 0.45);
 }
 
 .hero__title-line {
@@ -2242,20 +2350,22 @@ textarea.input {
   line-height: inherit;
   text-align: left;
   text-wrap: balance;
-  color: var(--color-primary);
+  color: #DDBA76;
   text-decoration: underline;
-  text-decoration-thickness: 0.055em;
-  text-underline-offset: 0.14em;
+  text-decoration-color: rgba(221, 186, 118, 0.45);
+  text-decoration-thickness: 0.045em;
+  text-underline-offset: 0.16em;
   cursor: pointer;
   transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 
 .hero__title-cta:hover {
-  text-decoration-thickness: 0.085em;
+  color: #EBD09A;
+  text-decoration-color: currentColor;
 }
 
 .hero__title-cta:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid #DDBA76;
   outline-offset: 4px;
   border-radius: 4px;
 }
@@ -2280,20 +2390,15 @@ textarea.input {
     min-height: 100dvh;
   }
 
-  /* Repurpose the header-scrim slot as a full frosted-white veil between
-     the photos and the copy, heavier at the edges for chrome and widget
-     legibility. Light, not dark: the store is light mode and the studio
-     shots should stay airy. */
+  /* Centered copy needs the wash spread evenly instead of weighted left,
+     heavier at the edges for the chrome and the voice widget. */
   .hero::before {
-    top: 0;
-    bottom: 0;
-    height: auto;
     z-index: 1;
     background: linear-gradient(
       to bottom,
-      rgba(255, 255, 255, 0.82) 0%,
-      rgba(255, 255, 255, 0.6) 45%,
-      rgba(255, 255, 255, 0.82) 100%
+      rgba(22, 12, 9, 0.72) 0%,
+      rgba(22, 12, 9, 0.42) 45%,
+      rgba(22, 12, 9, 0.75) 100%
     );
   }
 
@@ -2306,13 +2411,13 @@ textarea.input {
 
   .hero__content {
     max-width: 100%;
-    gap: 0.85rem;
+    gap: 1rem;
     align-items: center;
     text-align: center;
   }
 
   .hero__title {
-    font-size: 2.1rem;
+    font-size: 2.35rem;
   }
 
   .hero__title-cta {
@@ -2405,6 +2510,10 @@ textarea.input {
   .hero__slide,
   .hero__dot {
     transition: none;
+  }
+
+  .hero__slide.is-active .hero__media img {
+    animation: none;
   }
 }
 
@@ -4442,22 +4551,38 @@ textarea.input {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.15rem;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .section-header__title {
   margin-bottom: 0;
+  font-weight: 500;
 }
 
+/* Same eyebrow treatment as the hero: gold rule, then the label. */
 .section-header__subtitle {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
   font-family: var(--font-body);
-  font-size: 0.72rem;
-  letter-spacing: 0.16em;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-accent);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.55rem;
   font-weight: 600;
+}
+
+.section-header__subtitle::before {
+  content: '';
+  width: 1.75rem;
+  height: 1px;
+  flex: none;
+  background: currentColor;
+  opacity: 0.7;
 }
 
 /* --- Quick View Modal --- */
