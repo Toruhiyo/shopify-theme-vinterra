@@ -38,7 +38,7 @@
         >
       {%- endif -%}
     {%- else -%}
-      {{ 'product-1' | placeholder_svg_tag: 'placeholder' }}
+      {% render 'media-placeholder', kind: 'product' %}
     {%- endif -%}
 
     {%- comment -%} Badges row: left = provenance tags, right = discount {%- endcomment -%}

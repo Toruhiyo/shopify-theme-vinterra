@@ -1,0 +1,40 @@
+{%- comment -%}
+  Artwork for products and collections that have no photography yet. Shopify's
+  own placeholder_svg_tag ships apparel and backpacks, which read as a bug on a
+  wine storefront.
+
+  Accepts:
+  - kind: {String} 'product' (default), 'collection' or 'lifestyle'
+{%- endcomment -%}
+
+{%- assign kind = kind | default: 'product' -%}
+
+<div class="media-placeholder media-placeholder--{{ kind }}" aria-hidden="true">
+  {%- case kind -%}
+    {%- when 'collection' -%}
+      <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M60 42V20"/>
+        <path d="M60 20c7 0 13-4 17-10"/>
+        <circle cx="45" cy="56" r="11"/>
+        <circle cx="75" cy="56" r="11"/>
+        <circle cx="60" cy="77" r="11"/>
+        <circle cx="60" cy="98" r="11"/>
+      </svg>
+    {%- when 'lifestyle' -%}
+      <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="88" cy="32" r="11"/>
+        <path d="M8 86c18-26 34-26 46-13s26 12 44-19"/>
+        <path d="M8 100h104"/>
+        <path d="M26 100V86"/>
+        <path d="M50 100V82"/>
+        <path d="M74 100V86"/>
+      </svg>
+    {%- else -%}
+      <svg viewBox="0 0 44 120" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 8h10v7H17z"/>
+        <path d="M18 15h8v23c0 7 10 11 10 20v50a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4V58c0-9 10-13 10-20V15z"/>
+        <path d="M8 70h28"/>
+        <path d="M8 92h28"/>
+      </svg>
+  {%- endcase -%}
+</div>

@@ -44,7 +44,7 @@
                   loading="lazy"
                 >
               {%- else -%}
-                {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'placeholder' }}
+                {% render 'media-placeholder', kind: 'collection' %}
               {%- endif -%}
             </div>
             <div class="category-tile__overlay"></div>
@@ -83,7 +83,7 @@
                   loading="lazy"
                 >
               {%- else -%}
-                {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'placeholder' }}
+                {% render 'media-placeholder', kind: 'collection' %}
               {%- endif -%}
             </div>
             <div class="category-tile__overlay"></div>

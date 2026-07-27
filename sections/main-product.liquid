@@ -9,14 +9,18 @@
       {%- comment -%} Gallery {%- endcomment -%}
       <div class="pdp__gallery">
         <div class="pdp__gallery-main">
-          <img
-            src="{{ featured_image | image_url: width: 1200 }}"
-            alt="{{ featured_image.alt | escape }}"
-            width="1200"
-            height="1200"
-            loading="eager"
-            id="pdp-main-image"
-          >
+          {%- if featured_image -%}
+            <img
+              src="{{ featured_image | image_url: width: 1200 }}"
+              alt="{{ featured_image.alt | escape }}"
+              width="1200"
+              height="1200"
+              loading="eager"
+              id="pdp-main-image"
+            >
+          {%- else -%}
+            {% render 'media-placeholder', kind: 'product' %}
+          {%- endif -%}
         </div>
 
         {%- if product.images.size > 1 -%}

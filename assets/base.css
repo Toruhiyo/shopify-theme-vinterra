@@ -689,6 +689,34 @@ textarea.input {
   opacity: 0;
 }
 
+/* --- Media placeholder ---
+   Shown wherever a product or collection has no photography yet. Fills the
+   whole media box so the card keeps its ratio. */
+.media-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(115% 85% at 50% 0%, rgba(255, 255, 255, 0.5), transparent 62%),
+    var(--color-card);
+  color: var(--color-accent);
+}
+
+.media-placeholder svg {
+  height: 46%;
+  width: auto;
+  max-width: 46%;
+  opacity: 0.45;
+}
+
+.media-placeholder--lifestyle svg {
+  height: auto;
+  width: 32%;
+  max-width: 220px;
+}
+
 .product-card:hover .product-card__hover-image {
   opacity: 1;
 }
