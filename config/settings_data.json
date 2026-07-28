@@ -39,7 +39,7 @@
     "blocks": {
       "9413881465143053370": {
         "type": "shopify://apps/bizmis/blocks/app-embed/7c794697-2a86-4a22-9ab7-ca15d62a64a9",
-        "disabled": false,
+        "disabled": true,
         "settings": {}
       }
     }
