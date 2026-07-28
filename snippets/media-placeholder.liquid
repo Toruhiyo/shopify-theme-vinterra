@@ -4,7 +4,7 @@
   wine storefront.
 
   Accepts:
-  - kind: {String} 'product' (default), 'collection' or 'lifestyle'
+  - kind: {String} 'product' (default) or 'collection'
 {%- endcomment -%}
 
 {%- assign kind = kind | default: 'product' -%}
@@ -19,15 +19,6 @@
         <circle cx="75" cy="56" r="11"/>
         <circle cx="60" cy="77" r="11"/>
         <circle cx="60" cy="98" r="11"/>
-      </svg>
-    {%- when 'lifestyle' -%}
-      <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="88" cy="32" r="11"/>
-        <path d="M8 86c18-26 34-26 46-13s26 12 44-19"/>
-        <path d="M8 100h104"/>
-        <path d="M26 100V86"/>
-        <path d="M50 100V82"/>
-        <path d="M74 100V86"/>
       </svg>
     {%- else -%}
       <svg viewBox="0 0 44 120" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">

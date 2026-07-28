@@ -711,12 +711,6 @@ textarea.input {
   opacity: 0.45;
 }
 
-.media-placeholder--lifestyle svg {
-  height: auto;
-  width: 32%;
-  max-width: 220px;
-}
-
 .product-card:hover .product-card__hover-image {
   opacity: 1;
 }
