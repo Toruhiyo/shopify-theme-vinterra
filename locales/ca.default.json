@@ -26,7 +26,7 @@
     "menu": "Menú",
     "search": "Cerca",
     "account": "El meu compte",
-    "cart": "Cistella",
+    "cart": "Cistell",
     "navigation": "Navegació principal",
     "mobile_menu": "Menú mòbil",
     "close_menu": "Tanca el menú",
@@ -55,7 +55,7 @@
     }
   },
   "products": {
-    "add_to_cart": "Afegeix a la cistella",
+    "add_to_cart": "Afegeix al cistell",
     "buy_now": "Compra ara",
     "sold_out": "Exhaurit",
     "quick_view": "Vista ràpida",
@@ -148,14 +148,14 @@
     "continue_shopping": "Continua comprant"
   },
   "cart": {
-    "title": "La teva cistella",
-    "close": "Tanca la cistella",
+    "title": "El teu cistell",
+    "close": "Tanca el cistell",
     "product": "Producte",
     "quantity": "Unitats",
     "total": "Total",
     "subtotal": "Subtotal",
     "checkout": "Finalitza la comanda",
-    "empty": "La teva cistella és buida",
+    "empty": "El teu cistell és buit",
     "continue_shopping": "Continua comprant",
     "complete_setup": "Completa la teva caixa",
     "decrease": "Treu una unitat",
@@ -164,7 +164,7 @@
     "you_save": "Estalvies",
     "remove": "Treu",
     "cancel": "Cancel·la",
-    "confirm_remove": "Vols treure aquest article de la cistella?"
+    "confirm_remove": "Vols treure aquest article del cistell?"
   },
   "search": {
     "title": "Cerca",

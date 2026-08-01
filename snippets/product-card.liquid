@@ -60,12 +60,26 @@
 
     {%- comment -%} Quick Actions {%- endcomment -%}
     <div class="product-card__actions">
-      <a href="{{ product.url }}" class="btn btn--outline btn--sm">{{ 'products.quick_view' | t }}</a>
+      <a
+        href="{{ product.url }}"
+        class="btn btn--outline btn--sm btn--icon product-card__action-btn"
+        aria-label="{{ 'products.quick_view' | t }}"
+        data-tooltip="{{ 'products.quick_view' | t }}"
+      >
+        {% render 'icon-eye' %}
+      </a>
       {%- if product.available -%}
-        <form method="post" action="/cart/add">
+        <form method="post" action="/cart/add" class="product-card__action-form">
           <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
           <input type="hidden" name="quantity" value="1">
-          <button type="submit" class="btn btn--primary btn--sm btn--full">{{ 'products.add_to_cart' | t }}</button>
+          <button
+            type="submit"
+            class="btn btn--primary btn--sm btn--icon product-card__action-btn"
+            aria-label="{{ 'products.add_to_cart' | t }}"
+            data-tooltip="{{ 'products.add_to_cart' | t }}"
+          >
+            {% render 'icon-cart' %}
+          </button>
         </form>
       {%- else -%}
         <button class="btn btn--outline btn--sm btn--full" disabled>{{ 'products.sold_out' | t }}</button>
