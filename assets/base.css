@@ -805,7 +805,7 @@ textarea.input {
 .product-card__action-btn[data-tooltip]:focus-visible::after {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
-  transition-delay: 3s;
+  transition-delay: 1.5s;
 }
 
 .product-card__info {
