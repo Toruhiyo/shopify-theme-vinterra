@@ -272,8 +272,9 @@
   </div>
   {%- if current_variant.available -%}
     <button
+      type="button"
       class="btn btn--primary"
-      onclick="document.getElementById('product-form').dispatchEvent(new Event('submit', {cancelable: true, bubbles: true}))"
+      onclick="document.getElementById('product-form').requestSubmit()"
     >
       {{ 'products.add_to_cart' | t }}
     </button>

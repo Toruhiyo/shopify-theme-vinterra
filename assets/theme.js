@@ -56,14 +56,18 @@
       document.querySelectorAll('[data-cart-toggle]').forEach(btn => {
         btn.addEventListener('click', (e) => { e.preventDefault(); this.toggle(); });
       });
-      if (this.backdrop) this.backdrop.addEventListener('click', () => this.close());
-      this.drawer.querySelector('[data-cart-close]')?.addEventListener('click', () => this.close());
+      this.bindCloseControls();
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
           if (this.modal?.style.display !== 'none') { this.hideModal(); return; }
           if (this.isOpen()) this.close();
         }
       });
+    }
+
+    bindCloseControls() {
+      if (this.backdrop) this.backdrop.addEventListener('click', () => this.close());
+      this.drawer.querySelector('[data-cart-close]')?.addEventListener('click', () => this.close());
     }
 
     _itemId(el) {
@@ -261,6 +265,83 @@
     }
 
     toggle() { this.isOpen() ? this.close() : this.open(); }
+
+    async reload() {
+      if (!this.drawer) return;
+      try {
+        const res = await fetch(window.location.pathname + window.location.search);
+        const html = await res.text();
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const newDrawer = doc.querySelector('.cart-drawer');
+        const newBackdrop = doc.querySelector('.cart-drawer__backdrop');
+        if (!newDrawer) return;
+
+        const wasOpen = this.isOpen();
+        this.drawer.replaceWith(newDrawer);
+        this.drawer = newDrawer;
+        this.modal = this.drawer.querySelector('[data-remove-modal]');
+        this.modalBackdrop = this.drawer.querySelector('[data-modal-backdrop]');
+        this.bindCartItems();
+        this.bindModal();
+
+        if (newBackdrop) {
+          if (this.backdrop) this.backdrop.replaceWith(newBackdrop);
+          else document.body.prepend(newBackdrop);
+          this.backdrop = newBackdrop;
+        }
+        this.bindCloseControls();
+        if (wasOpen) this.open();
+      } catch { /* keep existing drawer markup */ }
+    }
+  }
+
+  /* --- Add to Cart (AJAX — stay on page, open drawer) --- */
+  class AddToCart {
+    constructor(cartDrawer) {
+      this.cartDrawer = cartDrawer;
+      document.addEventListener('submit', (e) => {
+        const form = e.target;
+        if (!(form instanceof HTMLFormElement)) return;
+        const action = form.getAttribute('action') || '';
+        if (!action.includes('/cart/add')) return;
+        e.preventDefault();
+        this.submit(form);
+      });
+    }
+
+    async submit(form) {
+      const submitBtn = form.querySelector('[type="submit"]');
+      const stickyBtn = document.querySelector('.pdp-sticky-bar .btn--primary:not([disabled])');
+      if (submitBtn) submitBtn.disabled = true;
+      if (stickyBtn) stickyBtn.disabled = true;
+
+      try {
+        await cartLock.acquire();
+        const root = window.Shopify?.routes?.root || '/';
+        const res = await fetch(`${root}cart/add.js`, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: new FormData(form)
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.description || data.message || 'Could not add to cart');
+        }
+
+        const cart = await (await fetch(`${root}cart.js`)).json();
+        cartBus.emit(cart);
+        if (this.cartDrawer?.drawer) {
+          await this.cartDrawer.reload();
+          this.cartDrawer.open();
+        }
+      } catch (err) {
+        window.alert(err.message || 'Could not add to cart');
+      } finally {
+        cartLock.release();
+        if (submitBtn) submitBtn.disabled = false;
+        if (stickyBtn) stickyBtn.disabled = false;
+      }
+    }
   }
 
   /* --- Cart Page (AJAX qty updates for /cart) --- */
@@ -1921,7 +2002,8 @@
 
   /* --- Initialize --- */
   function init() {
-    new CartDrawer();
+    const cartDrawer = new CartDrawer();
+    new AddToCart(cartDrawer);
     new CartPage();
     new CollectionFilters();
     new SearchInfiniteScroll();
