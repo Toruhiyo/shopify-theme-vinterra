@@ -117,6 +117,11 @@
   <script src="{{ 'overlayscrollbars.browser.es6.min.js' | asset_url }}" defer></script>
   <script src="{{ 'scrollbar.js' | asset_url }}" defer></script>
 
+  <script>
+    window.themeStrings = Object.assign(window.themeStrings || {}, {
+      addedToCart: {{ 'products.added_to_cart' | t | json }}
+    });
+  </script>
   <script src="{{ 'theme.js' | asset_url }}" defer></script>
 
   {%- if settings.bizmis_demo_enabled -%}

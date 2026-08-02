@@ -56,6 +56,7 @@
   },
   "products": {
     "add_to_cart": "Add to cart",
+    "added_to_cart": "Added to cart",
     "buy_now": "Buy now",
     "sold_out": "Sold out",
     "quick_view": "Quick view",

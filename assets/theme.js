@@ -295,10 +295,12 @@
     }
   }
 
-  /* --- Add to Cart (AJAX — stay on page, open drawer) --- */
+  /* --- Add to Cart (AJAX — stay on page, success feedback) --- */
   class AddToCart {
     constructor(cartDrawer) {
       this.cartDrawer = cartDrawer;
+      this.SUCCESS_MS = 1800;
+      this.PULSE_MS = 900;
       document.addEventListener('submit', (e) => {
         const form = e.target;
         if (!(form instanceof HTMLFormElement)) return;
@@ -330,17 +332,54 @@
 
         const cart = await (await fetch(`${root}cart.js`)).json();
         cartBus.emit(cart);
-        if (this.cartDrawer?.drawer) {
-          await this.cartDrawer.reload();
-          this.cartDrawer.open();
-        }
+        this.playSuccess(submitBtn);
+        if (stickyBtn && stickyBtn !== submitBtn) this.playSuccess(stickyBtn);
+        this.pulseCartIcon();
+        if (this.cartDrawer?.drawer) this.cartDrawer.reload();
       } catch (err) {
         window.alert(err.message || 'Could not add to cart');
-      } finally {
-        cartLock.release();
         if (submitBtn) submitBtn.disabled = false;
         if (stickyBtn) stickyBtn.disabled = false;
+      } finally {
+        cartLock.release();
       }
+    }
+
+    playSuccess(btn) {
+      if (!btn) return;
+      clearTimeout(btn._addedTimer);
+      const label = window.themeStrings?.addedToCart || 'Added to cart';
+      const isIcon = btn.classList.contains('btn--icon');
+      if (!btn.dataset.originalHtml) btn.dataset.originalHtml = btn.innerHTML;
+      btn.classList.add('is-added-to-cart');
+      btn.disabled = true;
+      if (isIcon) {
+        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
+      } else {
+        btn.textContent = label;
+      }
+      btn._addedTimer = setTimeout(() => {
+        btn.classList.remove('is-added-to-cart');
+        btn.innerHTML = btn.dataset.originalHtml;
+        delete btn.dataset.originalHtml;
+        btn.disabled = false;
+      }, this.SUCCESS_MS);
+    }
+
+    pulseCartIcon() {
+      const toggle = document.querySelector('[data-cart-toggle]');
+      const badge = document.querySelector('[data-cart-count]');
+      if (!toggle) return;
+      toggle.classList.remove('is-cart-pulse');
+      badge?.classList.remove('is-cart-count-pop');
+      void toggle.offsetWidth;
+      toggle.classList.add('is-cart-pulse');
+      badge?.classList.add('is-cart-count-pop');
+      clearTimeout(this._pulseTimer);
+      this._pulseTimer = setTimeout(() => {
+        toggle.classList.remove('is-cart-pulse');
+        badge?.classList.remove('is-cart-count-pop');
+      }, this.PULSE_MS);
     }
   }
 
