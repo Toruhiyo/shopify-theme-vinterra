@@ -219,6 +219,9 @@
     "disclaimer": "Beu amb moderació."
   },
   "bizmis": {
+    "intro": {
+      "store_tagline": "Vins i caves del Penedès"
+    },
     "panel": {
       "title": "Coneix el teu sommelier de veu",
       "examples": "Busco un negre del Penedès per acompanyar un rostit de xai.\nAquests dos caves s'assemblen. Quin és més sec?\nAquest blanc és ecològic i apte per a vegans?\nOn és la meva comanda? Fa dies que el seguiment no es mou.\nM'ha arribat una ampolla trencada. Com ho soluciono?\nFeu enviaments a França i el vi viatja protegit?",

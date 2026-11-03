@@ -219,6 +219,9 @@
     "disclaimer": "Beba com moderação."
   },
   "bizmis": {
+    "intro": {
+      "store_tagline": "Vinhos e cavas do Penedès"
+    },
     "panel": {
       "title": "Conheça o seu escanção por voz",
       "examples": "Procuro um tinto do Penedès para acompanhar borrego assado.\nEstas duas cavas parecem iguais. Qual é a mais seca?\nEste branco é biológico e adequado a vegans?\nOnde está a minha encomenda? O rastreio não mexe há dias.\nChegou uma garrafa partida. Como resolvo isto?\nEnviam para França e o vinho viaja protegido?",

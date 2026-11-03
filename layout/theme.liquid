@@ -1,7 +1,17 @@
 <!doctype html>
-<html class="no-js" lang="{{ request.locale.iso_code }}" data-overlayscrollbars-initialize>
+<html class="no-js" lang="{{ request.locale.iso_code }}" data-overlayscrollbars-initialize data-bizmis-stamp="{{ 'bizmis-logo-full-white-transparent.png' | asset_url }}">
 <head>
   <meta charset="utf-8">
+  <script>
+    // ?intro=bizmis on the home page (store demo films): the clerk opens the store, first as the Bizmis clerk beside
+    // the Bizmis logo, then as this store's own clerk (assets/bizmis-clerk-intro.js). Liquid has no query string,
+    // so the switch is read here, before the first paint.
+    (function () {
+      var bizmis = {{ template.name | json }} === 'index' && new URLSearchParams(location.search).get('intro') === 'bizmis';
+      document.documentElement.classList.toggle('is-clerk-intro', bizmis);
+      document.documentElement.classList.toggle('is-clerk-intro-bizmis', bizmis);
+    })();
+  </script>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0">
   <meta name="theme-color" content="{{ settings.color_background }}">
@@ -33,6 +43,10 @@
 
   {{ 'overlayscrollbars.min.css' | asset_url | stylesheet_tag }}
   {{ 'base.css' | asset_url | stylesheet_tag }}
+  {%- if template.name == 'index' -%}
+    {{ 'bizmis-clerk-intro.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'bizmis-clerk-intro.js' | asset_url }}"></script>
+  {%- endif -%}
   {{ content_for_header }}
   {% render 'favicon' %}
 
@@ -113,6 +127,18 @@
   {% render 'bizmis-demo-panel' %}
 
   {% render 'age-gate' %}
+
+  {%- if template.name == 'index' -%}
+    <div class="clerk-intro" data-clerk-intro aria-hidden="true">
+      <div class="clerk-intro__brands" data-clerk-intro-brands>
+        <img class="clerk-intro__brand clerk-intro__brand--bizmis" src="{{ 'bizmis-logo-full-orange.svg' | asset_url }}" alt="">
+        <div class="clerk-intro__brand clerk-intro__brand--store">
+          <img src="{{ 'logo-transparent.png' | asset_url }}" alt="">
+          <span>{{ 'bizmis.intro.store_tagline' | t }}</span>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
 
   <script src="{{ 'overlayscrollbars.browser.es6.min.js' | asset_url }}" defer></script>
   <script src="{{ 'scrollbar.js' | asset_url }}" defer></script>

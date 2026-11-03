@@ -219,6 +219,9 @@
     "disclaimer": "À consommer avec modération."
   },
   "bizmis": {
+    "intro": {
+      "store_tagline": "Vins et cavas du Penedès"
+    },
     "panel": {
       "title": "Découvrez votre sommelier vocal",
       "examples": "Je cherche un rouge du Penedès pour accompagner un agneau rôti.\nCes deux cavas se ressemblent. Lequel est le plus sec ?\nCe blanc est-il bio et vegan ?\nOù en est ma commande ? Le suivi ne bouge plus depuis des jours.\nUne bouteille est arrivée cassée. Comment faire ?\nLivrez-vous en France, et le vin voyage-t-il protégé ?",

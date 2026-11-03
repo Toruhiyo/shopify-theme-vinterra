@@ -219,6 +219,9 @@
     "disclaimer": "Bebe con moderación."
   },
   "bizmis": {
+    "intro": {
+      "store_tagline": "Vinos y cavas del Penedès"
+    },
     "panel": {
       "title": "Conoce a tu sumiller de voz",
       "examples": "Busco un tinto del Penedès para acompañar un asado de cordero.\nEstos dos cavas se parecen. ¿Cuál es más seco?\n¿Este blanco es ecológico y apto para veganos?\n¿Dónde está mi pedido? Hace días que el seguimiento no se mueve.\nMe ha llegado una botella rota. ¿Cómo lo soluciono?\n¿Hacéis envíos a Francia y el vino viaja protegido?",

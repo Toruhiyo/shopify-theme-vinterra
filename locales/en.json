@@ -219,6 +219,9 @@
     "disclaimer": "Please drink responsibly."
   },
   "bizmis": {
+    "intro": {
+      "store_tagline": "Wines and cavas from the Penedès"
+    },
     "panel": {
       "title": "Meet your voice sommelier",
       "examples": "I'm after a Penedès red to go with roast lamb.\nThese two cavas look the same. Which one is drier?\nIs this white organic and vegan friendly?\nWhere's my order? Tracking hasn't updated in days.\nA bottle arrived broken. How do I sort it out?\nDo you ship to France, and does the wine travel protected?",
