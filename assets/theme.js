@@ -331,6 +331,7 @@
         }
 
         const cart = await (await fetch(`${root}cart.js`)).json();
+        rememberCartCount(cart.item_count);
         cartBus.emit(cart);
         this.playSuccess(submitBtn);
         if (stickyBtn && stickyBtn !== submitBtn) this.playSuccess(stickyBtn);
@@ -353,11 +354,9 @@
       if (!btn.dataset.originalHtml) btn.dataset.originalHtml = btn.innerHTML;
       btn.classList.add('is-added-to-cart');
       btn.disabled = true;
-      if (isIcon) {
-        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
-      } else {
-        btn.textContent = label;
-      }
+      const tick = '<svg class="atc-tick" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline pathLength="1" points="20 6 9 17 4 12"/></svg>';
+      btn.innerHTML = isIcon ? tick : `${tick}<span>${label}</span>`;
+      sparkleButton(btn);
       btn._addedTimer = setTimeout(() => {
         btn.classList.remove('is-added-to-cart');
         btn.innerHTML = btn.dataset.originalHtml;
@@ -1990,6 +1989,58 @@
     window.addEventListener('load', apply);
   }
 
+  /* --- Add-to-cart celebration ---
+     Local to the button: it pops, a light sweeps across it, a soft ring eases out, the tick draws in front of
+     "Added to cart" and a few small sparkles flick off its edges (base.css). When the sales agent adds (the page
+     reloads), the cart icon pulses and its count pops once the widget is back. As in the Meridian demo store. */
+  const CART_COUNT_KEY = 'viniteca-marti:cart-count';
+  const ATC_SPARKS = [[-0.52, -1], [0.1, -1.15], [0.6, -0.95], [0.62, 1], [-0.08, 1.15], [-0.6, 0.9]];
+
+  function sparkleButton(btn) {
+    if (!btn || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    btn.querySelectorAll('.atc-spark').forEach((el) => el.remove());
+    const { width, height } = btn.getBoundingClientRect();
+    ATC_SPARKS.forEach(([x, y], i) => {
+      const spark = document.createElement('span');
+      spark.className = 'atc-spark';
+      spark.setAttribute('aria-hidden', 'true');
+      spark.style.setProperty('--x', String(x));
+      spark.style.setProperty('--y', String(y));
+      spark.style.setProperty('--d', `${(i % 3) * 40}ms`);
+      spark.style.setProperty('--hw', `${width / 2}px`);
+      spark.style.setProperty('--hh', `${height / 2}px`);
+      btn.appendChild(spark);
+    });
+  }
+
+  function rememberCartCount(count) {
+    try { sessionStorage.setItem(CART_COUNT_KEY, String(count)); } catch (e) { /* private mode */ }
+  }
+
+  function celebrateAgentAdd() {
+    const badge = document.querySelector('[data-cart-count]');
+    const count = Number(badge?.textContent || 0) || 0;
+    let before = null;
+    try { before = sessionStorage.getItem(CART_COUNT_KEY); } catch (e) { /* private mode */ }
+    rememberCartCount(count);
+    if (before == null || count <= Number(before)) return;
+    const end = Date.now() + 8000;
+    const tick = () => {
+      const clerk = document.querySelector('#bizmis-avatar-embed [class*="group/card"] canvas');
+      if (!clerk && Date.now() < end) { window.setTimeout(tick, 120); return; }
+      window.setTimeout(() => {
+        const toggle = document.querySelector('[data-cart-toggle]');
+        toggle?.classList.add('is-cart-pulse');
+        badge?.classList.add('is-cart-count-pop');
+        window.setTimeout(() => {
+          toggle?.classList.remove('is-cart-pulse');
+          badge?.classList.remove('is-cart-count-pop');
+        }, 900);
+      }, 350);
+    };
+    tick();
+  }
+
   /* Age verification. Blocks the storefront until the visitor confirms they are
      of legal drinking age; the answer is remembered so it only ever asks once. */
   const AGE_GATE_STORAGE_KEY = 'viniteca-marti:age-confirmed';
@@ -2064,6 +2115,7 @@
     document.querySelectorAll('[data-age-gate]').forEach(el => new AgeGate(el));
     initVoiceClerkTriggers();
     initPromoBar();
+    celebrateAgentAdd();
     document.querySelectorAll('[data-variant-selector]').forEach(el => {
       new VariantSelector(el);
     });

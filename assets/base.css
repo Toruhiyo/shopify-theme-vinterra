@@ -387,19 +387,81 @@ h1, h2, h3, h4, h5, h6 {
   outline-offset: 2px;
 }
 
+/* Added to cart: the button keeps the brand colour and celebrates on itself: a pop, a light sweeping across it, a
+   soft ring easing out, the tick drawing in front of the label and a few small sparkles off its edges (theme.js).
+   As in the Meridian demo store. */
 .btn.is-added-to-cart {
-  background: var(--color-success) !important;
-  color: #fff !important;
-  border-color: var(--color-success) !important;
+  position: relative;
   filter: none !important;
   pointer-events: none;
-  animation: atc-success-pop 0.45s ease;
+  overflow: visible;
+  background-image: linear-gradient(105deg, transparent 0%, transparent 38%, rgba(255, 255, 255, 0.45) 50%, transparent 62%, transparent 100%);
+  background-size: 260% 100%;
+  background-repeat: no-repeat;
+  background-position: 140% 0;
+  animation: atc-success-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1), atc-success-sheen 0.8s cubic-bezier(0.45, 0, 0.25, 1) 0.12s both;
+}
+
+.btn.is-added-to-cart::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  border: 2px solid var(--color-primary, #701C33);
+  animation: atc-success-ring 0.65s ease-out forwards;
+  pointer-events: none;
+}
+
+.btn.is-added-to-cart .atc-tick {
+  flex: none;
+}
+
+.btn.is-added-to-cart .atc-tick polyline {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: atc-tick-draw 0.35s ease-out 0.15s forwards;
+}
+
+.atc-spark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  background: var(--color-accent, #A9863F);
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  opacity: 0;
+  pointer-events: none;
+  animation: atc-spark 0.6s cubic-bezier(0.22, 1, 0.36, 1) calc(0.1s + var(--d, 0ms)) forwards;
 }
 
 @keyframes atc-success-pop {
   0% { transform: scale(1); }
-  40% { transform: scale(1.04); }
+  35% { transform: scale(1.06); }
+  65% { transform: scale(0.98); }
   100% { transform: scale(1); }
+}
+
+@keyframes atc-success-sheen {
+  from { background-position: 140% 0; }
+  to { background-position: -40% 0; }
+}
+
+@keyframes atc-success-ring {
+  0% { opacity: 0.8; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.08, 1.45); }
+}
+
+@keyframes atc-tick-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* each spark leaves from just inside the button's edge and flicks a little way out */
+@keyframes atc-spark {
+  0% { opacity: 0; transform: translate(calc(var(--x) * var(--hw)), calc(var(--y) * var(--hh))) scale(0.3) rotate(0deg); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(var(--x) * (var(--hw) + 14px)), calc(var(--y) * (var(--hh) + 12px))) scale(1) rotate(45deg); }
 }
 
 .header__icon-btn.is-cart-pulse {
@@ -425,6 +487,9 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (prefers-reduced-motion: reduce) {
   .btn.is-added-to-cart,
+  .btn.is-added-to-cart::after,
+  .btn.is-added-to-cart .atc-tick polyline,
+  .atc-spark,
   .header__icon-btn.is-cart-pulse,
   .header__cart-count.is-cart-count-pop {
     animation: none;
