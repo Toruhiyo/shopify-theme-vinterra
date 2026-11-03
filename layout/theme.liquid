@@ -3,13 +3,24 @@
 <head>
   <meta charset="utf-8">
   <script>
-    // ?intro=bizmis on the home page (store demo films): the clerk opens the store, first as the Bizmis clerk beside
-    // the Bizmis logo, then as this store's own clerk (assets/bizmis-clerk-intro.js). Liquid has no query string,
-    // so the switch is read here, before the first paint.
+    // The demo store's URL switches, as on every demo store (Meridian's). Liquid has no query string, so they are
+    // read here, before the first paint, and set classes on <html>.
     (function () {
-      var bizmis = {{ template.name | json }} === 'index' && new URLSearchParams(location.search).get('intro') === 'bizmis';
-      document.documentElement.classList.toggle('is-clerk-intro', bizmis);
-      document.documentElement.classList.toggle('is-clerk-intro-bizmis', bizmis);
+      var params = new URLSearchParams(location.search);
+      var root = document.documentElement;
+      // ?intro=bizmis on the home page (store demo films): the clerk opens the store, first as the Bizmis clerk beside
+      // the Bizmis logo, then as this store's own clerk (assets/bizmis-clerk-intro.js)
+      var bizmis = {{ template.name | json }} === 'index' && params.get('intro') === 'bizmis';
+      root.classList.toggle('is-clerk-intro', bizmis);
+      root.classList.toggle('is-clerk-intro-bizmis', bizmis);
+      // ?noagent: the store without its Bizmis clerk (the widget stays out of sight)
+      root.classList.toggle('no-bizmis-agent', params.has('noagent'));
+      // the recording links (?intro=) record the store itself: no Bizmis bar, the store's own hero (no film)
+      var recording = params.has('intro') && params.get('intro') !== '0';
+      // ?nobar: no Bizmis bar, and no space for it
+      root.classList.toggle('no-bizmis-bar', params.has('nobar') || recording);
+      // ?storehero (or ?nofilm): the store's own hero, no film (assets/bizmis-film.css, bizmis-film.js)
+      root.classList.toggle('store-hero', params.has('storehero') || params.has('nofilm') || recording);
     })();
   </script>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">

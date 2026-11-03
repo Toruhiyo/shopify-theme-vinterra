@@ -2011,6 +2011,23 @@ textarea.input {
   --bizmis-orange-dark: #ec7709;
 }
 
+/* ?nobar (and ?intro=bizmis): no Bizmis bar, and no space for it (layout/theme.liquid sets html.no-bizmis-bar) */
+html.no-bizmis-bar .announcement-bar-section:has(.promo-bar) {
+  display: none !important;
+}
+
+html.no-bizmis-bar,
+html.no-bizmis-bar body {
+  --promo-height: 0px !important;
+}
+
+/* ?noagent: the store without its Bizmis clerk (and the coach's prompts for it) */
+html.no-bizmis-agent #bizmis-avatar-embed,
+html.no-bizmis-agent .bizmis-viewport-portal-root,
+html.no-bizmis-agent .bizmis-coach {
+  display: none !important;
+}
+
 .promo-bar {
   background: linear-gradient(180deg, var(--bizmis-orange) 0%, var(--bizmis-orange-dark) 170%);
   color: #fff;
