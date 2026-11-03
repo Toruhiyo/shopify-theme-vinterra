@@ -1,0 +1,17 @@
+{%- comment -%}
+  The hero's play button: a burgundy disc with the film's name and length beside it, in the hero's gold eyebrow type,
+  under the film copy's heading (sections/hero.liquid). It sits in the copy's column, over the cellar scrim's dark side:
+  every slide's bottle or glasses stand in the middle of the picture, where Meridian's disc sits. The hero itself is the
+  film's poster: a click anywhere on it plays the film (assets/bizmis-film.js). Params: label (the button's name),
+  length (the film's length, optional).
+{%- endcomment -%}
+<button type="button" class="hero-film-play" data-film-open aria-label="{{ label | escape }}{% if length != blank %} ({{ length | escape }}){% endif %}">
+  <span class="hero-film-play__disc" data-play aria-hidden="true">
+    <span class="hero-film-play__ring"></span>
+    <svg viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+  </span>
+  <span class="hero-film-play__label" aria-hidden="true">
+    {{- label -}}
+    {%- if length != blank %}<span class="hero-film-play__length">{{ length }}</span>{% endif -%}
+  </span>
+</button>

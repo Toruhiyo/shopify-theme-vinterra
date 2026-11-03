@@ -1,0 +1,107 @@
+{%- comment -%}
+  The Bizmis demo film in the hero: bizmis.ai's hero film player (trujilloai-bizmis-landing src/components/Hero.tsx +
+  src/components/film/FilmPlayer.tsx, "bare" + "fill"), as in the Meridian demo store, in this store's colours and with
+  its words in the film's language (Spanish). The hero is the idle
+  state, with the landing's play button over its picture (snippets/bizmis-film-button.liquid). Play opens the film from that button
+  through an iris over the whole window, edge to edge on black, while the store's header steps aside: the landing's glass
+  dock (play, volume, time, seek, captions, quality, full screen), a glass close, the narrator's and the shopper's
+  captions in the landing's caption pill, and at the end the film's own install title becomes the landing's button.
+  Close (✕, Escape, a click outside the hero) runs the iris back; play again resumes where it stopped.
+
+  Params: src (HLS master .m3u8 or an MP4), label (the region's name), captions (a .vtt with <v Narrator> / <v Shopper>
+  voices, or <v Narrador> / <v Cliente>; optional), cta_url, cta_label, end_cta ("left,top,width,height" of the closing title's ink, as fractions of
+  the frame), end_hold (seconds before the end to stop on, for a film that fades out), agent_lines (the clerk's invite
+  to watch the film, lines separated by |: said in its captions, the first with a wave, the last while it points at
+  the film).
+{%- endcomment -%}
+{%- assign end_cta = end_cta | default: '0.1859,0.3972,0.6307,0.1185' | split: ',' -%}
+<div
+  class="bzf"
+  data-bizmis-film
+  data-phase="idle"
+  data-src="{{ src | escape }}"
+  data-captions="{{ captions | escape }}"
+  data-hls-js="https://cdn.jsdelivr.net/npm/hls.js@1.7.3/dist/hls.min.js"
+  data-end-cta="{{ end_cta | join: ',' }}"
+  data-end-hold="{{ end_hold | default: 0 }}"
+  data-agent-lines="{{ agent_lines | escape }}"
+  hidden
+>
+  <div class="bzf-iris" data-film-iris>
+    <div class="bzf-player" data-film-root role="region" aria-label="{{ label | escape }}" tabindex="0">
+      <video class="bzf-video" data-film-video playsinline preload="none" crossorigin="anonymous"></video>
+
+      <button type="button" class="bzf-glass bzf-paused" data-film-resume aria-label="Reproducir">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><polygon class="f" points="6 3 20 12 6 21 6 3"/></svg>
+      </button>
+      <div class="bzf-spinner" data-film-spinner aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+      </div>
+
+      <a class="bzf-end-cta" data-film-end-cta href="{{ cta_url | escape }}" target="_blank" rel="noopener noreferrer" aria-label="{{ cta_label | escape }}" hidden></a>
+
+      <div class="bzf-cc-box" data-film-cc-box hidden></div>
+
+      <div class="bzf-dock">
+        <div class="bzf-glass bzf-dock__bar" data-film-bar>
+          <button type="button" class="bzf-btn" data-film-toggle aria-label="Pausa">
+            <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><rect class="f" x="14" y="4" width="4" height="16" rx="1"/><rect class="f" x="6" y="4" width="4" height="16" rx="1"/></svg>
+            <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><polygon class="f" points="6 3 20 12 6 21 6 3"/></svg>
+            <svg class="i-replay" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          </button>
+
+          <div class="bzf-volume">
+            <button type="button" class="bzf-btn" data-film-mute aria-label="Silenciar">
+              <svg class="i-sound" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><path d="M16 9a5 5 0 0 1 0 6"/><path d="M19.364 18.364a9 9 0 0 0 0-12.728"/></svg>
+              <svg class="i-muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/></svg>
+            </button>
+            <input type="range" class="bzf-volume__slider" data-film-volume min="0" max="1" step="0.05" value="1" aria-label="Volumen">
+          </div>
+
+          <div class="bzf-timeline">
+            <span class="bzf-time" data-film-time>0:00</span>
+            <div class="bzf-track" data-film-track role="slider" tabindex="-1" aria-label="Posición en el vídeo" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0">
+              <div class="bzf-track__rail"><div class="bzf-track__buffered" data-film-buffered></div><div class="bzf-track__played" data-film-played></div></div>
+              <div class="bzf-track__knob" data-film-knob></div>
+              <div class="bzf-glass bzf-track__tip" data-film-tip hidden></div>
+            </div>
+            <span class="bzf-time bzf-time--total" data-film-duration>0:00</span>
+          </div>
+
+          {%- if captions != blank -%}
+            <button type="button" class="bzf-btn bzf-btn--cc" data-film-cc aria-label="Subtítulos" aria-pressed="false" title="Subtítulos">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="14" x="3" y="5" rx="2" ry="2"/><path d="M7 15h4M15 15h2M7 11h2M13 11h4"/></svg>
+              <span class="bzf-btn__on" aria-hidden="true"></span>
+            </button>
+          {%- endif -%}
+
+          <div class="bzf-quality" data-film-quality hidden>
+            <button type="button" class="bzf-btn bzf-btn--quality" data-film-quality-btn aria-label="Calidad" aria-haspopup="menu" aria-expanded="false">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+              <span class="bzf-btn__label" data-film-quality-label>Auto</span>
+            </button>
+            <ul class="bzf-glass bzf-quality__menu" data-film-quality-menu role="menu" aria-label="Calidad" hidden></ul>
+          </div>
+
+          <button type="button" class="bzf-btn" data-film-fullscreen aria-label="Pantalla completa">
+            <svg class="i-max" viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" x2="14" y1="3" y2="10"/><line x1="3" x2="10" y1="21" y2="14"/></svg>
+            <svg class="i-min" viewBox="0 0 24 24" aria-hidden="true"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" x2="21" y1="10" y2="3"/><line x1="3" x2="10" y1="21" y2="14"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="bzf-glass bzf-close" data-film-close aria-label="Cerrar el vídeo">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </button>
+  </div>
+  <div class="bzf-iris-glow" data-film-glow aria-hidden="true"></div>
+
+  <template data-film-icons>
+    <svg data-icon="narrator" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+    <svg data-icon="shopper" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    <svg data-icon="check" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+  </template>
+</div>
+{{ 'bizmis-film.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'bizmis-film.js' | asset_url }}" defer></script>

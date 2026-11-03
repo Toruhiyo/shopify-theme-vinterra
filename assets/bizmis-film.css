@@ -1,0 +1,956 @@
+/* The Bizmis demo film in the hero (snippets/bizmis-film.liquid, bizmis-film-button.liquid, assets/bizmis-film.js):
+   bizmis.ai's hero film player, as in the Meridian demo store, in this store's colours (the wine burgundy, the gold
+   the hero uses over its cellar scrim, the cream) and its fonts. */
+
+/* ---- idle: the store's own hero is the film's poster. Its play button, a burgundy disc (the page's primary, as on its
+   buttons) with a gold hairline halo and the landing's breathing ring, sits under the film copy's heading with the
+   film's name and length in the hero's gold eyebrow type: the copy's column on the scrim's dark side is the one part of
+   the picture no slide's bottle or glasses stand in. A click anywhere on the hero plays it. */
+.hero.has-film {
+  cursor: pointer;
+}
+
+/* With the film on, the hero shows its own copy (section settings film_*), smaller so the film's button leads; the
+   store's own copy shows instead with html.store-hero (?storehero, ?nofilm, ?intro=), and the film is gone. The copy
+   wrappers don't change the hero's layout. */
+.hero__copy {
+  display: contents;
+}
+
+html:not(.store-hero) .hero--has-film .hero__copy--store,
+html.store-hero .hero__copy--film,
+html.store-hero .hero-film-play,
+html.store-hero [data-bizmis-film] {
+  display: none !important;
+}
+
+/* the film's heading runs longer than the store's ("Conoce a nuestro dependiente."): a little more room per line; its
+   second line keeps the store's gold underlined call (base.css .hero__title-cta) */
+.hero__copy--film .hero__title {
+  max-width: 11em;
+  font-size: clamp(2.4rem, 4.2vw, 3.6rem);
+}
+
+.hero-film-play {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.15rem;
+  margin-top: 0.35rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: #ddba76;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  animation: hero-film-play-in 700ms cubic-bezier(0.22, 1, 0.36, 1) 300ms both;
+}
+
+@keyframes hero-film-play-in {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: none; }
+}
+
+.hero-film-play:focus-visible {
+  outline: none;
+}
+
+.hero-film-play__disc {
+  position: relative;
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 4.25rem;
+  height: 4.25rem;
+  border-radius: 50%;
+  background: var(--color-primary, #701c33);
+  color: var(--color-primary-fg, #fdf9f2);
+  box-shadow: inset 0 1px 0 rgb(253 249 242 / 0.18), 0 18px 40px -12px rgb(22 12 9 / 0.7);
+  transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 200ms ease;
+}
+
+/* a gold hairline halo around the disc, the hero's gold rule */
+.hero-film-play__disc::before {
+  content: '';
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 1px solid rgb(221 186 118 / 0.55);
+}
+
+.hero.has-film:hover .hero-film-play__disc,
+.hero-film-play:hover .hero-film-play__disc {
+  transform: scale(1.07);
+}
+
+.hero-film-play:active .hero-film-play__disc {
+  filter: brightness(0.9);
+}
+
+.hero-film-play:focus-visible .hero-film-play__disc {
+  box-shadow: 0 0 0 3px #fdf9f2, 0 0 0 5px #ddba76, 0 18px 40px -12px rgb(22 12 9 / 0.7);
+}
+
+/* the landing's breathing ring (.bza-play-ring), in the hero's gold: the burgundy alone sinks into the dark scrim */
+.hero-film-play__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  animation: hero-film-breathe 2.4s ease-out infinite;
+}
+
+@keyframes hero-film-breathe {
+  from { box-shadow: 0 0 0 0 rgb(221 186 118 / 0.4); }
+  to { box-shadow: 0 0 0 1.3rem rgb(221 186 118 / 0); }
+}
+
+.hero-film-play svg {
+  width: 1.65rem;
+  height: 1.65rem;
+  margin-left: 0.25rem;
+  fill: currentColor;
+  stroke: none;
+}
+
+/* the film's name and length: the hero's eyebrow (base.css .hero__subtitle), the length in muted cream */
+.hero-film-play__label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-shadow: 0 1px 12px rgb(22 12 9 / 0.5);
+  transition: color 200ms ease;
+}
+
+.hero-film-play__length {
+  color: rgb(253 249 242 / 0.7);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+}
+
+.hero.has-film:hover .hero-film-play__label,
+.hero-film-play:hover .hero-film-play__label {
+  color: #ebd09a;
+}
+
+@media (max-width: 749px) {
+  /* phones: the copy is centred (the heading's second line too: a button only spans its words), the button under it */
+  .hero__copy--film .hero__title-cta {
+    width: 100%;
+  }
+
+  .hero-film-play {
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .hero-film-play__disc {
+    width: 3.85rem;
+    height: 3.85rem;
+  }
+
+  .hero-film-play svg {
+    width: 1.45rem;
+    height: 1.45rem;
+  }
+}
+
+/* ---- open: bizmis.ai's hero film player (FilmPlayer "bare" + "fill", Hero's iris), in the store's colours: its
+   frosted glass tinted with the hero's cellar ink instead of the landing's warm brown, the hero's gold for "on" */
+.bzf {
+  --bzf-glass-bg: rgb(22 12 9 / 0.3);
+  --bzf-ink: #1f1a16;
+  --bzf-gold: #ddba76;
+  /* the store's body face, named outright (loaded by layout/theme.liquid): --font-body can carry a Liquid font error */
+  --bzf-font: "Source Sans 3", "Helvetica Neue", Arial, sans-serif;
+  --bzf-glass: inset 0 1px 0 rgb(255 255 255 / 0.45), inset 0 -1px 0 rgb(255 255 255 / 0.08), 0 12px 40px -12px rgb(0 0 0 / 0.5);
+  --r: 0px;   /* the iris starts shut */
+  --cx: 50%;
+  --cy: 50%;
+  position: fixed;   /* moved to <body> by the script: it covers the window, not just the hero */
+  inset: 0;
+  z-index: 2147483000;
+}
+
+.bzf[hidden] {
+  display: none;
+}
+
+/* open: the page's scrolling (and its scrollbar) locked under the film, which covers the store's header, its promo
+   strip and the hero's top margin */
+html.bizmis-film-open,
+html.bizmis-film-open body,
+html.bizmis-film-open [data-overlayscrollbars-viewport] {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
+html.bizmis-film-open .os-scrollbar {
+  visibility: hidden !important;
+}
+
+.bzf-glass {
+  border: 1px solid rgb(255 255 255 / 0.4);
+  background-color: var(--bzf-glass-bg);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+  backdrop-filter: blur(24px) saturate(1.5);
+  box-shadow: var(--bzf-glass);
+}
+
+/* the film: the whole hero is the player, revealed through the iris */
+.bzf-iris {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  -webkit-mask-image: radial-gradient(circle at var(--cx) var(--cy), #000 calc(var(--r) - 90px), transparent var(--r));
+  mask-image: radial-gradient(circle at var(--cx) var(--cy), #000 calc(var(--r) - 90px), transparent var(--r));
+}
+
+/* a soft light riding the iris' edge: the store's cream and burgundy hand over to the film */
+.bzf-iris-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--cx) var(--cy), transparent calc(var(--r) - 140px), rgb(253 249 242 / 0.8) calc(var(--r) - 50px), rgb(112 28 51 / 0.3) calc(var(--r) - 10px), transparent var(--r));
+}
+
+.bzf-player {
+  position: absolute;
+  inset: 0;
+  outline: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.bzf[data-phase='playing']:not(.is-controls) .bzf-player {
+  cursor: none;
+}
+
+.bzf-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+
+/* the hero steps back while the film plays: the store's header fades away, the picture pushes back and blurs */
+.announcement-bar-section,
+.header-section {
+  transition: opacity 500ms ease;
+}
+
+html.bizmis-film-open .announcement-bar-section,
+html.bizmis-film-open .header-section {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hero__slides,
+.hero__container {
+  transition: transform 950ms cubic-bezier(0.65, 0, 0.35, 1), filter 950ms cubic-bezier(0.65, 0, 0.35, 1), opacity 500ms ease;
+}
+
+.hero.is-film-open .hero__slides,
+.hero.is-film-open .hero__container {
+  pointer-events: none;
+  transform: scale(1.08);
+  filter: blur(14px) brightness(1.1);
+}
+
+.hero.is-film-open .hero__nav {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* the live widget steps aside (the film has its own), its phone bar too (portalled to <body>, above the film) */
+html.bizmis-film-open #bizmis-avatar-embed,
+html.bizmis-film-open .bizmis-viewport-portal-root {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: opacity 200ms ease, visibility 0s 200ms;
+}
+
+/* paused: a glass play button in the middle of the frame */
+.bzf-paused {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0;
+  translate: -50% -50%;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 200ms ease;
+}
+
+.bzf[data-phase='paused'] .bzf-paused {
+  display: flex;
+}
+
+.bzf-paused:hover {
+  transform: scale(1.1);
+}
+
+.bzf-paused svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: 0.25rem;
+  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 0.25));
+}
+
+/* buffering: centred by its wrapper so the spinner's own transform is free for the rotation */
+.bzf-spinner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.bzf.is-stalled[data-phase='playing'] .bzf-spinner {
+  opacity: 1;
+}
+
+.bzf-spinner svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #fff;
+  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 0.3));
+  animation: bzf-spin 1s linear infinite;
+}
+
+@keyframes bzf-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* every icon: lucide's 24px stroke icons */
+.bzf svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bzf svg .f {
+  fill: currentColor;
+}
+
+/* ended: the film's own install title becomes a button in place (the landing's .bzf-end-cta: it fades and settles in
+   as the film lands on its last frame, then calls with a running border light). It frames the film's own Bizmis title,
+   so it keeps the film's orange: the only orange here, inside the film, never on the store's own UI. */
+@property --bzf-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.bzf-end-cta {
+  position: absolute;
+  z-index: 5;
+  isolation: isolate;
+  box-shadow:
+    inset 0 0 0 2px rgb(249 163 83 / 0.7),
+    0 18px 44px -18px rgb(249 163 83 / 0.65);
+  animation: bzf-end-in 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.bzf-end-cta[hidden] {
+  display: none;
+}
+
+.bzf-end-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 3px;
+  background: conic-gradient(from var(--bzf-angle), transparent 0deg 250deg, #f9a353 300deg, #ffd3a6 330deg, #f9a353 345deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  animation: bzf-end-run 3.2s linear 0.6s infinite;
+  pointer-events: none;
+}
+
+.bzf-end-cta:hover {
+  transform: translateY(-2px) scale(1.015);
+  background-color: rgb(249 163 83 / 0.06);
+  box-shadow:
+    inset 0 0 0 3px #f9a353,
+    0 0 0 8px rgb(249 163 83 / 0.14),
+    0 26px 54px -18px rgb(249 163 83 / 0.85);
+}
+
+.bzf-end-cta:hover::before {
+  animation-duration: 1.4s;
+}
+
+.bzf-end-cta:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 3px #f9a353, 0 0 0 8px rgb(249 163 83 / 0.3);
+}
+
+@keyframes bzf-end-in {
+  from { opacity: 0; transform: scale(1.06); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes bzf-end-run {
+  to { --bzf-angle: 360deg; }
+}
+
+/* captions: the narrator's and the shopper's lines (the agent is captioned in the picture), in the landing's caption
+   pill, tagged with the voice: under the picture when the letterbox has room, else low in the frame, over the dock */
+.bzf-cc-box {
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  transition: bottom 300ms ease-out;
+}
+
+.bzf-cc-box[hidden] {
+  display: none;
+}
+
+.bzf-cc {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.55em;
+  max-width: 100%;
+  margin: 0;
+  padding: 0.24em 0.78em 0.26em 0.62em;
+  border: 1px solid rgb(253 249 242 / 0.8);
+  border-radius: 1.2em;
+  background-color: rgb(251 248 243 / 0.86);
+  background-image: linear-gradient(150deg, rgb(253 249 242 / 0.5) 0%, rgb(253 249 242 / 0) 100%);
+  box-shadow:
+    inset 0 1px 0 rgb(253 249 242 / 0.9),
+    0 0 0 1px rgb(31 26 22 / 0.08),
+    0 18px 44px -22px rgb(31 26 22 / 0.35);
+  -webkit-backdrop-filter: blur(24px) saturate(1.25);
+  backdrop-filter: blur(24px) saturate(1.25);
+  color: var(--color-fg, var(--bzf-ink));
+  font-family: var(--bzf-font);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-align: left;
+  animation: bzf-cc-in 0.22s ease-out both;
+}
+
+.bzf-cc__tag {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.3em;
+  align-self: center;
+  padding-right: 0.6em;
+  border-right: 1px solid rgb(31 26 22 / 0.16);
+  color: rgb(31 26 22 / 0.62);
+  font-size: 0.62em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.bzf .bzf-cc__mic {
+  width: 1.25em;
+  height: 1.25em;
+  stroke-width: 2.5;
+}
+
+/* the narrator in the store's burgundy; the shopper in ink, with a bag */
+.bzf-cc__tag--narrator .bzf-cc__mic {
+  color: var(--color-primary, #701c33);
+}
+
+.bzf-cc__tag--shopper {
+  color: rgb(31 26 22 / 0.78);
+}
+
+.bzf-cc__tag--shopper .bzf-cc__mic {
+  color: var(--color-fg, var(--bzf-ink));
+}
+
+.bzf-cc__text {
+  min-width: 0;
+  text-wrap: balance;
+}
+
+@keyframes bzf-cc-in {
+  from { opacity: 0; transform: translateY(0.3em); }
+  to { opacity: 1; transform: none; }
+}
+
+/* the dock: inside the frame, frosted glass; it hides while the pointer rests */
+.bzf-dock {
+  position: absolute;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bzf-dock__bar {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  border-radius: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms ease;
+}
+
+.bzf.is-controls .bzf-dock__bar {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.bzf-btn {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0.75rem;
+  background: transparent;
+  color: #fff;
+  font-family: var(--bzf-font);
+  cursor: pointer;
+  filter: drop-shadow(0 1px 3px rgb(0 0 0 / 0.25));
+  transition: background-color 150ms ease;
+}
+
+.bzf-btn:hover,
+.bzf-btn.is-open {
+  background-color: rgb(255 255 255 / 0.15);
+}
+
+.bzf-btn:focus-visible {
+  outline: 2px solid rgb(255 255 255 / 0.8);
+  outline-offset: 1px;
+}
+
+.bzf-btn svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.bzf [data-film-toggle] .i-play,
+.bzf [data-film-toggle] .i-replay,
+.bzf[data-phase='paused'] [data-film-toggle] .i-pause,
+.bzf[data-phase='ended'] [data-film-toggle] .i-pause,
+.bzf [data-film-mute] .i-muted,
+.bzf.is-muted [data-film-mute] .i-sound,
+.bzf [data-film-fullscreen] .i-min,
+.bzf.is-fullscreen [data-film-fullscreen] .i-max {
+  display: none;
+}
+
+.bzf[data-phase='paused'] [data-film-toggle] .i-play,
+.bzf[data-phase='ended'] [data-film-toggle] .i-replay,
+.bzf.is-muted [data-film-mute] .i-muted,
+.bzf.is-fullscreen [data-film-fullscreen] .i-min {
+  display: block;
+}
+
+.bzf [data-film-toggle] .i-play {
+  margin-left: 0.125rem;
+}
+
+/* volume: the slider opens beside the speaker on hover */
+.bzf-volume {
+  display: none;
+  align-items: center;
+}
+
+.bzf-volume__slider {
+  display: none;
+  width: 0;
+  opacity: 0;
+  accent-color: #fff;
+  cursor: pointer;
+  transition: width 300ms ease, opacity 300ms ease, margin 300ms ease;
+}
+
+.bzf-volume:hover .bzf-volume__slider,
+.bzf-volume:focus-within .bzf-volume__slider {
+  width: 4rem;
+  margin-right: 0.5rem;
+  opacity: 1;
+}
+
+/* the timeline */
+.bzf-timeline {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0 0.25rem;
+}
+
+.bzf-time {
+  display: none;
+  color: #fff;
+  font-family: var(--bzf-font);
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  filter: drop-shadow(0 1px 3px rgb(0 0 0 / 0.25));
+}
+
+.bzf-time--total {
+  color: rgb(255 255 255 / 0.7);
+}
+
+.bzf-track {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 1.5rem;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.bzf-track__rail {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 0.375rem;
+  overflow: hidden;
+  translate: 0 -50%;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.25);
+  transition: height 150ms ease;
+}
+
+.bzf-track:hover .bzf-track__rail {
+  height: 0.5rem;
+}
+
+.bzf-track__buffered,
+.bzf-track__played {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0;
+}
+
+.bzf-track__buffered {
+  background: rgb(255 255 255 / 0.25);
+}
+
+.bzf-track__played {
+  border-radius: 999px;
+  background: #fff;
+}
+
+.bzf-track__knob {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 0.875rem;
+  height: 0.875rem;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.3);
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.bzf-track:hover .bzf-track__knob {
+  opacity: 1;
+}
+
+.bzf-track__tip {
+  position: absolute;
+  top: -2.5rem;
+  translate: -50% 0;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-family: var(--bzf-font);
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.bzf-track__tip[hidden] {
+  display: none;
+}
+
+/* captions on: a gold bar under the icon (the burgundy would sink into the dark glass) */
+.bzf-btn__on {
+  position: absolute;
+  left: 50%;
+  bottom: 0.25rem;
+  width: 1.25rem;
+  height: 3px;
+  translate: -50% 0;
+  border-radius: 999px;
+  background: var(--bzf-gold);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.bzf-btn--cc[aria-pressed='true'] .bzf-btn__on {
+  opacity: 1;
+}
+
+/* quality */
+.bzf-quality {
+  position: relative;
+}
+
+.bzf-quality[hidden] {
+  display: none;
+}
+
+.bzf-btn--quality {
+  width: auto;
+  padding: 0 0.5rem;
+}
+
+.bzf-btn__label {
+  display: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.bzf-quality__menu {
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  min-width: 11rem;
+  margin: 0 0 0.5rem;
+  padding: 0.25rem;
+  overflow: hidden;
+  list-style: none;
+  border-radius: 0.75rem;
+  background-color: rgb(22 12 9 / 0.72);
+  color: #fff;
+  font-family: var(--bzf-font);
+  font-size: 0.875rem;
+}
+
+.bzf-quality__menu[hidden] {
+  display: none;
+}
+
+.bzf-quality__item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem 0.375rem 0.5rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.15s ease;
+}
+
+.bzf-quality__item:hover {
+  background-color: rgb(255 255 255 / 0.1);
+}
+
+.bzf-quality__item:focus-visible {
+  box-shadow: inset 0 0 0 2px rgb(255 255 255 / 0.8);
+}
+
+.bzf-quality__item[aria-checked='true'] {
+  font-weight: 700;
+  background-color: rgb(255 255 255 / 0.24);
+}
+
+.bzf-quality__item svg {
+  flex-shrink: 0;
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 3;
+  opacity: 0;
+}
+
+.bzf-quality__item[aria-checked='true'] svg {
+  opacity: 1;
+}
+
+.bzf-quality__name {
+  flex: 1;
+}
+
+.bzf-quality__now {
+  margin-left: 0.375rem;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  color: rgb(255 255 255 / 0.75);
+}
+
+.bzf-quality__uhd {
+  font-size: 10px;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+/* the close: a glass ✕ top right */
+.bzf-close {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 150ms ease, opacity 300ms ease;
+}
+
+.bzf-close:hover {
+  background-color: rgb(22 12 9 / 0.42);
+}
+
+.bzf[data-phase='idle'] .bzf-close {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.bzf-close svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .bzf-dock {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    gap: 0.75rem;
+  }
+
+  .bzf-dock__bar {
+    gap: 0.375rem;
+    padding: 0.375rem;
+  }
+
+  .bzf-btn {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .bzf-btn--quality {
+    width: auto;
+    padding: 0 0.75rem;
+  }
+
+  .bzf-btn__label {
+    display: inline;
+  }
+
+  .bzf-btn__on {
+    bottom: 0.375rem;
+  }
+
+  .bzf-volume {
+    display: flex;
+  }
+
+  .bzf-timeline {
+    padding: 0 0.5rem;
+  }
+
+  .bzf-time {
+    display: block;
+    font-size: 0.875rem;
+  }
+
+  .bzf-paused {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .bzf-paused svg {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .bzf-close {
+    right: 1.5rem;
+    top: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .bzf-volume__slider {
+    display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-film-play,
+  .hero-film-play__disc,
+  .hero-film-play__ring,
+  .bzf-cc,
+  .bzf-end-cta {
+    animation: none;
+    transition: none;
+  }
+
+  .bzf-end-cta::before {
+    display: none;
+  }
+
+  .hero__slides,
+  .hero__container {
+    transition: none;
+  }
+}
