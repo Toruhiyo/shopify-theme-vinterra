@@ -3,9 +3,9 @@
    the hero uses over its cellar scrim, the cream) and its fonts. */
 
 /* ---- idle: the store's own hero is the film's poster. Its play button, a burgundy disc (the page's primary, as on its
-   buttons) with a gold hairline halo and the landing's breathing ring, sits under the film copy's heading with the
-   film's name and length in the hero's gold eyebrow type: the copy's column on the scrim's dark side is the one part of
-   the picture no slide's bottle or glasses stand in. A click anywhere on the hero plays it. */
+   buttons) with a gold hairline halo and the landing's breathing ring, sits in the middle of the hero (Oriol: "en el
+   centro del video", as on Meridian), the film's name and length under it in the hero's gold eyebrow type. A click
+   anywhere on the hero plays it. */
 .hero.has-film {
   cursor: pointer;
 }
@@ -32,10 +32,12 @@ html.store-hero [data-bizmis-film] {
 }
 
 .hero-film-play {
-  display: inline-flex;
-  align-items: center;
-  gap: 1.15rem;
-  margin-top: 0.35rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  translate: -50% -50%;
+  display: flex;
   padding: 0;
   border: 0;
   border-radius: 999px;
@@ -114,8 +116,13 @@ html.store-hero [data-bizmis-film] {
   stroke: none;
 }
 
-/* the film's name and length: the hero's eyebrow (base.css .hero__subtitle), the length in muted cream */
+/* the film's name and length under the disc: the hero's eyebrow (base.css .hero__subtitle), the length in muted cream.
+   Out of the button's box, so the disc itself is what sits in the middle */
 .hero-film-play__label {
+  position: absolute;
+  top: calc(100% + 1.35rem);
+  left: 50%;
+  translate: -50% 0;
   display: flex;
   align-items: baseline;
   gap: 0.75rem;
@@ -141,14 +148,20 @@ html.store-hero [data-bizmis-film] {
 }
 
 @media (max-width: 749px) {
-  /* phones: the copy is centred (the heading's second line too: a button only spans its words), the button under it */
+  /* phones: the copy is centred in the middle of the hero (the heading's second line too: a button only spans its
+     words); the disc sits under it, above the clerk's bar, as on Meridian */
   .hero__copy--film .hero__title-cta {
     width: 100%;
   }
 
   .hero-film-play {
-    gap: 1rem;
-    margin-top: 0.5rem;
+    top: auto;
+    bottom: calc(13vh + env(safe-area-inset-bottom));
+    translate: -50% 0;
+  }
+
+  .hero-film-play__label {
+    display: none;
   }
 
   .hero-film-play__disc {

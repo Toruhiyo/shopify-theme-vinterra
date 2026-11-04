@@ -116,9 +116,8 @@
       {%- if show_film -%}
         {%- comment -%}
           With the film on: its own copy (locales bizmis.film.*, native in each language), smaller; the heading's second line plays the film,
-          in the store's gold underlined call, and the play button sits under it, in the copy's column: every slide's
-          bottle or glasses stand in the middle of the picture. The store's own copy above stays in the page for
-          html.store-hero.
+          in the store's gold underlined call. The play button sits in the middle of the hero (rendered below, as on
+          Meridian). The store's own copy above stays in the page for html.store-hero.
         {%- endcomment -%}
         <div class="hero__copy hero__copy--film">
           <p class="hero__subtitle">{{ 'bizmis.film.eyebrow' | t }}</p>
@@ -128,13 +127,13 @@
               {{- 'bizmis.film.title_cta' | t -}}
             </button>
           </h1>
-          {%- render 'bizmis-film-button', label: 'bizmis.film.play', length: section.settings.film_length -%}
         </div>
       {%- endif -%}
     </div>
   </div>
 
   {%- if show_film -%}
+    {%- render 'bizmis-film-button', label: 'bizmis.film.play', length: section.settings.film_length -%}
     {%- render 'bizmis-film',
       src: section.settings.film_src,
       captions: section.settings.film_captions,

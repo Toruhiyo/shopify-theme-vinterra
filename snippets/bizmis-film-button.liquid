@@ -1,9 +1,8 @@
 {%- comment -%}
-  The hero's play button: a burgundy disc with the film's name and length beside it, in the hero's gold eyebrow type,
-  under the film copy's heading (sections/hero.liquid). It sits in the copy's column, over the cellar scrim's dark side:
-  every slide's bottle or glasses stand in the middle of the picture, where Meridian's disc sits. The hero itself is the
-  film's poster: a click anywhere on it plays the film (assets/bizmis-film.js). Params: label (the translation key of the button's name),
-  length (the film's length, optional).
+  The hero's play button: a burgundy disc in the middle of the hero, the film's name and length in the hero's gold
+  eyebrow type under it (Oriol 2026-11-04: "el play button en el centro del video", as on Meridian). The hero itself is
+  the film's poster: a click anywhere on it plays the film (assets/bizmis-film.js). Params: label (the translation key
+  of the button's name), length (the film's length, optional).
 {%- endcomment -%}
 {%- assign label = label | t -%}
 <button type="button" class="hero-film-play" data-film-open aria-label="{{ label }}{% if length != blank %} ({{ length | escape }}){% endif %}">
