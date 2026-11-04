@@ -6,7 +6,7 @@
   length (the film's length, optional).
 {%- endcomment -%}
 {%- assign label = label | t -%}
-<button type="button" class="hero-film-play" data-film-open aria-label="{{ label | escape }}{% if length != blank %} ({{ length | escape }}){% endif %}">
+<button type="button" class="hero-film-play" data-film-open aria-label="{{ label }}{% if length != blank %} ({{ length | escape }}){% endif %}">
   <span class="hero-film-play__disc" data-play aria-hidden="true">
     <span class="hero-film-play__ring"></span>
     <svg viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></svg>

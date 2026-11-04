@@ -35,13 +35,19 @@
     auto: 'Auto'
   };
   var VOICE_LABELS = { narrator: 'Narrador', shopper: 'Cliente' };
+  // Shopify's translations come HTML-escaped ("l&#39;agent"): back to plain text for captions and labels set from JS
+  function decodeHtml(text) {
+    var box = document.createElement('textarea');
+    box.innerHTML = text;
+    return box.value;
+  }
   (function () {
     var el = document.querySelector('[data-bizmis-film][data-i18n]');
     var words = {};
     try { words = JSON.parse(el ? el.getAttribute('data-i18n') : '{}') || {}; } catch (e) { words = {}; }
-    Object.keys(T).forEach(function (k) { if (words[k]) T[k] = words[k]; });
-    if (words.narrator) VOICE_LABELS.narrator = words.narrator;
-    if (words.shopper) VOICE_LABELS.shopper = words.shopper;
+    Object.keys(T).forEach(function (k) { if (words[k]) T[k] = decodeHtml(words[k]); });
+    if (words.narrator) VOICE_LABELS.narrator = decodeHtml(words.narrator);
+    if (words.shopper) VOICE_LABELS.shopper = decodeHtml(words.shopper);
   })();
   var CAPTIONS_LANG = 'es';
 
@@ -632,7 +638,7 @@
     // film's button is), in its own captions (AvatarVoicechat.say); then what it does and the invite take turns. Only
     // while the film is closed, the hero in view and the clerk's card showing (phones: captions, no pointing); it stops
     // for good once the visitor turns to the clerk. ?noagent hides the clerk, and with it the invite.
-    var agentLines = (layer.getAttribute('data-agent-lines') || '').split('|').map(function (l) { return l.trim(); }).filter(Boolean);
+    var agentLines = decodeHtml(layer.getAttribute('data-agent-lines') || '').split('|').map(function (l) { return l.trim(); }).filter(Boolean);
     (function invite() {
       if (agentLines.length < 2 || document.documentElement.classList.contains('no-bizmis-agent')) return;
       var START_MS = 2500;
