@@ -115,24 +115,20 @@
       </div>
       {%- if show_film -%}
         {%- comment -%}
-          With the film on: its own copy (section settings film_*), smaller; the heading's second line plays the film,
+          With the film on: its own copy (locales bizmis.film.*, native in each language), smaller; the heading's second line plays the film,
           in the store's gold underlined call, and the play button sits under it, in the copy's column: every slide's
           bottle or glasses stand in the middle of the picture. The store's own copy above stays in the page for
           html.store-hero.
         {%- endcomment -%}
         <div class="hero__copy hero__copy--film">
-          {%- if section.settings.film_eyebrow != blank -%}
-            <p class="hero__subtitle">{{ section.settings.film_eyebrow }}</p>
-          {%- endif -%}
+          <p class="hero__subtitle">{{ 'bizmis.film.eyebrow' | t }}</p>
           <h1 class="hero__title">
-            <span class="hero__title-line">{{ section.settings.film_title }}</span>
-            {%- if section.settings.film_title_cta != blank -%}
-              <button type="button" class="hero__title-cta" data-film-open>
-                {{- section.settings.film_title_cta -}}
-              </button>
-            {%- endif -%}
+            <span class="hero__title-line">{{ 'bizmis.film.title' | t }}</span>
+            <button type="button" class="hero__title-cta" data-film-open>
+              {{- 'bizmis.film.title_cta' | t -}}
+            </button>
           </h1>
-          {%- render 'bizmis-film-button', label: section.settings.film_label, length: section.settings.film_length -%}
+          {%- render 'bizmis-film-button', label: 'bizmis.film.play', length: section.settings.film_length -%}
         </div>
       {%- endif -%}
     </div>
@@ -141,13 +137,10 @@
   {%- if show_film -%}
     {%- render 'bizmis-film',
       src: section.settings.film_src,
-      label: section.settings.film_label,
       captions: section.settings.film_captions,
       cta_url: section.settings.film_cta_url,
-      cta_label: section.settings.film_cta_label,
       end_cta: section.settings.film_end_cta,
-      end_hold: section.settings.film_end_hold,
-      agent_lines: section.settings.film_agent_lines
+      end_hold: section.settings.film_end_hold
     -%}
   {%- endif -%}
 
@@ -227,45 +220,13 @@
       "id": "film_src",
       "label": "Film (HLS .m3u8 or MP4 URL)",
       "default": "https://cdn.bizmis.ai/media/film/demo-viniteca/v5/master.m3u8",
-      "info": "Plays over the hero from its play button. Leave empty to hide the film."
-    },
-    {
-      "type": "text",
-      "id": "film_label",
-      "label": "Play button label",
-      "default": "Ver la demo"
+      "info": "Plays over the hero from its play button. Leave empty to hide the film. Its copy, the clerk's invite and the player's words come from the theme's languages (bizmis.film.*)."
     },
     {
       "type": "text",
       "id": "film_length",
       "label": "Film length (shown beside the play button)",
       "default": "3:15"
-    },
-    {
-      "type": "text",
-      "id": "film_eyebrow",
-      "label": "Film copy: subtitle",
-      "default": "Vinos y cavas del Penedès",
-      "info": "With the film on, the hero shows this copy (smaller) instead of the store's own. ?storehero shows the store's."
-    },
-    {
-      "type": "text",
-      "id": "film_title",
-      "label": "Film copy: heading",
-      "default": "Conoce a nuestro dependiente."
-    },
-    {
-      "type": "text",
-      "id": "film_title_cta",
-      "label": "Film copy: heading's second line (plays the film)",
-      "default": "Míralo vender."
-    },
-    {
-      "type": "text",
-      "id": "film_agent_lines",
-      "label": "The clerk's invite (lines separated by |)",
-      "default": "¡Hola! Soy el agente de ventas de Bizmis de Viniteca Martí.|Te recomiendo el vino perfecto para cada plato y resuelvo tus dudas al momento.|¡Dale al play y mírame vender!",
-      "info": "Said in the clerk's captions: the first with a wave, the last while it points at the film; then the last two take turns."
     },
     {
       "type": "text",
@@ -278,12 +239,6 @@
       "id": "film_cta_url",
       "label": "End button link",
       "default": "https://apps.shopify.com/bizmis"
-    },
-    {
-      "type": "text",
-      "id": "film_cta_label",
-      "label": "End button label (for screen readers)",
-      "default": "Instala Bizmis en Shopify"
     },
     {
       "type": "text",

@@ -241,6 +241,29 @@
       "other_demos": "Otras demos",
       "demos_hint": "Estas demos están protegidas con contraseña.",
       "password_label": "Contraseña"
+    },
+    "film": {
+      "eyebrow": "Vinos y cavas del Penedès",
+      "title": "Conoce a nuestro dependiente.",
+      "title_cta": "Mira cómo vende.",
+      "play": "Ver la demo",
+      "region": "Demo de Bizmis en Viniteca Martí",
+      "cta_label": "Instala Bizmis en Shopify",
+      "agent_lines": "¡Hola! Soy el agente de ventas de Bizmis en Viniteca Martí.|Te recomiendo el vino ideal para cada plato y te resuelvo cualquier duda al momento.|¡Dale al play y verás cómo vendo!",
+      "play_btn": "Reproducir",
+      "pause": "Pausa",
+      "replay": "Volver a ver",
+      "mute": "Silenciar",
+      "unmute": "Activar el sonido",
+      "volume": "Volumen",
+      "seek": "Posición en el vídeo",
+      "captions": "Subtítulos",
+      "quality": "Calidad",
+      "fullscreen": "Pantalla completa",
+      "exit_fullscreen": "Salir de pantalla completa",
+      "close": "Cerrar el vídeo",
+      "narrator": "Narrador",
+      "shopper": "Cliente"
     }
   }
 }

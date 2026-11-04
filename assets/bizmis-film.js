@@ -22,7 +22,7 @@
   var SEEK_STEP_S = 5;
   var IRIS_MS = 950;
   var CAPTIONS_KEY = 'bizmis.film.captions';
-  // the player's words, in the film's language
+  // the player's words: Spanish by default, the visitor's language from the snippet's data-i18n (locales bizmis.film.*)
   var T = {
     play: 'Reproducir',
     pause: 'Pausa',
@@ -35,6 +35,14 @@
     auto: 'Auto'
   };
   var VOICE_LABELS = { narrator: 'Narrador', shopper: 'Cliente' };
+  (function () {
+    var el = document.querySelector('[data-bizmis-film][data-i18n]');
+    var words = {};
+    try { words = JSON.parse(el ? el.getAttribute('data-i18n') : '{}') || {}; } catch (e) { words = {}; }
+    Object.keys(T).forEach(function (k) { if (words[k]) T[k] = words[k]; });
+    if (words.narrator) VOICE_LABELS.narrator = words.narrator;
+    if (words.shopper) VOICE_LABELS.shopper = words.shopper;
+  })();
   var CAPTIONS_LANG = 'es';
 
   var easeInOut = function (t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };

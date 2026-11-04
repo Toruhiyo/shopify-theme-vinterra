@@ -241,6 +241,29 @@
       "other_demos": "Other demos",
       "demos_hint": "These demos are password-protected.",
       "password_label": "Password"
+    },
+    "film": {
+      "eyebrow": "Wines and cavas from the Penedès",
+      "title": "Meet our sales assistant.",
+      "title_cta": "See it in action.",
+      "play": "Watch the demo",
+      "region": "Bizmis demo at Viniteca Martí",
+      "cta_label": "Install Bizmis on Shopify",
+      "agent_lines": "Hi! I'm Viniteca Martí's sales agent, powered by Bizmis.|I'll find the right wine for every dish and answer your questions on the spot.|Hit play and see me in action!",
+      "play_btn": "Play",
+      "pause": "Pause",
+      "replay": "Watch again",
+      "mute": "Mute",
+      "unmute": "Unmute",
+      "volume": "Volume",
+      "seek": "Video position",
+      "captions": "Subtitles",
+      "quality": "Quality",
+      "fullscreen": "Full screen",
+      "exit_fullscreen": "Exit full screen",
+      "close": "Close the video",
+      "narrator": "Narrator",
+      "shopper": "Shopper"
     }
   }
 }
