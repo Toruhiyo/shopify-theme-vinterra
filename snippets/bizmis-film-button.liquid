@@ -2,10 +2,11 @@
   The hero's play button: a burgundy disc in the middle of the hero, the film's name and length in the hero's gold
   eyebrow type under it (Oriol 2026-11-04: "el play button en el centro del video", as on Meridian). The hero itself is
   the film's poster: a click anywhere on it plays the film (assets/bizmis-film.js). Params: label (the translation key
-  of the button's name), length (the film's length, optional).
+  of the button's name), length (the film's length, optional), inline (true: the phones' twin, in the copy's flow under
+  the heading; the centred one is the desktop's).
 {%- endcomment -%}
 {%- assign label = label | t -%}
-<button type="button" class="hero-film-play" data-film-open aria-label="{{ label }}{% if length != blank %} ({{ length | escape }}){% endif %}">
+<button type="button" class="hero-film-play{% if inline %} hero-film-play--inline{% endif %}" data-film-open aria-label="{{ label }}{% if length != blank %} ({{ length | escape }}){% endif %}">
   <span class="hero-film-play__disc" data-play aria-hidden="true">
     <span class="hero-film-play__ring"></span>
     <svg viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></svg>

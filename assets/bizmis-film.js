@@ -97,9 +97,14 @@
     var iris = $('[data-film-iris]');
     var glow = $('[data-film-glow]');
     var film = $('[data-film-video]');
-    // the play disc over the hero and any other trigger in its copy (the heading's second line); the iris opens from the disc
+    // the play disc and any other trigger in its copy (the heading's second line); the iris opens from the disc. There
+    // are two discs (centred over the hero on desktop, under the copy on phones), one shown at a time: the visible one
     var openBtns = Array.prototype.slice.call(hero.querySelectorAll('[data-film-open]'));
-    var disc = hero.querySelector('[data-play]') || openBtns[0];
+    var discs = Array.prototype.slice.call(hero.querySelectorAll('[data-play]'));
+    var visibleDisc = function () {
+      for (var i = 0; i < discs.length; i++) if (discs[i].getClientRects().length) return discs[i];
+      return discs[0] || openBtns[0];
+    };
     var resumeBtn = $('[data-film-resume]');
     var toggleBtn = $('[data-film-toggle]');
     var muteBtn = $('[data-film-mute]');
@@ -474,7 +479,7 @@
       if (phase !== 'idle') return;
       layer.hidden = false; // shown (still masked shut) before it is measured
       var box = layer.getBoundingClientRect();
-      var target = disc.getBoundingClientRect();
+      var target = visibleDisc().getBoundingClientRect();
       var cx = target.left + target.width / 2 - box.left;
       var cy = target.top + target.height / 2 - box.top;
       var far = Math.max(Math.hypot(cx, cy), Math.hypot(box.width - cx, cy), Math.hypot(cx, box.height - cy), Math.hypot(box.width - cx, box.height - cy));
@@ -498,6 +503,7 @@
       setPhase('idle');
       setOpen(false);
       runIris(0, function () { if (phase === 'idle') layer.hidden = true; });
+      var disc = visibleDisc();
       (disc.closest('button') || disc).focus({ preventScroll: true });
     }
 

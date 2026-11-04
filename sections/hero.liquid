@@ -117,7 +117,7 @@
         {%- comment -%}
           With the film on: its own copy (locales bizmis.film.*, native in each language), smaller; the heading's second line plays the film,
           in the store's gold underlined call. The play button sits in the middle of the hero (rendered below, as on
-          Meridian). The store's own copy above stays in the page for html.store-hero.
+          Meridian); on phones its twin here, right under the heading. The store's own copy above stays in the page for html.store-hero.
         {%- endcomment -%}
         <div class="hero__copy hero__copy--film">
           <p class="hero__subtitle">{{ 'bizmis.film.eyebrow' | t }}</p>
@@ -127,6 +127,7 @@
               {{- 'bizmis.film.title_cta' | t -}}
             </button>
           </h1>
+          {%- render 'bizmis-film-button', label: 'bizmis.film.play', length: section.settings.film_length, inline: true -%}
         </div>
       {%- endif -%}
     </div>

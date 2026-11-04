@@ -116,6 +116,11 @@ html.store-hero [data-bizmis-film] {
   stroke: none;
 }
 
+/* the phones' twin (in the copy's flow) only shows on phones */
+.hero-film-play--inline {
+  display: none;
+}
+
 /* the film's name and length under the disc: the hero's eyebrow (base.css .hero__subtitle), the length in muted cream.
    Out of the button's box, so the disc itself is what sits in the middle */
 .hero-film-play__label {
@@ -149,15 +154,22 @@ html.store-hero [data-bizmis-film] {
 
 @media (max-width: 749px) {
   /* phones: the copy is centred in the middle of the hero (the heading's second line too: a button only spans its
-     words); the disc sits under it, above the clerk's bar, as on Meridian */
+     words) */
   .hero__copy--film .hero__title-cta {
     width: 100%;
   }
 
-  .hero-film-play {
-    top: auto;
-    bottom: calc(13vh + env(safe-area-inset-bottom));
-    translate: -50% 0;
+  /* the disc sits right under the heading (Oriol: "més a sota de mira como vende, no al peu de la pagina"): its twin in
+     the copy's flow shows, the centred one hides */
+  .hero-film-play:not(.hero-film-play--inline) {
+    display: none;
+  }
+
+  .hero-film-play--inline {
+    display: flex;
+    position: static;
+    translate: none;
+    margin-top: 0.75rem;
   }
 
   .hero-film-play__label {
